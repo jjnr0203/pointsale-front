@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SupplierRoutingModule } from './supplier-routing.module';
-import { SupplierListComponent } from './supplier-list/supplier-list.component';
-import { SupplierFormComponent } from './supplier-form/supplier-form.component';
+import { ShipperFormComponent } from './shipper-form/shipper-form.component';
+import { ShipperListComponent } from './shipper-list/shipper-list.component';
 
 
 @NgModule({
   declarations: [
-    SupplierListComponent,
-    SupplierFormComponent
+    ShipperFormComponent,
+    ShipperListComponent
   ],
   imports: [
     CommonModule,
