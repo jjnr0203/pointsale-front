@@ -6,5 +6,105 @@
   width: 100px;
 }
 .main {
+  padding-top: 20px;
+  padding-left: 35px;
+  display: flex;
+  margin: 15px;
   width: 100%;
+  justify-content: space-between;
+}
+
+.left-main{
+  height: 90vh;
+  width: 78%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  background-color: #363535;
+  border-radius: 20px;
+}
+.right-main{
+  width: 18%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: solid 2px rgba(255, 245, 245, 0.8);
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #363535;
+  border-radius: 10px;
+  width: 130px;
+  height: 100px;
+  margin: 5px;
+  text-align: center;
+  font-size: 15px;
+  transition: background-color 0.3s, transform 0.1s;
+  cursor: default;
+  user-select: none;
+  border: none;
+}
+
+.buttons:hover {
+  background-color: #0056b3;
+}
+
+.buttons:active {
+  transform: scale(0.95);
+}
+
+:host ::ng-deep .p-dialog-content{
+  background-color: #1a1a1b;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+:host ::ng-deep .p-dialog-header{
+  background-color: #363535;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+:host ::ng-deep .p-element{
+  border: none;
+}
+
+.customer-form{
+  margin-top: 20px;
+  height: 500px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px 20px 10px 20px;
+}
+
+.form-input input{
+  background-color: rgb(51, 53, 53);
+  height: 30px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+}
+.form-input label{
+  margin-bottom: 10px;
 }

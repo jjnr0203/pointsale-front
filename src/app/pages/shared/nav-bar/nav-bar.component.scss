@@ -23,7 +23,7 @@
     font-size: 18px;
     color: #FFFFFF;
     opacity: 0.9;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
 }
 .icon{
     margin-bottom: 5px;
@@ -47,13 +47,15 @@
 }
 
 .se-icons{
+    width: 100%;
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 10px;
-    padding: 10px;
+    font-size: 15px;
+    padding: 20px;
     padding-bottom: 25px;
+    text-align: center;
 }
 .pi{
     font-size: 30px;
