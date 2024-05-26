@@ -14,25 +14,31 @@
         <button class="buttons" (click)="showDialog()"> Agregar Cliente</button>
         <p-dialog header="Agregar cliente" [modal]="true" [(visible)]="dialogVisible" [style]="{ width: '55rem' }">
           <div class="body-modal">
+            <div class="customer-list">
+              
+            </div>
             <div class="customer-form">
-              <form [formGroup]="customerForm">
+              <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+                <div class="form-input">
+                  <h3>Nuevo cliente</h3>
+                </div>
                 <div class="form-input">
                   <label for="identification">Número de identificación:</label>
                   <input pInputText pKeyFilter="int" formControlName="identification"/>
                 </div>
                 <div class="form-input">
                   <label for="name">Nombre:</label>
-                  <input 
-                      pInputText 
-                      id="name" 
+                  <input
+                      pInputText
+                      id="name"
                       formControlName="name"
                       />
                 </div>
                 <div class="form-input">
                   <label for="email">Correo:</label>
-                  <input 
-                      pInputText 
-                      id="email" 
+                  <input
+                      pInputText
+                      id="email"
                       formControlName="email"
                       />
                 </div>
@@ -42,23 +48,20 @@
                 </div>
                 <div class="form-input">
                   <label for="address">Dirección</label>
-                  <input 
-                      pInputText 
-                      id="address" 
+                  <input
+                      pInputText
+                      id="address"
                       formControlName="address"
                       />
                 </div>
                 <div class="flex justify-content-center gap-2">
                   <p-button label="Cancelar" severity="secondary" [rounded]="true" (click)="dialogVisible = false" />
-                  <p-button label="Guardar" severity="primary" [rounded]="true" (click)="dialogVisible=false" />
+                  <p-button type="submit" label="Guardar" severity="primary" [rounded]="true" />
                 </div>
               </form>
             </div>
-            <div>
-
-            </div>
           </div>
-        
+
         </p-dialog>
         <button class="buttons"> Cancelar </button>
         <button class="buttons"> Proceder con el Pago </button>
