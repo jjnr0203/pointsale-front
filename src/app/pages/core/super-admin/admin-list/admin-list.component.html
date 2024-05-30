@@ -1,1 +1,33 @@
-<p>admin-list works!</p>
+<div class="container">
+    <div class="nav">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+        <!-- @for (let user of users;track user.id){
+        <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user let-columns="columns">
+                <tr>
+                    <td>
+                        {{user.name}}
+                    </td>
+                    <td>
+                        {{user.email}}
+                    </td>
+                    <td>
+                        <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
+                    </td>
+                    <td>
+                        <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false" />
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    } -->
+    </div>
+</div>

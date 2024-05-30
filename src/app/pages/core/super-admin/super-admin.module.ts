@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { SharedAppModule } from '../../shared/shared-app.module';
+
+import { DataViewModule } from 'primeng/dataview';
 
 
 @NgModule({
@@ -11,7 +14,9 @@ import { AdminListComponent } from './admin-list/admin-list.component';
   ],
   imports: [
     CommonModule,
-    SuperAdminRoutingModule
+    SuperAdminRoutingModule,
+    SharedAppModule,
+    DataViewModule
   ]
 })
 export class SuperAdminModule { }
