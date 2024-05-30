@@ -3,68 +3,109 @@
     <app-nav-bar></app-nav-bar>
   </div>
   <div class="main">
-    <div class="left-main">
-      <div class="details">
-
-      </div>
+    <div class="left-main col-8">
+      <h2> Productos agregados </h2>
+      <form class="col-12" [formGroup]="form">
+        <div class="form-controls col-12" formArrayName="ordersDetails">
+          @for (orderDetailForm of ordersDetails.controls; track orderDetailForm; let i = $index) {
+            <div class="order-detail-group" [formGroupName]="i">
+              <div class="details-input">
+                <p-floatLabel>
+                  <p-dropdown
+                    class="col-12"
+                    [options]="products"
+                    (onChange)="onProductSelect($event.value.id, i)"
+                    placeholder="Seleccione un producto"
+                    [editable]="true"
+                    optionLabel="name"
+                    id="productId"
+                  />
+                  <label for="productId">Producto:</label>
+                </p-floatLabel>
+              </div>
+              <div class="details-input">
+                <p-floatLabel>
+                  <input pInputText id="quantity" pKeyFilter="int" formControlName="quantity"/>
+                  <label for="quantity" style="margin-bottom: 5px">Cantidad:</label>
+                </p-floatLabel>
+              </div>
+              <p-button severity="danger" (click)="removeItem(i)">
+                <i class="pi pi-trash" style="font-size: 20px" (click)="removeItem(i)"></i>
+              </p-button>
+            </div>
+          }
+        </div>
+      </form>
+      <p-button icon="pi pi-plus" [rounded]="true" severity="secondary" [disabled]="actionButtonsState"
+                (click)="addOrderDetail()"/>
     </div>
-    <div class="right-main">
-      <div class="actions">
-        <button class="buttons"> Nueva Orden </button>
-        <button class="buttons" (click)="showDialog()"> Agregar Cliente</button>
+    <div class="right-main col-3">
+      <div class="actions col-12">
+        <button class="buttons col-5" (click)="activeActionButtons()" [disabled]="newOrderState"> Nueva Orden</button>
+        <button class="buttons col-5" (click)="showDialog()" [disabled]="actionButtonsState"> Agregar Cliente</button>
         <p-dialog header="Agregar cliente" [modal]="true" [(visible)]="dialogVisible" [style]="{ width: '55rem' }">
           <div class="body-modal">
-            <div class="customer-list">
-              
+            <div class="customer-list col-12">
+              <p-autoComplete styleClass="auto-complete" class="custom-input"
+                              [suggestions]="filteredCustomers"
+                              (completeMethod)="filterCustomer($event)"
+                              (onSelect)="onCustomerSelect($event)"
+                              optionLabel="name"
+                              placeholder="Buscar un cliente">
+                <ng-template pTemplate="item" let-item>
+                  {{ item.identification }} <br> {{ item.name }}
+                </ng-template>
+              </p-autoComplete>
             </div>
             <div class="customer-form">
-              <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+              <form [formGroup]="customerForm" (ngSubmit)="onSubmitCustomer()">
                 <div class="form-input">
                   <h3>Nuevo cliente</h3>
                 </div>
                 <div class="form-input">
                   <label for="identification">Número de identificación:</label>
-                  <input pInputText pKeyFilter="int" formControlName="identification"/>
+                  <input pInputText id="identification" pKeyFilter="int" formControlName="identification"/>
                 </div>
                 <div class="form-input">
                   <label for="name">Nombre:</label>
                   <input
-                      pInputText
-                      id="name"
-                      formControlName="name"
-                      />
+                    pInputText
+                    id="name"
+                    formControlName="name"
+                  />
                 </div>
                 <div class="form-input">
                   <label for="email">Correo:</label>
                   <input
-                      pInputText
-                      id="email"
-                      formControlName="email"
-                      />
+                    pInputText
+                    id="email"
+                    formControlName="email"
+                  />
                 </div>
                 <div class="form-input">
                   <label for="phone">Número de contacto:</label>
-                  <input pInputText pKeyFilter="int" formControlName="phone"/>
+                  <input pInputText id="phone" pKeyFilter="int" formControlName="phone"/>
                 </div>
                 <div class="form-input">
                   <label for="address">Dirección</label>
                   <input
-                      pInputText
-                      id="address"
-                      formControlName="address"
-                      />
+                    pInputText
+                    id="address"
+                    formControlName="address"
+                  />
                 </div>
                 <div class="flex justify-content-center gap-2">
-                  <p-button label="Cancelar" severity="secondary" [rounded]="true" (click)="dialogVisible = false" />
-                  <p-button type="submit" label="Guardar" severity="primary" [rounded]="true" />
+                  <p-button label="Cancelar" severity="secondary" [rounded]="true" (click)="closeDialog()"/>
+                  <p-button type="submit" label="Guardar" severity="primary" [rounded]="true"/>
                 </div>
               </form>
             </div>
           </div>
 
         </p-dialog>
-        <button class="buttons"> Cancelar </button>
-        <button class="buttons"> Proceder con el Pago </button>
+        <button class="buttons col-5" [disabled]="actionButtonsState"> Cerrar Orden</button>
+        <button class="buttons col-5" [disabled]="actionButtonsState" (click)="inactiveActionButtons()"> Cancelar
+        </button>
       </div>
     </div>
   </div>

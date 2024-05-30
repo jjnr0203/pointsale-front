@@ -1,4 +1,4 @@
 export interface ResponseModel {
-  data:{},
+  data:any,
   message:string
 }
