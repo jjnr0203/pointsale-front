@@ -6,6 +6,9 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { SharedAppModule } from '../../shared/shared-app.module';
 
 import { DataViewModule } from 'primeng/dataview';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import { DataViewModule } from 'primeng/dataview';
     CommonModule,
     SuperAdminRoutingModule,
     SharedAppModule,
-    DataViewModule
+    DataViewModule,
+    TableModule,
+    ButtonModule
   ]
 })
 export class SuperAdminModule { }

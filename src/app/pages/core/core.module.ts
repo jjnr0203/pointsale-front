@@ -11,7 +11,7 @@ import { SharedAppModule } from '../shared/shared-app.module';
   imports: [
     CommonModule,
     CoreRoutingModule,
-    SharedAppModule
+    SharedAppModule,
   ]
 })
 export class CoreModule { }

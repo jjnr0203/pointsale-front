@@ -5,3 +5,9 @@ export interface CustomerModel {
   address?: string; 
   email?: string; 
 }
+
+export interface ShipperModel {
+  name: string;
+  email: string; 
+  password: string; 
+}

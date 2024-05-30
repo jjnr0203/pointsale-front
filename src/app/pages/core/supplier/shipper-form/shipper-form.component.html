@@ -1,1 +1,39 @@
-<p>shipper-form works!</p>
+<div class="container">
+    <div class="nav">
+        <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+
+        <div class="customer-form">
+            <form [formGroup]="shipperForm">
+        <div class="flex flex-column gap-2">
+            <label for="name">Nombre:</label>
+            <input 
+                pInputText 
+                id="name" 
+                aria-describedby="username-help" 
+                formControlName="name" />
+        </div>
+        <div class="flex flex-column gap-2">
+            <label for="email">Emai:</label>
+            <input 
+                pInputText 
+                id="email" 
+                aria-describedby="email" 
+                formControlName="email" />
+        </div>
+        <div class="flex flex-column gap-2">
+            <label for="password">Contraseña:</label>
+            <input 
+                pInputText 
+                id="password" 
+                aria-describedby="password" 
+                formControlName="password" />
+        </div>
+        <br>
+            <p-button (onClick)="validateForm" icon="pi pi-check" type="submit" severity="primary" label="Crear nuevo repartidor" />
+        </form>
+    </div>
+
+    </div>
+</div>

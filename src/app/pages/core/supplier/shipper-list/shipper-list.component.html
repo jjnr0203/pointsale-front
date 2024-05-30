@@ -1,1 +1,24 @@
-<p>shipper-list works!</p>
+<div class="container">
+    <div class="nav">
+        <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+        <p-table [value]="shippers" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td><p-button label="Editar" icon="pi pi-trash" /></td>
+                    <td><p-button label="Eliminar" icon="pi pi-trash" /></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
