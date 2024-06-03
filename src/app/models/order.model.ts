@@ -1,5 +1,8 @@
+import {OrderDetailModel} from "./order-detail.model";
+
 export interface OrderModel {
-  paymentMethodId: string;
-  customerId: string;
-  shopId: string;
+  paymentMethod: string;
+  customer: string;
+  shop: string;
+  ordersDetails:OrderDetailModel[];
 }

@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.left-main{
+.left-main {
   height: 92vh;
   overflow-y: scroll;
   display: flex;
@@ -26,15 +26,15 @@
   border-radius: 20px;
   padding-top: 10px;
 }
-.right-main{
-  margin-right:35px;
+.right-main {
+  margin-right: 35px;
   height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -67,29 +67,29 @@
   transform: scale(0.95);
 }
 
-:host ::ng-deep .p-dialog-content{
+:host ::ng-deep .p-dialog-content {
   background-color: #1a1a1b;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 
-:host ::ng-deep .p-dialog-header{
+:host ::ng-deep .p-dialog-header {
   background-color: #363535;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
 
-:host ::ng-deep .p-element{
+:host ::ng-deep .p-element {
   border: none;
 }
 
-.body-modal{
+.body-modal {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.customer-list{
+.customer-list {
   display: flex;
   justify-content: start;
   align-items: start;
@@ -97,7 +97,7 @@
   width: 400px;
 }
 
-.customer-form{
+.customer-form {
   height: 500px;
   width: 45%;
   display: flex;
@@ -105,34 +105,35 @@
   justify-content: center;
   align-items: center;
 }
-h3{
+h3 {
   margin: 0px;
 }
-.form-input{
+.form-input {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 10px 20px 10px 20px;
 }
 
-.form-input input{
+.form-input input {
   background-color: rgb(51, 53, 53);
-  height: 40px;
+  height: 25px;
   width: 300px;
   border: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 15px;
 }
-.form-input label{
-  margin-bottom: 10px;
+.form-input label {
+  margin-bottom: 0;
+  font-size: 15px;
 }
 
-::ng-deep .p-autocomplete-input{
+::ng-deep .p-autocomplete-input {
   width: 300px;
 }
 
-.order-detail-group{
+.order-detail-group {
   margin-top: 15px;
   width: 48%;
   padding: 0;
@@ -142,18 +143,18 @@ h3{
   justify-content: center;
 }
 
-.form-controls{
+.form-controls {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 
-.details-input label{
+.details-input label {
   margin-left: 15px;
 }
-.details-input input{
-  text-align:end;
+.details-input input {
+  text-align: end;
   border-radius: 10px;
   height: 37px;
   margin-left: 20px;
@@ -163,4 +164,7 @@ h3{
   background-color: #20262e;
 }
 
-
+.validators{
+  font-size: 15px;
+  color: #8dd0ff;
+}

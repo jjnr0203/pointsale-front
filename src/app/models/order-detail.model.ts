@@ -1,5 +1,5 @@
 export interface OrderDetailModel {
-  orderId:string  
+  order:string
   quantity: number;
-  productId: string;
+  product: string;
 }

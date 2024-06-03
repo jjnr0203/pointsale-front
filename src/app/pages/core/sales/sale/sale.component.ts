@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CustomersHttpService} from "../../../../http-services/customers-http.service";
-import {CustomerModel} from "../../../../models/customer.model";
-import {ResponseModel} from "../../../../models/response.model";
-import {AutoCompleteEvent} from "../../../../models/autocomplete.model";
-import {OrderModel} from "../../../../models/order.model";
-import {OrdersHttpService} from "../../../../http-services/orders-http.service";
+import {
+  AbstractControl,FormArray,FormBuilder,FormGroup,Validators
+} from '@angular/forms';
+import {CustomersHttpService,OrdersHttpService,CataloguesHttpService,OrdersService} from '../../../../http-services';
+import {CreateCustomerModel, CustomerModel,} from '../../../../models/customer.model';
+import {ResponseModel} from '../../../../models/response.model';
+import {OrderModel} from '../../../../models/order.model';
+import {ConfirmationService, MessageService} from "primeng/api";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-sale',
@@ -13,102 +15,126 @@ import {OrdersHttpService} from "../../../../http-services/orders-http.service";
   styleUrl: './sale.component.scss',
 })
 export class SaleComponent implements OnInit {
+  protected readonly Validators = Validators;
   // forms
-  form: FormGroup;
   customerForm: FormGroup;
   orderForm: FormGroup;
   // data
+  payments: any = [];
   customers: CustomerModel[] = [];
   products = [
-    { id: 1, name: 'Gorra', price: 100 },
-    { id: 2, name: ' buzo', price: 200 },
-    { id: 3, name: 'Producto 3', price: 300 },
-    { id: 4, name: 'Producto 4', price: 400 },
-    { id: 5, name: 'Producto 5', price: 500 }
+    {id: '961d7cce-eb80-462f-8e79-b52adb11c880', name: 'Gorra', price: 100},
+    {id: '5dcd9102-e621-47d7-958b-410572222feb', name: ' buzo', price: 200},
   ];
 
-  constructor(private formBuilder: FormBuilder, private customersHttpService: CustomersHttpService, private ordersHttpService: OrdersHttpService) {
-    this.customerForm = this.newCustomerForm;
-    this.orderForm = this.newOrderForm;
-    this.form= this.newForm;
+  constructor(
+    private formBuilder: FormBuilder,
+    private customersHttpService: CustomersHttpService,
+    private ordersHttpService: OrdersHttpService,
+    private ordersService: OrdersService,
+    private cataloguesHttpService: CataloguesHttpService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {
+    this.customerForm = this.ordersService.customerForm();
+    this.orderForm = this.ordersService.orderForm();
+    this.applyValidations();
   }
+
   ngOnInit() {
-    this.getCustomers()
+    this.getPayments();
+    this.getCustomers();
   }
 
-  get newForm(): FormGroup {
-    return this.formBuilder.group({
-      customer: [null, Validators.required],
-      order: [null, Validators.required],
-      ordersDetails: this.formBuilder.array([])
-    });
-  }
-
+  //orders details
   get ordersDetails(): FormArray {
-    return this.form.get('ordersDetails') as FormArray;
+    return this.orderForm.controls['ordersDetails'] as FormArray;
   }
   addOrderDetail(): void {
-    this.ordersDetails.push(this.formBuilder.group({
-      orderId: ['', Validators.required],
-      quantity: [1, Validators.required],
-      productId: ['', Validators.required]
-    }));
+    this.ordersDetails.push(
+      this.formBuilder.group({
+        order: ['', Validators.required],
+        quantity: [1, Validators.required],
+        product: [null, Validators.required],
+      })
+    );
   }
   removeItem(index: number): void {
     this.ordersDetails.removeAt(index);
   }
 
-  get newCustomerForm(): FormGroup {
-    return this.formBuilder.group({
-      identification: [null, Validators.required],
-      name: [null, Validators.required],
-      email: [null, Validators.required],
-      phone: [null, Validators.required],
-      address: [null, Validators.required],
-    })
+  //on submit methods
+  onSubmitOrder(event: any) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: '¿Está seguro de terminar esta orden?',
+      header: 'Confirmación',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.createOrder(this.orderForm.value)
+      }
+    });
   }
-
-  get newOrderForm(): FormGroup {
-    return this.formBuilder.group({
-      shopId: ['3af35618-8919-41f9-a4a8-d99ad5be67fc', Validators.required],
-      customerId: [null, Validators.required],
-      paymentMethodId: [null, Validators.required]
-    })
-  }
-
-  onSubmitOrder() {
-    this.createOrder(this.orderForm.value)
-  }
-
   onSubmitCustomer() {
     if (!this.selectedCustomer) {
-      this.createCustomer(this.customerForm.value)
-      this.customerForm.reset();
-      this.getCustomers()
+      this.customerForm.markAllAsTouched()
+      if (this.customerForm.valid) {
+        this.createCustomer(this.customerForm.value);
+        this.closeDialog();
+      }
     } else {
-      this.orderForm.controls['customerId'].setValue(this.selectedCustomer.id)
-      this.closeDialog()
+      this.orderForm.controls['customer'].setValue(this.selectedCustomer.id);
+      this.closeDialog();
     }
   }
-
-  getCustomers() {
-    return this.customersHttpService.findAll().subscribe((response: ResponseModel) => {
-      this.customers = response.data
-      console.log(this.customers)
-    })
-  }
-
-  createCustomer(customer: CustomerModel) {
-    return this.customersHttpService.create(customer).subscribe(response => {
-      console.log(response)
-      this.getCustomers();
+  createCustomer(customer: CreateCustomerModel) {
+    return this.customersHttpService.create(customer).subscribe((response) => {
+      const newUser = response.data;
+      this.customer.setValue(newUser.id);
     });
   }
 
+  restartForms(){
+    this.actionButtonsState = true;
+    this.paymentMethod.disable();
+    this.newOrderState = false;
+    this.orderForm.reset();
+    this.shop.setValue('9ff1970b-7afe-4ce1-ba8b-66c6148c259f');
+    this.customerForm.reset();
+    this.ordersDetails.clear();
+  }
+
   createOrder(order: OrderModel) {
-    return this.ordersHttpService.create(order).subscribe(response => {
-      console.log(response)
-    })
+    return this.ordersHttpService.create(order).pipe(
+      first()
+    ).subscribe({
+      next: (response) => {
+        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: response.message, life: 3000});
+        this.restartForms()
+      },
+      error: (error) => {
+        console.error(error);
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Error al cerrar la orden', life: 3000});
+      }
+    });
+  }
+
+  // getters catalogues
+  getCustomers() {
+    return this.customersHttpService.findAll().subscribe((response: ResponseModel) => this.customers = response.data);
+  }
+
+  /* getProducts() {
+     return this.customersHttpService.findAll().subscribe((response: ResponseModel) => {
+       this.customers = response.data;
+     });
+   }*/
+  getPayments() {
+    return this.cataloguesHttpService.getByPayment('PAYMENTS').subscribe(
+      (response: ResponseModel) => this.payments = response.data);
   }
 
   //getters customerForm
@@ -132,37 +158,55 @@ export class SaleComponent implements OnInit {
     return this.customerForm.controls['address'];
   }
 
-  //getters y setters orderForm
-  get customerId(): AbstractControl {
-    return this.orderForm.controls['customerId'];
+  //getters orderForm
+  get customer(): AbstractControl {
+    return this.orderForm.controls['customer'];
   }
 
-  get shopID(): AbstractControl {
-    return this.orderForm.controls['shopId'];
+  get shop(): AbstractControl {
+    return this.orderForm.controls['shop'];
   }
 
-  get paymentMethodId(): AbstractControl {
-    return this.orderForm.controls['paymentMethodId'];
+  get paymentMethod(): AbstractControl {
+    return this.orderForm.controls['paymentMethod'];
   }
 
-  selectedCustomer!: any;
-  filteredCustomers: CustomerModel[] = [];
+  get cash(): AbstractControl {
+    return this.orderForm.controls['cash'];
+  }
+
+  get cashBack(): AbstractControl {
+    return this.orderForm.controls['cashBack'];
+  }
+
+  // functions
+  selectedCustomer!: CustomerModel;
   onCustomerSelect(event: any) {
-    this.selectedCustomer = event.value
-    this.orderForm.controls['customerId'].setValue(event.value.id);
-    this.customerForm.patchValue(event.value)
+    this.selectedCustomer = event.value;
+    this.orderForm.controls['customer'].setValue(event.value.id);
+    this.customerForm.patchValue(event.value);
   }
 
-  onProductSelect(id:string, i:number) {
-    this.ordersDetails.at(i).get('productId')?.setValue(id);
-    console.log(this.ordersDetails.at(i).get('productId')?.value);
-  }
-
-  filterCustomer(event: AutoCompleteEvent) {
+  filteredCustomers: CustomerModel[] = [];
+  filterCustomer(event: any) {
     const query = event.query;
     this.filteredCustomers = this.customers.filter((customer: CustomerModel) =>
       customer.identification.toLowerCase().includes(query.toLowerCase())
     );
+  }
+
+  applyValidations() {
+    this.paymentMethod.valueChanges.subscribe((value) => {
+      if (value?.code === 2) {
+        this.cash.addValidators(Validators.required);
+        this.cashBack.addValidators(Validators.required);
+      } else {
+        this.cash.reset()
+        this.cashBack.reset()
+        this.cash.removeValidators(Validators.required);
+        this.cashBack.removeValidators(Validators.required);
+      }
+    });
   }
 
   dialogVisible: boolean = false;
@@ -172,18 +216,15 @@ export class SaleComponent implements OnInit {
 
   closeDialog() {
     this.dialogVisible = false;
-    this.customerForm.reset()
+    this.customerForm.reset();
+    this.selectedCustomer = undefined!;
   }
 
   newOrderState: boolean = false;
   actionButtonsState: boolean = true;
   activeActionButtons() {
+    this.paymentMethod.enable()
     this.actionButtonsState = false;
     this.newOrderState = true;
-  }
-
-  inactiveActionButtons() {
-    this.actionButtonsState = true
-    this.newOrderState=false
   }
 }

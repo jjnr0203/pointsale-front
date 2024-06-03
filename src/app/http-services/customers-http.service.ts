@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CustomerModel} from "../models/customer.model";
+import {CreateCustomerModel, CustomerModel} from "../models/customer.model";
 import {ResponseModel} from "../models/response.model";
 
 @Injectable({
@@ -15,7 +15,7 @@ export class CustomersHttpService {
     return this.httpClient.get<ResponseModel>(this.url);
   }
 
-  create(customer:CustomerModel){
+  create(customer:CreateCustomerModel){
     return this.httpClient.post<ResponseModel>(this.url, customer);
   }
 }
