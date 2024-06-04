@@ -23,8 +23,8 @@ export class SaleComponent implements OnInit {
   payments: any = [];
   customers: CustomerModel[] = [];
   products = [
-    {id: '961d7cce-eb80-462f-8e79-b52adb11c880', name: 'Gorra', price: 100},
-    {id: '5dcd9102-e621-47d7-958b-410572222feb', name: ' buzo', price: 200},
+    {id: '961d7cce-eb80-462f-8e79-b52adb11c880', name: 'Gorra', price: 50},
+    {id: '5dcd9102-e621-47d7-958b-410572222feb', name: ' buzo', price: 100},
   ];
 
   constructor(
