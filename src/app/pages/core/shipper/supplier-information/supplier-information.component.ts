@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './supplier-information.component.scss'
 })
 export class SupplierInformationComponent {
-
+  suppliers: any = []
 }

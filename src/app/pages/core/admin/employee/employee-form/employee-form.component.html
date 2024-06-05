@@ -1,1 +1,159 @@
-<p>employee-form works!</p>
+<!--     <div class="container">
+        <div class="nav">
+            <app-nav-bar></app-nav-bar>
+        </div>
+        <div class="main">
+    <form [formGroup]="form" style="width: 50%; text-align: center; border: 2px solid #cfbcbc; padding: 20px; border-radius: 20px;">
+        <p class="h1">Registro del empleado</p>
+
+            <div class="flex flex-column gap-2">
+              <label for="names" class="font-bold block mb-2">Nombre del producto: </label>
+              <input 
+                  pInputText 
+                  id="name" 
+                  aria-describedby="username-help" 
+                  formControlName="name" />
+              <small id="username-help">
+                  Ingrese el nombre del producto
+              </small>
+          
+            @if (nameField.errors) {
+                @if (nameField.touched) {
+                  @if (nameField.errors['minlength']) {
+                    <span style="color: red; ">El campo debe contener 2 caracteres o más</span>
+                  }
+                  @else if (nameField.errors['required']) {
+                    <span style="color: red;">El campo es requerido</span>
+                  }
+                }
+              }
+          </div><br>
+        
+
+            <div class="flex flex-column gap-2">
+              <label for="price" class="font-bold block mb-2">Precio: </label>
+              <input pInputText id="price" pKeyFilter="int" class="w-full" formControlName="price" /> 
+              <small id="username-help">
+                  Ingrese el precio del producto
+              </small>
+            @if (priceField.errors) {
+              @if (priceField.touched) {
+                @if (priceField.errors['required']) {
+                  <span style="color: red;">El campo es requerido</span>
+                }
+              }
+            }
+        </div><br>
+
+
+        
+          <div class="flex flex-column gap-2">
+            <label for="unit" class="font-bold block mb-2">Unidades del producto </label>
+            <input pInputText id="unit" pKeyFilter="int" class="w-full" formControlName="unit" /> 
+            <small id="username-help">
+                Ingrese el numero de unidades deseadas
+            </small>
+          @if (unitField.errors) {
+            @if (unitField.touched) {
+              @if (unitField.errors['min']) {
+                <span style="color: red;">El campo debe contener por lo menos una unidad</span>
+              }
+              @else if (unitField.errors['required']) {
+                <span style="color: red;">El campo es requerido</span>
+              }
+            }
+          }
+      </div><br>
+
+        <div>
+          <button 
+              pButton 
+              pRipple 
+              label="Submit" 
+              class="p-button-success">
+          </button>
+        </div>
+    </form>
+    </div>
+</div>
+ -->
+ <div class="container">
+    <div class="nav">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+      <p-card header="Registro del producto"  [style]="{ width: '800px' }">
+        
+        <form [formGroup]="form"
+          style="width: 100%; text-align: center; border: 2px solid #cfbcbc; padding: 20px; border-radius: 20px;">
+  
+          <div class="flex flex-column gap-2">
+            <label for="names" class="font-bold block mb-2">Nombre del producto: </label>
+            <input pInputText id="name" aria-describedby="username-help" formControlName="name" />
+            <small id="username-help">
+              Ingrese el nombre del producto
+            </small>
+  
+            @if (nameField.errors) {
+            @if (nameField.touched) {
+            @if (nameField.errors['minlength']) {
+            <span style="color: red; ">El campo debe contener 2 caracteres o más</span>
+            }
+            @else if (nameField.errors['required']) {
+            <span style="color: red;">El campo es requerido</span>
+            }
+            }
+            }
+          </div><br>
+  
+  
+          <div class="flex flex-column gap-2">
+            <label for="price" class="font-bold block mb-2">Precio: </label>
+            <input pInputText id="price" pKeyFilter="int" class="w-full" formControlName="price" (input)="updateCost()"/>
+            <small id="username-help">
+              Ingrese el precio del producto
+            </small>
+            @if (priceField.errors) {
+            @if (priceField.touched) {
+            @if (priceField.errors['required']) {
+            <span style="color: red;">El campo es requerido</span>
+            }
+            }
+            }
+          </div><br>
+  
+  
+  
+          <div class="flex flex-column gap-2">
+            <label for="unit" class="font-bold block mb-2">Unidades del producto </label>
+            <input pInputText id="unit" pKeyFilter="int" class="w-full" formControlName="unit" (input)="updateCost()"/>
+            <small id="username-help">
+              Ingrese el numero de unidades deseadas
+            </small>
+            @if (unitField.errors) {
+            @if (unitField.touched) {
+            @if (unitField.errors['min']) {
+            <span style="color: red;">El campo debe contener por lo menos una unidad</span>
+            }
+            @else if (unitField.errors['required']) {
+            <span style="color: red;">El campo es requerido</span>
+            }
+            }
+            }
+          </div><br>
+  
+          <div class="flex flex-column gap-2">
+            <label for="unit" class="font-bold block mb-2">Costo total: </label>
+            <input pInputText id="unit" pKeyFilter="int" placeholder="{{ result }}" class="w-full" formControlName="unit" (input)="updateCost() "/>
+            
+          </div><br>
+          
+        </form>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+            <p-button label="Save" class="w-full" styleClass="w-full" />
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
