@@ -7,7 +7,6 @@ import { SharedAppModule } from '../../shared/shared-app.module';
 
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 
 

@@ -14,6 +14,7 @@ import { DividerModule } from 'primeng/divider';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     InputTextModule,
     DividerModule,
-    ButtonModule
+    ButtonModule,
+    PanelModule,
   ]
 })
 export class AuthModule { }

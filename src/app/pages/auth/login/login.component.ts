@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { min } from 'rxjs';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +17,8 @@ export class LoginComponent {
 
 get buildForm(): FormGroup {
   return (this.form = this.formBuilder.group({
-    password: [null, [Validators.required, Validators.minLength(5)]],
-    user: [null, [Validators.required]],
-   
-
-
+    password: [null, [Validators.required]],
+    email: [null, [Validators.required, Validators.email]],
   }))
 }
 
@@ -32,6 +28,15 @@ validateForm() {
   } else {
     alert('No valido');
   }
+}
+
+
+get passwordField(): AbstractControl {
+  return this.form.controls['password'];
+}
+
+get emailField(): AbstractControl {
+  return this.form.controls['email'];
 }
 
 }

@@ -1,0 +1,30 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-panel {
+    width: 800px; /* Agrandar la tarjeta */
+  }
+  
+  .p-panel {
+    padding: 2rem; /* Aumentar el padding interno de la tarjeta */
+    text-align: center;
+  }
+  
+  .p-field {
+    margin-bottom: 1.5rem; /* Espaciado entre los campos del formulario */
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 1rem; /* Espaciado adicional debajo del formulario */
+  }
+
+  :host ::ng-deep .p-password {
+    width: 400px;
+  }
+  
+
