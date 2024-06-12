@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  encapsulation: ViewEncapsulation.None
+
 })
 export class LoginComponent {
   private formBuilder: FormBuilder = inject(FormBuilder);
