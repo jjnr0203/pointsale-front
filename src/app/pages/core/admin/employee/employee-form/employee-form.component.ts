@@ -1,28 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { EmployeeHttpService } from '../../../../../http-services/employee-http.service';
 
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
-  styleUrls: ['./employee-form.component.scss']
+  styleUrl: './employee-form.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class EmployeeFormComponent {
   form: FormGroup;
   employees: any[] = [];
-  result: number = 0;
+  roles: any[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private employeeHttpService: EmployeeHttpService
   ) {
     this.form = this.buildForm();
+    this.roles = [
+      { label: 'Empleado', value: 'empleado' },
+    ];
   }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(2)]],
-      price: [null, [Validators.required]],
-      unit: [null, [Validators.required, Validators.min(1)]]
+      name: [null, [Validators.required, Validators.minLength(5)]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]],
+      role: ['', Validators.required]
     });
   }
 
@@ -47,21 +53,37 @@ export class EmployeeFormComponent {
     }
   }
 
-  updateCost() {
-    const price = this.form.controls['price'].value;
-    const unit = this.form.controls['unit'].value;
-    this.result = price * unit;
-  }
+
+
+/*   validateForm() {
+    if (this.form.valid) {
+      alert('El formulario es valido')
+    } else {
+      alert('El formulario no es valido');
+    }
+  } */
+
 
   get nameField(): AbstractControl {
     return this.form.controls['name'];
   }
+<<<<<<< HEAD
   
   get priceField(): AbstractControl {
     return this.form.controls['price'];
+=======
+
+  get emailField(): AbstractControl {
+    return this.form.controls['email'];
+>>>>>>> 1a5db43c22c75f5b2869fe733d2c1bb7700706e0
   }
 
-  get unitField(): AbstractControl {
-    return this.form.controls['unit'];
+  get passwordField(): AbstractControl {
+    return this.form.controls['password'];
   }
-}
+
+  get roleField(): AbstractControl {
+    return this.form.controls['role'];
+  }
+  }
+  

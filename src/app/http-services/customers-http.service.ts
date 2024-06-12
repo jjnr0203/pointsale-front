@@ -15,10 +15,13 @@ export class CustomersHttpService {
     return this.httpClient.get<ResponseModel>(this.url);
   }
 
+<<<<<<< HEAD
   findOne(){
     return this.httpClient.get<ResponseModel>(this.url)
   }
 
+=======
+>>>>>>> 1a5db43c22c75f5b2869fe733d2c1bb7700706e0
   create(customer:CreateCustomerModel){
     return this.httpClient.post<ResponseModel>(this.url, customer);
   }

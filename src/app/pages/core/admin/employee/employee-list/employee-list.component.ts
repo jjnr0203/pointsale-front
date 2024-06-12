@@ -8,32 +8,32 @@ import { EmployeeHttpService } from '../../../../../http-services/employee-http.
 })
 export class EmployeeListComponent {
 
-  products: any = [
-    {
-      name: 'Arroz',
-      price: '0.50',
-      unit: '2'
-
-    },
-    {
-      name: 'Papas',
-      price: '0.25',
-      unit: '3'
-    },
-    {
-      name: 'Cebolla',
-      price: '0.15',
-      unit: '5'
-    }
-  ];
+  employes: any = [];
   constructor(private employeeHttpService: EmployeeHttpService) {
     this.findAll()
   }
 
   findAll() {
-    return this.employeeHttpService.findAll().subscribe(response => { this.products = response })
+    return this.employeeHttpService.findAll().subscribe(response => { this.employes = response })
   }
 
+/*   updateUser() {
+    this.employeeHttpService.update('1', {}).subscribe(response => {
+      console.log(response);
+    })
+  } */
+
+    deleteUser(id: string) {
+      this.employeeHttpService.delete(id).subscribe(response => {
+        console.log(response);
+      })
+    }
+
+    /* findUserOne(id: string) {
+      this.employeeHttpService.findOne(id).subscribe(response => {
+        this.user = response;
+      });
+    } */
 
 }
 
