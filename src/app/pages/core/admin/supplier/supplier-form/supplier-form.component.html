@@ -1,1 +1,38 @@
-<p>supplier-form works!</p>
+<div class="container">    
+    <div class="nav">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+      <div class="supplier-form">
+        <form [formGroup]="supplier">
+          <div class="flex flex-column gap-2">
+            <label for="name">Nombre:</label>
+            <input 
+              pInputText 
+              id="name" 
+              aria-describedby="username-help" 
+              formControlName="name" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="phone">Celular:</label>
+            <input 
+              pInputText 
+              id="phone" 
+              aria-describedby="phone" 
+              formControlName="phone" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="email">Correo Electrónico:</label>
+            <input 
+              pInputText 
+              id="email" 
+              aria-describedby="email" 
+              formControlName="email" />
+          </div>
+          <br>
+          <p-button (onClick)="onSubmit()" icon="pi pi-users" type="submit" severity="primary" label="Crear nuevo repartidor" />
+        </form>
+      </div>
+    </div>
+  </div>
+  

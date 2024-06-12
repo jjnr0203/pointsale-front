@@ -16,7 +16,7 @@ export class CustomersHttpService {
   }
 
   findOne(){
-    return this.httpClient.post<ResponseModel>(this.url)
+    return this.httpClient.get<ResponseModel>(this.url)
   }
 
   create(customer:CreateCustomerModel){

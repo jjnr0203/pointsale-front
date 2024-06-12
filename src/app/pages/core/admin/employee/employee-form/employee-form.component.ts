@@ -56,7 +56,7 @@ export class EmployeeFormComponent {
   get nameField(): AbstractControl {
     return this.form.controls['name'];
   }
-
+  
   get priceField(): AbstractControl {
     return this.form.controls['price'];
   }

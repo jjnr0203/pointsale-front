@@ -1,15 +1,37 @@
 .container {
-    display: flex;
-  }
-  
-  .nav {
-    width: 100px;
-  }
-  .main {
-    padding-top: 20px;
-    padding-left: 35px;
-    display: flex;
-    margin: 15px;
-    width: 100%;
-    justify-content: space-between;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Para centrar verticalmente */
+  height: 100vh; /* Para que ocupe toda la altura de la ventana */
+}
+
+.nav {
+  width: 100px;
+}
+
+.main {
+  padding: 20px 35px;
+  display: flex;
+  flex-direction: column; /* Para asegurar que los elementos se apilen verticalmente */
+  margin: 15px;
+  width: 100%;
+  max-width: 600px; /* Para limitar el ancho máximo del formulario */
+  justify-content: center;
+  align-items: center; /* Para centrar los elementos dentro del main */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.supplier-form {
+  width: 100%; /* Para que el formulario ocupe todo el ancho disponible */
+}
+
+.supplier-form .p-inputtext {
+  width: 100%; /* Para que los inputs ocupen todo el ancho del contenedor */
+  font-size: 1.2em; /* Para hacer los inputs más grandes */
+}
+
+.p-button {
+  width: 100%; /* Para que el botón ocupe todo el ancho del formulario */
+  font-size: 1.2em; /* Para hacer el texto del botón más grande */
+}
