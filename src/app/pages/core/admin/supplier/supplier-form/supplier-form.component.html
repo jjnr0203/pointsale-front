@@ -6,31 +6,34 @@
       <div class="supplier-form">
         <form [formGroup]="supplier">
           <div class="flex flex-column gap-2">
-            <label for="name">Nombre:</label>
+            <label for="name" class="form-label">Nombre:</label>
             <input 
               pInputText 
               id="name" 
               aria-describedby="username-help" 
-              formControlName="name" />
+              formControlName="name"
+              class="form-input" />
           </div>
           <div class="flex flex-column gap-2">
-            <label for="phone">Celular:</label>
+            <label for="phone" class="form-label">Celular:</label>
             <input 
               pInputText 
               id="phone" 
               aria-describedby="phone" 
-              formControlName="phone" />
+              formControlName="phone"
+              class="form-input" />
           </div>
           <div class="flex flex-column gap-2">
-            <label for="email">Correo Electrónico:</label>
+            <label for="email" class="form-label">Correo Electrónico:</label>
             <input 
               pInputText 
               id="email" 
               aria-describedby="email" 
-              formControlName="email" />
+              formControlName="email"
+              class="form-input" />
           </div>
           <br>
-          <p-button (onClick)="onSubmit()" icon="pi pi-users" type="submit" severity="primary" label="Crear nuevo repartidor" />
+          <p-button (onClick)="onSubmit()" icon="pi pi-users" type="submit" label="Enviar" [raised]="true" severity="contrast" />
         </form>
       </div>
     </div>

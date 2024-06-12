@@ -1,7 +1,54 @@
-<div class="container">
+<div class="container">    
     <div class="nav">
-        <app-nav-bar>
-            
-        </app-nav-bar>
+      <app-nav-bar></app-nav-bar>
     </div>
-</div>
+    <div class="main">
+      <div class="shop-form">
+        <form [formGroup]="shop">
+          <div class="flex flex-column gap-2">
+            <label for="name">Nombre:</label>
+            <input 
+              pInputText 
+              id="name" 
+              aria-describedby="username-help" 
+              formControlName="name" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="ruc">Ruc:</label>
+            <input 
+              pInputText 
+              id="ruc" 
+              aria-describedby="ruc" 
+              formControlName="ruc" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="address">Dirección:</label>
+            <input 
+              pInputText 
+              id="address" 
+              aria-describedby="address" 
+              formControlName="address" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="phone">Teléfono:</label>
+            <input 
+              pInputText 
+              id="phone" 
+              aria-describedby="phone" 
+              formControlName="phone" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="email">Correo Electrónico:</label>
+            <input 
+              pInputText 
+              id="email" 
+              aria-describedby="email" 
+              formControlName="email" />
+          </div>
+          <br>
+          <p-button (onClick)="onSubmit()" icon="pi pi-shop" type="submit" severity="primary" label="Crear nueva tienda" />
+        </form>
+      </div>
+    </div>
+  </div>
+  

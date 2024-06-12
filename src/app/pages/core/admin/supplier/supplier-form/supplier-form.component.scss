@@ -1,15 +1,37 @@
 .container {
-    display: flex;
+  display: flex;
   }
   
   .nav {
     width: 100px;
   }
   .main {
-    padding-top: 20px;
-    padding-left: 35px;
+    padding-left: 350px;
     display: flex;
-    margin: 15px;
+    margin: auto;
     width: 100%;
     justify-content: space-between;
+    
+  }
+
+  .supplier-form{
+    box-shadow: 0 4px 8px rgb(20, 2, 102);
+    border-radius: 10px;
+    padding: 35px;
+    background: #f3f3f3;
+    width: 50%;
+    height: 60%;
+  }
+  .form-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #080070;
+    transition: border-color 0.3s;
   }
