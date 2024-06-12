@@ -5,18 +5,32 @@
 .nav {
   width: 100px;
 }
+
 .main {
   padding-top: 20px;
   padding-left: 35px;
   display: flex;
   margin: 15px;
   width: 100%;
+  justify-content: center;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-:host ::ng-deep .p-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #ddd;
-  border-radius: 100px;
+.table-title {
+  margin: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  margin-left: 5px;
+  cursor: pointer;
 }

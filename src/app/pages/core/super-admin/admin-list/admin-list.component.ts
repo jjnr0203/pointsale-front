@@ -1,22 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdminHttpService } from '../../../../http-services/admin-http.service';
-import { ResponseModel } from '../../../../models/response.model';
+import { AdminModel } from '../../../../models/response.model';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-admin-list',
   templateUrl: './admin-list.component.html',
-  styleUrl: './admin-list.component.scss'
+  styleUrls: ['./admin-list.component.scss']
 })
 export class AdminListComponent {
   users: any = [];
-  
-  constructor(private adminHttpService:AdminHttpService){
-    this.findAll()
+  filteredUsers: any = [];
+  searchTerm: string = '';
+
+  constructor(private adminHttpService: AdminHttpService) {
+    this.findAll();
   }
-  
-  findAll(){
-    return this.adminHttpService.findAll().subscribe(response => {this.users = response});
+
+  findAll() {
+    this.adminHttpService.findAll().subscribe(response => {
+      this.users = response.data;
+      this.filteredUsers = response.data;
+    });
+  }
+
+  filterUsers() {
+    if (this.searchTerm) {
+      this.filteredUsers = this.users.filter((user: any) =>
+        user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredUsers = this.users;
+    }
+  }
+
+  /* deleteUser(user:AdminModel) {
+    this.adminHttpService.delete(user.id).subscribe(() => {
+      this.filteredUsers = this.filteredUsers.filter((u: any) => u !== user);
+      this.users = this.users.filter((u: any) => u !== user);
+    });
+  } */
+
+  deleteUser(user: AdminModel) {
+    this.adminHttpService.delete(user.id).pipe(
+      catchError(error => {
+        console.error('Error deleting user:', error);
+        return of(null);
+      })
+    ).subscribe(() => {
+      this.findAll();
+    });
   }
 }
-
 

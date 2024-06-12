@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="nav">
         <app-nav-bar></app-nav-bar>
     </div>
@@ -21,4 +21,10 @@
             </ng-template>
         </p-table>
     </div>
+</div> -->
+<div class="card flex justify-content-center gap-2">
+    <p-toast />
+    <p-confirmDialog />
+    <p-button (click)="confirm1($event)" label="Save" [outlined]="true" />
+    <p-button (click)="confirm2($event)" label="Delete" severity="danger" [outlined]="true" />
 </div>

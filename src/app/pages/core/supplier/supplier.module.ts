@@ -8,6 +8,11 @@ import { SharedAppModule } from '../../shared/shared-app.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -21,7 +26,14 @@ import { TableModule } from 'primeng/table';
     SharedAppModule,
     ReactiveFormsModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    CardModule,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  providers:[
+    ConfirmationService,
+    MessageService
   ]
 })
 export class SupplierModule { }

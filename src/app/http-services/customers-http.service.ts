@@ -14,12 +14,8 @@ export class CustomersHttpService {
   findAll(){
     return this.httpClient.get<ResponseModel>(this.url);
   }
-
-  findOne(){
-    return this.httpClient.post<ResponseModel>(this.url)
-  }
-
-  create(customer:CreateCustomerModel){
+  
+ create(customer:CreateCustomerModel){
     return this.httpClient.post<ResponseModel>(this.url, customer);
   }
 }
