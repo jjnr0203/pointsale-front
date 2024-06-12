@@ -17,6 +17,9 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OrderListModule } from 'primeng/orderlist';
 import { ListboxModule } from 'primeng/listbox';
 import { CardModule } from 'primeng/card';
+import { PasswordModule } from 'primeng/password';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { CardModule } from 'primeng/card';
     ConfirmPopupModule,
     OrderListModule,
     ListboxModule,
-    CardModule
+    CardModule,
+    PasswordModule,
+    FloatLabelModule,
+    DropdownModule
   ]
 })
 export class EmployeeModule { }

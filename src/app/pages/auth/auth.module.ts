@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from '../auth/login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -19,6 +20,7 @@ import { PanelModule } from 'primeng/panel';
 @NgModule({
   declarations: [
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

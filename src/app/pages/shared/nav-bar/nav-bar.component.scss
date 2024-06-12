@@ -38,7 +38,8 @@
 
 .second-element {
   padding-top: 10px;
-  height:auto;
+  max-height: 500px;
+  overflow-y: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -60,3 +61,31 @@
 .pi {
   font-size: 30px;
 }
+.options-container{
+  padding: 15px;
+  border-radius: 10px;
+  position: relative;
+  display: none;
+  div{
+   
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    a{
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+  }
+  div:hover{
+    background-color: rgba(128, 128, 128, 0.507);
+  }
+}
+
+.options-container-active{
+  display: block;
+}
+
+ /* .navbar .p-component{
+  background-color: #052C4E;
+  height: 50px;
+ } */
