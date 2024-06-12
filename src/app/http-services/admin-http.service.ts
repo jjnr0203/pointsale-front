@@ -4,14 +4,13 @@ import { ResponseModel } from '../models/response.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminHttpService {
+  constructor(private httpClient: HttpClient) {}
+  url: string = 'http://localhost:3000/users';
 
-  constructor(private httpClient: HttpClient) { }
-  url:string = "http://localhost:3000/users";
-
-  findAll(){
+  findAll() {
     return this.httpClient.get<ResponseModel>(this.url);
   }
   /* delete(id:string){

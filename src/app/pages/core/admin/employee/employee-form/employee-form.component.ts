@@ -1,12 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { EmployeeHttpService } from '../../../../../http-services/employee-http.service';
 
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeFormComponent {
   form: FormGroup;
@@ -18,17 +23,21 @@ export class EmployeeFormComponent {
     private employeeHttpService: EmployeeHttpService
   ) {
     this.form = this.buildForm();
-    this.roles = [
-      { label: 'Empleado', value: 'empleado' },
-    ];
+    this.roles = [{ label: 'Empleado', value: 'empleado' }];
   }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5)]],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]],
-      role: ['', Validators.required]
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),
+        ],
+      ],
+      role: ['', Validators.required],
     });
   }
 
@@ -41,7 +50,7 @@ export class EmployeeFormComponent {
           alert('Empleado creado exitosamente');
           this.form.reset();
           // Actualizar la lista en EmployeeListComponent
-          this.employees
+          this.employees;
         },
         (error) => {
           console.error('Error al crear el empleado:', error);
@@ -53,9 +62,7 @@ export class EmployeeFormComponent {
     }
   }
 
-
-
-/*   validateForm() {
+  /*   validateForm() {
     if (this.form.valid) {
       alert('El formulario es valido')
     } else {
@@ -63,19 +70,15 @@ export class EmployeeFormComponent {
     }
   } */
 
-
   get nameField(): AbstractControl {
     return this.form.controls['name'];
   }
-<<<<<<< HEAD
-  
+
   get priceField(): AbstractControl {
     return this.form.controls['price'];
-=======
-
+  }
   get emailField(): AbstractControl {
     return this.form.controls['email'];
->>>>>>> 1a5db43c22c75f5b2869fe733d2c1bb7700706e0
   }
 
   get passwordField(): AbstractControl {
@@ -85,5 +88,4 @@ export class EmployeeFormComponent {
   get roleField(): AbstractControl {
     return this.form.controls['role'];
   }
-  }
-  
+}
