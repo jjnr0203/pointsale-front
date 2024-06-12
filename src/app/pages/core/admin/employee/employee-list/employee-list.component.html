@@ -32,29 +32,29 @@
         <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-        <p-card header="Lista de Productos" [style]="{ width: '900px' }">
+        <p-card header="Lista de Empleados" [style]="{ width: '900px' }">
             <ng-template pTemplate="header">
             </ng-template>
             
-            <p-listbox [options]="products" optionLabel="name" [filter]="true" [style]="{ width: '40rem' }"
+            <p-listbox [options]="employes" optionLabel="name" [filter]="true" [style]="{ width: '40rem' }"
                 [listStyle]="{'max-height': '220px'}" />
             <ng-template pTemplate="footer">
                 
             </ng-template>
-            <p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+            <p-table [value]="employes" [tableStyle]="{'min-width': '50rem'}">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Unidades</th>
+                        <th>Nombre:</th>
+                        <th>Email</th>
+                        <th>Password</th>
                         <th>Acción</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-products>
+                <ng-template pTemplate="body" let-employes>
                     <tr>
-                        <td>{{products.name}}</td>
-                        <td>{{products.price}}</td>
-                        <td>{{products.unit}}</td>
+                        <td>{{employes.name}}</td>
+                        <td>{{employes.email}}</td>
+                        <td>{{employes.password}}</td>
                         <td><p-button label="Delete" icon="pi pi-trash" /></td>
                     </tr>
                 </ng-template>
