@@ -38,8 +38,9 @@ export class SaleComponent implements OnInit {
   ) {
     this.customerForm = this.ordersService.customerForm();
     this.orderForm = this.ordersService.orderForm();
-    this.applyValidations();
+    this.addValidations();
   }
+
 
   ngOnInit() {
     this.getPayments();
@@ -195,7 +196,7 @@ export class SaleComponent implements OnInit {
     );
   }
 
-  applyValidations() {
+  addValidations() {
     this.paymentMethod.valueChanges.subscribe((value) => {
       if (value?.code === 2) {
         this.cash.addValidators(Validators.required);
