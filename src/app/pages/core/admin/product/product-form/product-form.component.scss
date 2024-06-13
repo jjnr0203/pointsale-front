@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+  }
+  
+  .nav {
+    width: 100px;
+  }
+  .main {
+    padding-top: 20px;
+    padding-left: 35px;
+    display: flex;
+    margin: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }

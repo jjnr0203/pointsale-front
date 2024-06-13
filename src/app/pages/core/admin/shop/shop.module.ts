@@ -5,6 +5,10 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ShopFormComponent } from './shop-form/shop-form.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { SharedAppModule } from '../../../shared/shared-app.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -15,7 +19,11 @@ import { SharedAppModule } from '../../../shared/shared-app.module';
   imports: [
     CommonModule,
     ShopRoutingModule,
-    SharedAppModule
+    SharedAppModule,
+    TableModule,
+    CardModule,
+    ButtonModule,
+    ReactiveFormsModule,
   ]
 })
 export class ShopModule { }

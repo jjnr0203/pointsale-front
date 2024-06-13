@@ -1,7 +1,46 @@
-<div class="container">
+<div class="container">    
     <div class="nav">
-        <app-nav-bar>
-            
-        </app-nav-bar>
+      <app-nav-bar></app-nav-bar>
     </div>
-</div>
+    <div class="main">
+      <div class="product-form">
+        <form [formGroup]="product">
+          <div class="flex flex-column gap-2">
+            <label for="name">Nombre:</label>
+            <input 
+              pInputText 
+              id="name" 
+              aria-describedby="username-help" 
+              formControlName="name" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="unit">Unidad:</label>
+            <input 
+              pInputText 
+              id="unit" 
+              aria-describedby="unit" 
+              formControlName="unit" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="price">Precio:</label>
+            <input 
+              pInputText 
+              id="price" 
+              aria-describedby="price" 
+              formControlName="price" />
+          </div>
+          <div class="flex flex-column gap-2">
+            <label for="cost">Costo:</label>
+            <input 
+              pInputText 
+              id="cost" 
+              aria-describedby="cost" 
+              formControlName="cost" />
+          </div>
+          <br>
+          <p-button (onClick)="onSubmit()" icon="pi pi-cart-plus" type="submit" severity="primary" label="Crear un nuevo producto" />
+        </form>
+      </div>
+    </div>
+  </div>
+  
