@@ -1,39 +1,48 @@
-body{
+/* body{
   background-image: url("/assets/images/background.png");
   background-size: cover;
-}
+} */
 
 .container {
-    display: flex;
-  }
+  display: flex;
   
-  .nav {
-    width: 80px;
-  }
-  .main {
-    padding-top: px;
-    padding-left: 30px;
-    display: flex;
-    margin: 15px;
-    width: 100%;
-    justify-content: space-between;
-  }
+}
 
-  .my-password{
-  width: 1200px;
-  }
-
-  .my-password .p-component{
+.nav {
+  width: 80px;
+}
+.main {
+  padding-top: px;
+  padding-left: 30px;
+  display: flex;
+  margin: 15px;
   width: 100%;
-  height: 40px;
-  }
+  justify-content: space-between;
+  
+}
 
-  .my-password .p-icon{
-    position: relative;
-    bottom: 8px;
-  }
+.my-password{
+width: 1200px;
+}
 
-  .my-rol .p-component{
-    width: 100%;
-  }
-    
+.my-password .p-component{
+width: 100%;
+height: 40px;
+}
+
+.my-password .p-icon{
+  position: relative;
+  bottom: 8px;
+}
+
+.my-rol .p-component{
+  width: 100%;
+}
+
+.my-card .p-component{
+  background-color: #052C4E;
+  background-size: cover;
+}
+  
+
+

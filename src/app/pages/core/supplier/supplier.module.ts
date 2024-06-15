@@ -13,6 +13,7 @@ import { CardModule } from 'primeng/card';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ToastModule } from 'primeng/toast';
     TableModule,
     CardModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    PasswordModule
   ],
   providers:[
     ConfirmationService,
