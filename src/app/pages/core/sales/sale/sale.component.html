@@ -26,13 +26,13 @@
               </div>
               <div class="details-input col-5">
                 <p-floatLabel>
-                  <input type="number" id="quantity" style="width: 88%" pKeyFilter="int"
+                  <input type="number" id="quantity" style="width: 90%" pKeyFilter="int"
                          formControlName="quantity"/>
                   <label for="quantity" style="margin-bottom: 5px">Cantidad:</label>
                 </p-floatLabel>
               </div>
-              <p-button severity="danger" (click)="removeItem(i)">
-                <i class="pi pi-trash" style="font-size: 20px" (click)="removeItem(i)"></i>
+              <p-button severity="danger" (click)="removeOrderDetail(i)">
+                <i class="pi pi-trash" style="font-size: 20px" ></i>
               </p-button>
             </div>
           }
@@ -132,13 +132,13 @@
           @if (cashBack.hasValidator(Validators.required)) {
             <div class="payment-group col-12">
               <label for="cash">Dinero recibido:</label>
-              <p-inputGroup class="col-12">
+              <p-inputGroup class="cash-input col-12" >
                 <p-inputGroupAddon>$</p-inputGroupAddon>
                 <p-inputNumber formControlName="cash" id="cash" mode="currency" currency="USD"
                                locale="en-US" />
               </p-inputGroup>
               <label for="cashback">Cambio:</label>
-              <p-inputGroup class="col-12">
+              <p-inputGroup  class="cash-input col-12">
                 <p-inputGroupAddon>$</p-inputGroupAddon>
                 <p-inputNumber formControlName="cashBack" id="cashback" mode="currency" currency="USD"
                                locale="en-US"/>
