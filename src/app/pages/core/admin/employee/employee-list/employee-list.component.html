@@ -27,38 +27,37 @@
 
  -->
 
- <div class="container">
+<div class="container">
     <div class="nav">
         <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-        <p-card header="Lista de Empleados" [style]="{ width: '900px' }">
+        <p-table class="col-11" [tableStyle]="{ 'min-width': '50rem'}" styleClass="p-datatable-striped"
+            [paginator]="true" [rows]="7" [value]="filteredEmployees">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    <h2 class="table-title">Lista de empleados</h2>
+                    <div class="search-bar">
+                        <input type="text" pInputText placeholder="Buscar..." [(ngModel)]="searchTerm"
+                            (input)="filterEmployees()" />
+                        <i class="pi pi-search search-icon"></i>
+                    </div>
+                </div>
+            </ng-template>
             <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:33%">Name</th>
+                    <th style="width:34%">Email</th>
+                    <th style="width:33%">Acciones</th>
+                </tr>
             </ng-template>
-            
-            <p-listbox [options]="employes" optionLabel="name" [filter]="true" [style]="{ width: '40rem' }"
-                [listStyle]="{'max-height': '220px'}" />
-            <ng-template pTemplate="footer">
-                
+            <ng-template pTemplate="body" let-employee>
+                <tr>
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.email}}</td>
+                    <td><p-button label="Delete" icon="pi pi-trash" (onClick)="deleteEmployee(employee)" /></td>
+                </tr>
             </ng-template>
-            <p-table [value]="employes" [tableStyle]="{'min-width': '50rem'}">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Nombre:</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Acción</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-employes>
-                    <tr>
-                        <td>{{employes.name}}</td>
-                        <td>{{employes.email}}</td>
-                        <td>{{employes.password}}</td>
-                        <td><p-button label="Delete" icon="pi pi-trash" /></td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </p-card>
+        </p-table>
     </div>
 </div>
