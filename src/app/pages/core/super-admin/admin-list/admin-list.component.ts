@@ -7,7 +7,7 @@ import { UserDeleteModel } from '../../../../models/user.model';
 @Component({
   selector: 'app-admin-list',
   templateUrl: './admin-list.component.html',
-  styleUrls: ['./admin-list.component.scss']
+  styleUrls: ['./admin-list.component.scss'],
 })
 export class AdminListComponent {
   catalogue: any = [];
