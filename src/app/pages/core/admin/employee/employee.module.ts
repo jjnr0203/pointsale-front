@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -20,6 +20,7 @@ import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { DropdownModule } from 'primeng/dropdown';
     CardModule,
     PasswordModule,
     FloatLabelModule,
-    DropdownModule
+    DropdownModule,
+    DataViewModule,
+    FormsModule,
   ]
 })
 export class EmployeeModule { }

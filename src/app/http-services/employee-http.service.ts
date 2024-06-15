@@ -14,6 +14,10 @@ export class EmployeeHttpService {
     return this.httpClient.get<ResponseModel>(this.url);
   }
 
+  findEmployeeByShop(shop:string){
+    return this.httpClient.get(`${this.url}/${shop}`)
+  }
+
   create(employee:any){
     return this.httpClient.post<ResponseModel>(this.url, employee);
   }
