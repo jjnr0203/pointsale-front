@@ -1,7 +1,25 @@
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body{
+    background-image: url("/assets/images/celeste.jpg");
+    background-size: cover;
 }
-  
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.my-password .p-component{
+    width: 100%;
+}
+
+.my-rol .p-component{
+    width: 100%;
+}
+
+.my-card .p-component{
+    background-color: #8cafc4;
+    background-size: cover;
+  }
+

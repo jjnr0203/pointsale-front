@@ -34,3 +34,27 @@
   margin-left: 5px;
   cursor: pointer;
 }
+
+.custom-delete-button {
+  .p-button-icon-left {
+    font-size: 0.2em !important; // Ajusta el tamaño del icono
+    margin-right: 10px !important; // Ajusta el espacio entre el icono y el texto
+  }
+
+  .p-button {
+    font-size: 0.4em !important;
+    padding: 0.15em 0.2,5em !important; // Ajusta el padding según sea necesario
+  }
+}
+
+/* styles.scss (o styles.css si estás usando CSS) */
+
+:host ::ng-deep .p-datatable {
+  border: 4px solid #052C4E; /* Establece el borde con color azul marino */
+  border-radius: 10px; /* Redondea las esquinas de la tabla */
+  overflow: hidden;
+  background-color: #36d14e;
+}
+
+
+

@@ -16,6 +16,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,10 @@ import { PanelModule } from 'primeng/panel';
     DividerModule,
     ButtonModule,
     PanelModule,
-  ]
+    ToastModule
+  ],
+providers:[
+  MessageService
+]
 })
 export class AuthModule { }
