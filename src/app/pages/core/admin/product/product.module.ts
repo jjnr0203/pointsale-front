@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
+import { CarouselModule } from 'primeng/carousel';
+import { ImageModule } from 'primeng/image';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { TableModule } from 'primeng/table';
     CardModule,
     ButtonModule,
     ReactiveFormsModule,
+    CarouselModule,
+    ImageModule
   ]
 })
 export class ProductModule { }

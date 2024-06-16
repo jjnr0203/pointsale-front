@@ -24,9 +24,9 @@ export class ProductFormComponent {
   productForm(){
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      unit: [0, [Validators.required, Validators.minLength(1)]],
-      price: [0, [Validators.required]],
-      cost: [0, [Validators.required]]
+      unit: [null, [Validators.required, Validators.minLength(1)]],
+      price: [null, [Validators.required]],
+      cost: [null, [Validators.required]]
     })
   }
 
@@ -39,13 +39,16 @@ export class ProductFormComponent {
           alert('Tienda creada exitosamente');
           this.product.reset();
           this.products
+          console.log(this.products)
         },
         (error: any) => {
-          console.error('Error al crear la tienda:', error);
-          alert('Error al crear la tienda');
+          console.error('Error al crear el producto:', error);
+          alert('Error al crear el producto');
         }
       )
     } else {
+      const data = this.product.value;
+      this.product.markAllAsTouched()
       alert('El formulario no es valido');
     }
   }
@@ -72,3 +75,5 @@ export class ProductFormComponent {
   }
 
 }
+
+

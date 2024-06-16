@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-supplier-form',
@@ -24,8 +25,8 @@ export class SupplierFormComponent {
   supplierForm(): FormGroup{
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      phone:['',[Validators.required, Validators.maxLength(10)]],
-      email:['',[Validators.required, Validators.email]],
+      phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
     })
   }
 
@@ -67,3 +68,5 @@ export class SupplierFormComponent {
   }
 
 }
+
+
