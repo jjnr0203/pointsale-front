@@ -9,7 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrimeIcons } from 'primeng/api';
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
 
 
 @NgModule({
@@ -25,6 +26,9 @@ import { PrimeIcons } from 'primeng/api';
     CardModule,
     ButtonModule,
     ReactiveFormsModule,
+    ImageModule,
+    GalleriaModule 
+    
   ]
 })
 export class SupplierModule { }
