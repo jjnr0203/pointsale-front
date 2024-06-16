@@ -1,41 +1,70 @@
 <div class="container">    
-    <div class="nav">
-      <app-nav-bar></app-nav-bar>
-    </div>
-    <div class="main">
-      <div class="supplier-form">
-        <form [formGroup]="supplier">
-          <div class="flex flex-column gap-2">
-            <label for="name" class="form-label">Nombre:</label>
-            <input 
-              pInputText 
-              id="name" 
-              aria-describedby="username-help" 
-              formControlName="name"
-              class="form-input" />
-          </div>
-          <div class="flex flex-column gap-2">
-            <label for="phone" class="form-label">Celular:</label>
-            <input 
-              pInputText 
-              id="phone" 
-              aria-describedby="phone" 
-              formControlName="phone"
-              class="form-input" />
-          </div>
-          <div class="flex flex-column gap-2">
-            <label for="email" class="form-label">Correo Electrónico:</label>
-            <input 
-              pInputText 
-              id="email" 
-              aria-describedby="email" 
-              formControlName="email"
-              class="form-input" />
-          </div>
-          <br>
-          <p-button (onClick)="onSubmit()" icon="pi pi-users" type="submit" label="Enviar" [raised]="true" severity="contrast" />
-        </form>
-      </div>
+  <div class="nav">
+    <app-nav-bar></app-nav-bar>
+  </div>
+  <div class="main">
+    <div class="supplier-form">
+      <p-card styleClass="form" class="flex justify-content-center">
+        <h2 class="form-title">Registro de Proovedor</h2>
+      <form [formGroup]="supplier">
+        <div class="field">
+          <label for="name" class="block">Nombre</label>
+          <input
+          type="text"
+          pInputText
+          placeholder="Nombre"
+          formControlName="name"/>
+          @if(nameField.errors){
+            @if (nameField.errors['required'] && nameField.touched){
+              <small style="color: red;">El campo nombre es requerido</small>
+            }
+            @if (nameField.errors['minlength']){
+              <small class="alert-validation" style="color: red;">Minimo de letras es 4</small>
+            }
+          }
+        </div>
+        <div class="field">
+          <label for="phone" class="block">Teléfono</label>
+          <input
+          type="number"
+          pInputText
+          placeholder="Teléfono"
+          formControlName="phone"/>
+          @if(phoneField.errors){
+            @if (phoneField.errors['required'] && phoneField.touched){
+              <small style="color: red;">El campo teléfono es requerido</small>
+            }
+            @if (phoneField.errors['minlength']){
+              <small class="alert-validation" style="color: red;">Minimo de números es 10</small>
+            }
+            }
+        </div>
+        <div class="field">
+          <label for="email" class="block">Correo Eléctronico</label>
+          <input
+          type="email"
+          pInputText
+          placeholder="Correo Eléctronico"
+          formControlName="email"/>
+          @if(emailField.errors){
+            @if (emailField.errors['required'] && emailField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
+        <br>
+        <div class="d-grid gap-2 ">
+        <p-button (onClick)="onSubmit()" icon="pi pi-users"  type="submit" label="Enviar" severity="contrast" />
+        </div>
+      </form>
+    </p-card>
     </div>
   </div>
-  
+  <div class="card flex justify-content-center">
+    <p-image 
+        src="https://th.bing.com/th/id/OIG3.J_pcECUKnxPQ4hv0O7F2?w=1024&h=1024&rs=1&pid=ImgDetMain"
+        alt="Image" 
+        width="637"
+        [preview]="true" />
+</div>
+</div>

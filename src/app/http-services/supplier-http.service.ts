@@ -1,17 +1,19 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { SupplierModel } from "../models/supplier.model";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn:'root'
 })
 
 export class SupplierHttpService{
-    constructor(private httpClient:HttpClient){}
+    constructor(private readonly httpClient:HttpClient){}
     url:string = "http://localhost:3000/suppliers";
 
-    findAll(){
-        return this.httpClient.get<SupplierModel>(`${this.url}`);
+    findAll():Observable<SupplierModel[]>{
+        return this.httpClient.get<SupplierModel[]>(`${this.url}`);
+        
     }
 
     finOneShupplier(id:string){
