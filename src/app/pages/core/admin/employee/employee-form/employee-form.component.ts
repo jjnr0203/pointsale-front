@@ -6,86 +6,82 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { EmployeeHttpService } from '../../../../../http-services/employee-http.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss',
+  providers: [MessageService],
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeFormComponent {
   form: FormGroup;
+  userForm: FormGroup;
   employees: any[] = [];
   roles: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private employeeHttpService: EmployeeHttpService
+    private employeeHttpService: EmployeeHttpService,
+    protected router: Router, private activatedRoute: ActivatedRoute
   ) {
+    this.userForm = this.buildUserForm();
     this.form = this.buildForm();
     this.roles = [{ label: 'Empleado', value: 'empleado' }];
   }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
+      user: this.userForm,
+      shop: ['5ca520cb-0a41-436a-88b8-c7bf142f559e', [Validators.required]]
+    });
+  }
+
+  buildUserForm(): FormGroup {
+    return this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5)]],
       email: [null, [Validators.required, Validators.email]],
-      password: [
-        null,
-        [
-          Validators.required,
-          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),
-        ],
-      ],
+      password: [null,[Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),]],
       role: ['', Validators.required],
+    })
+  }
+
+  createEmployee(employee: any) {
+    return this.employeeHttpService.create(employee).subscribe((response) => {
+      const newUser = response.data;
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      const formData = this.form.value;
-      this.employeeHttpService.create(formData).subscribe(
-        (response) => {
-          this.employees.push(response); // Agregar el nuevo empleado a la lista local
-          alert('Empleado creado exitosamente');
-          this.form.reset();
-          // Actualizar la lista en EmployeeListComponent
-          this.employees;
-        },
-        (error) => {
-          console.error('Error al crear el empleado:', error);
-          alert('Error al crear el empleado');
-        }
-      );
-    } else {
-      alert('El formulario no es válido');
-    }
+      const data = this.form.value;
+      console.log(this.form.value)
+      this.createEmployee(data)
+      this.form.reset();
+    } (error: any) => {
+      console.log(error)
+      alert('Error al crear el empleado');
+    };
   }
 
-  /*   validateForm() {
-    if (this.form.valid) {
-      alert('El formulario es valido')
-    } else {
-      alert('El formulario no es valido');
-    }
-  } */
+
+
 
   get nameField(): AbstractControl {
-    return this.form.controls['name'];
+    return this.userForm.controls['name'];
   }
 
-  get priceField(): AbstractControl {
-    return this.form.controls['price'];
-  }
   get emailField(): AbstractControl {
-    return this.form.controls['email'];
+    return this.userForm.controls['email'];
   }
 
   get passwordField(): AbstractControl {
-    return this.form.controls['password'];
+    return this.userForm.controls['password'];
   }
 
   get roleField(): AbstractControl {
-    return this.form.controls['role'];
+    return this.userForm.controls['role'];
   }
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,FormArray,FormBuilder,FormGroup,Validators
 } from '@angular/forms';
-import {CustomersHttpService,OrdersHttpService,CataloguesHttpService,OrdersService} from '../../../../http-services';
+import {CustomersHttpService,OrdersHttpService,CataloguesHttpService} from '../../../../http-services';
 import {CreateCustomerModel, CustomerModel,} from '../../../../models/customer.model';
 import {ResponseModel} from '../../../../models/response.model';
 import {OrderModel} from '../../../../models/order.model';
@@ -23,28 +23,48 @@ export class SaleComponent implements OnInit {
   payments: any = [];
   customers: CustomerModel[] = [];
   products = [
-    {id: '961d7cce-eb80-462f-8e79-b52adb11c880', name: 'Gorra', price: 50},
-    {id: '5dcd9102-e621-47d7-958b-410572222feb', name: ' buzo', price: 100},
+    {id: '000710b0-afb5-4439-b53b-3af65e251c81', name: 'Gorra', price: 50},
+    {id: '000710b0-afb5-4439-b53b-3af75e251c81', name: ' buzo', price: 100},
   ];
 
   constructor(
     private formBuilder: FormBuilder,
     private customersHttpService: CustomersHttpService,
     private ordersHttpService: OrdersHttpService,
-    private ordersService: OrdersService,
     private cataloguesHttpService: CataloguesHttpService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {
-    this.customerForm = this.ordersService.customerForm();
-    this.orderForm = this.ordersService.orderForm();
+    this.customerForm = this.newCustomerForm();
+    this.orderForm = this.newOrderForm();
     this.addValidations();
   }
-
 
   ngOnInit() {
     this.getPayments();
     this.getCustomers();
+  }
+
+  newCustomerForm(): FormGroup {
+    return this.formBuilder.group({
+      identification: [null, [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      name: [null, Validators.required],
+      email: [null, Validators.required],
+      phone: [null, Validators.required],
+      address: [null, Validators.required],
+      shopIds:[['e3999fd5-ebdc-4558-a8ea-3f81198641e6'], Validators.required]
+    });
+  }
+
+  newOrderForm(): FormGroup {
+    return this.formBuilder.group({
+      shop: ['e3999fd5-ebdc-4558-a8ea-3f81198641e6', Validators.required],
+      customer: [null, Validators.required],
+      paymentMethod: [{value: null, disabled: true}, Validators.required],
+      cash: [null],
+      cashBack: [null],
+      ordersDetails: this.formBuilder.array([]),
+    });
   }
 
   //orders details
@@ -60,7 +80,7 @@ export class SaleComponent implements OnInit {
       })
     );
   }
-  removeItem(index: number): void {
+  removeOrderDetail(index: number): void {
     this.ordersDetails.removeAt(index);
   }
 
@@ -113,7 +133,7 @@ export class SaleComponent implements OnInit {
       first()
     ).subscribe({
       next: (response) => {
-        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: response.message, life: 3000});
+        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'Venta exitosa', life: 3000});
         this.restartForms()
       },
       error: (error) => {

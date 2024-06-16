@@ -4,22 +4,23 @@
     </div>
     <div class="main">
       <p-table
+        class="custom-p-table"
         class="col-11"
         [tableStyle]="{ 'min-width': '50rem'}"
         styleClass="p-datatable-striped"
         [paginator]="true"
-        [rows]="7"
+        [rows]="5"
         [value]="filteredUsers"
       >
-        <ng-template pTemplate="caption">
+        <ng-template pTemplate="caption" clas="table">
           <div class="table-header">
-            <h2 class="table-title">Lista de administradores</h2>
+            <h1 class="table-title">Lista de administradores</h1>
             <div class="search-bar">
               <input type="text" 
                 pInputText 
                 placeholder="Buscar..." 
                 [(ngModel)]="searchTerm" 
-                (input)="filterUsers()" />
+                />
               <i class="pi pi-search search-icon"></i>
             </div>
           </div>
@@ -35,7 +36,7 @@
           <tr>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
-            <td><p-button label="Delete" icon="pi pi-trash" (onClick)="deleteUser(user)"/></td>
+            <td><p-button label="Eliminar" severity="danger" size="small" icon="pi pi-trash" (onClick)="deleteUser(user)"/>
           </tr>
         </ng-template>
       </p-table>

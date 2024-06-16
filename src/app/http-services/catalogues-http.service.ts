@@ -13,5 +13,8 @@ export class CataloguesHttpService {
   getByPayment(type:string){
     return this.httpClient.get<ResponseModel>(`${this.url}?type=${type}`)
   }
+  getRoleByName(name:string){
+    return this.httpClient.get<ResponseModel>(`${this.url}/create?name=${name}`)
+  }
 
 }

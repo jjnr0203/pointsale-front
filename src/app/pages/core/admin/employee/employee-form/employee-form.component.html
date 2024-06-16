@@ -79,27 +79,30 @@
  -->
 
 
-<div class="container">
+ <div class="container">
   <div class="nav">
     <app-nav-bar></app-nav-bar>
   </div>
   <div class="main">
     <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
       <div class="main" style="display: flex; justify-content: center; align-items: center;">
-        <p-card [style]="{ width: '1100px' }">
+        <p-card [style]="{ width: '1100px' }" class="my-card">
           <ng-template pTemplate="header">
-            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem;">
+            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem; color: white;">
               Registro del empleado
             </div>
           </ng-template>
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
 
-            <form [formGroup]="form" style="width: 50%; text-align: left;">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" style="width: 50%; text-align: left; color: white;">
 
               <div class="flex flex-column gap-2">
-                <label for="name" class="font-bold block mb-2">Nombre: </label>
-                <input pInputText id="name" aria-describedby="username-help" formControlName="name" />
+                <label for="name" class="font-bold block mb-2" style="color: white;">Nombre: </label>
+                <input pInputText id="name" aria-describedby="username-help" formControlName="name"
+                  style="background-color: white;" />
+                  {{nameField.value | json}}
+                  {{form.value | json}}
                 <small id="username-help">Ingrese su nombre y apellido</small>
                 <div *ngIf="nameField.errors && nameField.touched">
                   <span *ngIf="nameField.errors['minlength']" style="color: red;">El campo debe contener 5 caracteres o
@@ -109,8 +112,9 @@
               </div><br>
 
               <div class="flex flex-column gap-2">
-                <label for="email" class="font-bold block mb-2">Email: </label>
-                <input pInputText id="email" aria-describedby="username-help" formControlName="email" />
+                <label for="email" class="font-bold block mb-2" style="color: white;">Email: </label>
+                <input pInputText id="email" aria-describedby="username-help" formControlName="email"
+                  style="background-color: white;" />
                 <small id="username-help">Ingrese su correo electrónico</small>
                 <div *ngIf="emailField.errors && emailField.touched">
                   <span *ngIf="emailField.errors['email']" style="color: red;">El campo debe contener un correo
@@ -119,7 +123,7 @@
                 </div>
               </div><br>
 
-              <label for="email" class="font-bold block mb-2">Password: </label>
+              <label for="email" class="font-bold block mb-2" style="color: white;">Password: </label>
               <p-floatLabel>
                 <p-password formControlName="password" [feedback]="false" class="my-password" />
                 <label for="password"></label>
@@ -132,24 +136,27 @@
               </div><br>
 
               <div class="flex flex-column gap-2">
-                <label for="role" class="font-bold block mb-2">Rol: </label>
-                <p-dropdown [options]="roles" formControlName="role" placeholder="Seleccione un rol" class="my-rol"></p-dropdown>
+                <label for="role" class="font-bold block mb-2" style="color: white;">Rol: </label>
+                <p-dropdown [options]="roles" formControlName="role" placeholder="Seleccione un rol"
+                  class="my-rol"></p-dropdown>
                 <small id="role-help">Seleccione el rol del usuario</small>
                 <div *ngIf="roleField.errors && roleField.touched">
                   <span *ngIf="roleField.errors['required']" style="color: red;">El campo es requerido</span>
                 </div>
               </div><br>
 
-              <div class="d-grid gap-2">
-                <button pButton type="button" label="Validar" class="p-button-outlined p-button-success" (click)="onSubmit()"></button>
-              </div>
+              <!-- <div class="d-grid gap-2">
+                <button pButton type="submit" (click)="onSubmit()" label="Validar" class="p-button-outlined p-button-success"
+                  ></button>
+              </div> -->
 
+              <button (click)="onSubmit()">presionar</button>
             </form>
 
             <!-- Imagen -->
             <div style="width: 40%; text-align: center;">
-              <img src="https://w7.pngwing.com/pngs/615/354/png-transparent-clerk-computer-icons-clerk-thumbnail.png"
-                alt="Descripción de la imagen" style="max-width: 100%; border-radius: 20px;">
+              <img src="/assets/images/empleado_image.png" alt="Descripción de la imagen"
+                style="max-width: 100%; border-radius: 20px;">
             </div>
 
           </div>
