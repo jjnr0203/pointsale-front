@@ -23,16 +23,22 @@ export class AdminListComponent {
     return this.cataloguesHttpService.getRoleByName('ADMIN').subscribe(response=>{ 
       this.catalogue = response.data[0].id;
       this.findAll();
-      console.log(this.catalogue)
     })
   }
 
   findAll() {
     this.adminHttpService.findUserByRole(this.catalogue).subscribe(response => {
       this.users = response;
-      this.filteredUsers = response;
-      console.log(this.users)
+      this.filteredUsers = this.users;
+      console.log(this.filteredUsers)
     });
+  }
+
+  filterCustomer(event: any) {
+    const query = event.query;
+    this.filteredUsers = this.users.filter((user: any) =>
+      user.name.toLowerCase().includes(query.toLowerCase())
+    );
   }
 
   filterUsers() {

@@ -14,8 +14,10 @@
                     <h2 class="table-title">Lista de empleados</h2>
                     <div class="search-bar">
                         <input type="text" 
-                            pInputText placeholder="Buscar..." 
+                            pInputText 
+                            placeholder="Buscar..." 
                             [(ngModel)]="searchTerm"
+                            (ngModelChange)="filterEmployees()"
                             />
                         <i class="pi pi-search search-icon"></i>
                     </div>

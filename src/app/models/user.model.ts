@@ -8,3 +8,8 @@ export interface UserFormModel{
     password:string;
     role_id:string;
 }
+
+export interface LoginFormModel{
+    email:string;
+    password: string;
+}

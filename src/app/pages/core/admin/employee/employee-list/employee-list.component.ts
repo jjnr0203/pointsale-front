@@ -26,12 +26,12 @@ export class EmployeeListComponent {
 
   filterEmployees() {
     if (this.searchTerm) {
-      this.filterEmployees = this.employees.filter((employee: any) =>
-        employee.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        employee.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+      this.filteredEmployees = this.employees.filter((employee: any) =>
+        employee.user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        employee.user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
-      this.filterEmployees = this.employees;
+      this.filteredEmployees = this.employees;
     }
   }
 
