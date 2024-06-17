@@ -21,6 +21,7 @@ import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
 import { DataViewModule } from 'primeng/dataview';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DataViewModule } from 'primeng/dataview';
     DropdownModule,
     DataViewModule,
     FormsModule,
+    ImageModule
   ]
 })
 export class EmployeeModule { }

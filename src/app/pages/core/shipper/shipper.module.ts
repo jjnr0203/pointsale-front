@@ -7,6 +7,8 @@ import { SharedAppModule } from '../../shared/shared-app.module';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ButtonModule } from 'primeng/button';
     SharedAppModule,
     TableModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    ImageModule,
+    InputTextModule
   ]
 })
 export class ShipperModule { }

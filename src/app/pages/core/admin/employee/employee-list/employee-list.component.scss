@@ -1,54 +1,122 @@
-.container {
-  display: flex;
-}
+  body {
+    background-size: cover;
+    background-color: rgba(0, 0, 255, 0.514)
+  }
 
-.nav {
-  width: 100px;
-}
+  .container {
+    display: flex;
+  }
 
-.main {
-  padding-top: 20px;
-  padding-left: 35px;
-  display: flex;
-  margin: 15px;
-  width: 100%;
-  justify-content: center;
-}
+  .nav {
+    width: 100px;
+  }
 
-.table-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .main {
+    padding-top: 0px;
+    padding-left: 35px;
+    display: flex;
+    margin: 15px;
+    width: 100%;
+    justify-content: center;
+  }
 
-.table-title {
-  margin: 0;
-}
+  .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-}
+  .table-title {
+    margin: 0;
+  }
 
-.search-icon {
-  margin-left: 5px;
-  cursor: pointer;
-}
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
 
-:host ::ng-deep .p-datatable {
-  border: 4px solid #052C4E; /* Establece el borde con color azul marino */
-  border-radius: 10px; /* Redondea las esquinas de la tabla */
-  overflow: hidden;
-  background-color: #36d14e;
-}
+  .search-icon {
+    margin-left: 5px;
+    cursor: pointer;
+  }
 
-:host ::ng-deep .p-datatable-thead {
-  > tr {
-    > th {
-      background-color: #052C4E; /* Azul marino */
-      color: white; /* Color de texto blanco para mejor visibilidad */
+  :host ::ng-deep .p-datatable {
+    border: 4px solid  #000000ee; 
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #36d14e;
+  }
+
+  :host ::ng-deep .p-datatable-thead {
+    > tr {
+      > th {
+        background-color: #000000ee; 
+        color: white; 
+      }
     }
   }
-}
+
+  /* Estilos específicos para el componente */
+
+  :host {
+    display: block;
+  }
+
+  .container {
+    display: flex;
+  }
+
+  .nav {
+    width: 100px;
+  }
+
+  .main {
+    padding-top: 0px;
+    padding-left: 35px;
+    display: flex;
+    margin: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .table-title {
+    margin: 0;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .p-datatable {
+    border: 4px solid #000000ee;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .p-datatable-thead > tr > th {
+    background-color: #000000ee;
+    color: white;
+  }
+
+  .p-datatable-tbody tr:hover {
+    background-color: #b9b9b9;
+    cursor: pointer;
+  }
+
+  .p-datatable-tbody tr:hover td {
+    color: #000000;
+  }
 
 
