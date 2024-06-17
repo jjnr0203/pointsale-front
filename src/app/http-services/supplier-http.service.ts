@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { SupplierModel } from "../models/supplier.model";
 import { Observable } from "rxjs";
+import { ResponseModel } from "../models/response.model";
 
 @Injectable({
     providedIn:'root'
@@ -14,6 +15,14 @@ export class SupplierHttpService{
     findAll():Observable<SupplierModel[]>{
         return this.httpClient.get<SupplierModel[]>(`${this.url}`);
         
+    }
+
+    findSupplierByUser(id:string){
+        return this.httpClient.get<ResponseModel>(`${this.url}/${id}/user`);
+    }
+
+    findOne(id:string){
+        return this.httpClient.get<ResponseModel>(`${this.url}/${id}`);
     }
 
     finOneShupplier(id:string){
