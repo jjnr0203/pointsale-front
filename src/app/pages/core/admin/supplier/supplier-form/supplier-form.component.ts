@@ -4,6 +4,8 @@ import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
 import { InputTextModule } from 'primeng/inputtext';
 
+
+
 @Component({
   selector: 'app-supplier-form',
   templateUrl: './supplier-form.component.html',
@@ -14,11 +16,10 @@ export class SupplierFormComponent {
   suppliers: SupplierModel[]= [];
   result: number = 0;
   
-
   constructor(
     private suppliersHttpService: SupplierHttpService,
-    private formBuilder: FormBuilder
-  ){
+    private formBuilder: FormBuilder,
+  ){  
     this.supplier = this.supplierForm();
   }
 
@@ -27,7 +28,8 @@ export class SupplierFormComponent {
       name: ['', [Validators.required, Validators.minLength(4)]],
       phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
-      idShipper: ['esaf18ae1c5se1c8sc1', [Validators.required]]
+      
+      //shippers: [[this.currentShipper], [Validators.required]]
     })
   }
 
