@@ -5,10 +5,10 @@
   <div class="main">
     <div class="product-form">
       <p-card styleClass="form" class="flex justify-content-center" [style]="{ width: '450px' }">
-        <h2 class="form-title">Registro de Producto</h2>
+        <h2 class="form-title">Registro de Productos</h2>
       <form [formGroup]="product">
         <div class="field">
-          <label for="name" class="block">Nombre</label>
+          <label for="name" class="block" >Nombre</label>
           <input
           type="text"
           pInputText
@@ -32,10 +32,10 @@
           formControlName="unit"/>
           @if(unitField.errors){
             @if (unitField.errors['required'] && unitField.touched){
-              <small style="color: red;">El campo unidad es requerido</small>
+              <small style="color: red;">El campo teléfono es requerido</small>
             }
             @if (unitField.errors['minlength']){
-              <small class="alert-validation" style="color: red;">Minimo de números es 1</small>
+              <small class="alert-validation" style="color: red;">Minimo de unidad es 1</small>
             }
             }
         </div>
@@ -48,38 +48,49 @@
           formControlName="price"/>
           @if(priceField.errors){
             @if (priceField.errors['required'] && priceField.touched){
-              <small style="color: red;">El campo precio es requerido</small>
+              <small style="color: red;">El campo es requerido</small>
             }
             }
         </div>
         <div class="field">
-          <label for="cost" class="block">Costo</label>
+          <label for="cost" class="block">Costo:</label>
           <input
           type="number"
           pInputText
-          placeholder="Costo"
+          placeholder="costo"
           formControlName="cost"/>
           @if(costField.errors){
             @if (costField.errors['required'] && costField.touched){
-              <small style="color: red;">El campo costo es requerido</small>
+              <small style="color: red;">El campo id es requerido</small>
             }
             }
         </div>
-        <br>
+        <div class="field">
+          <label for="idShops" class="block">Id:</label>
+          <input
+          type="text"
+          pInputText
+          placeholder="Id"
+          formControlName="idShops"/>
+          @if(costField.errors){
+            @if (costField.errors['required'] && costField.touched){
+              <small style="color: red;">El campo id es requerido</small>
+            }
+            }
+        </div>
         <div class="d-grid gap-2 ">
-        <p-button (onClick)="onSubmit()" icon="pi pi-users"  type="submit" label="Enviar" severity="contrast" />
+        <p-button (onClick)="onSubmit()" size="small" label="Enviar" [raised]="true" severity="contrast"/>
         </div>
       </form>
     </p-card>
     </div>
   </div>
-  <div class="image">
-    <p-image
-        src="https://th.bing.com/th/id/OIG3.J_pcECUKnxPQ4hv0O7F2?w=1024&h=1024&rs=1&pid=ImgDetMain"
+  <div class="card flex justify-content-center">
+    <p-image 
+        src="https://th.bing.com/th/id/OIG4.TuJ7ur4WrMGygCcyYrqb?pid=ImgGn"
         alt="Image" 
-        width="560"
-        height="600"
-        border-raduis
+        width="520"
+        height="520"
         [preview]="true" />
 </div>
 </div>

@@ -49,6 +49,8 @@ export class ShopFormComponent {
         }
       )
     } else {
+      const data = this.shop.value;
+      this.shop.markAllAsTouched()
       alert('El formulario no es valido');
     }
   }
