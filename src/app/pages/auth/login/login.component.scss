@@ -1,5 +1,5 @@
 body{
-    background-image: url("/assets/images/background.png");
+    background-image: url("/assets/images/fondo2.jpg");
     background-size: cover;
 }
 
@@ -41,9 +41,24 @@ button {
     /* Espaciado adicional debajo del formulario */
 }
 
+p-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    width: calc(50% - 20px); /* Dos tarjetas en una fila con espacio entre ellas */
+    box-sizing: border-box;
+  }
+  
+  p-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 
 .my-password .p-component{
     width: 100%;
+}
+
+.my-card .p-component{
+    background-color: rgba(0, 0, 0, 0.685);
 }
 
 

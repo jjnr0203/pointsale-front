@@ -9,6 +9,11 @@ export interface UserFormModel{
     role_id:string;
 }
 
+export interface EmployeeFormModel{
+    user:string;
+    shop: string;
+}
+
 export interface LoginFormModel{
     email:string;
     password: string;

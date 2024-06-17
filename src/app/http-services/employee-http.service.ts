@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseModel } from '../models/response.model';
+import { EmployeeFormModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class EmployeeHttpService {
     return this.httpClient.get(`${this.url}/${shop}`)
   }
 
-  create(employee:any){
+  create(employee:EmployeeFormModel){
     return this.httpClient.post<ResponseModel>(this.url, employee);
   }
 

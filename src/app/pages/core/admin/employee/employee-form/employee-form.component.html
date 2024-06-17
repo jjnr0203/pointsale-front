@@ -79,7 +79,7 @@
  -->
 
 
- <div class="container">
+<div class="container">
   <div class="nav">
     <app-nav-bar></app-nav-bar>
   </div>
@@ -101,8 +101,8 @@
                 <label for="name" class="font-bold block mb-2" style="color: white;">Nombre: </label>
                 <input pInputText id="name" aria-describedby="username-help" formControlName="name"
                   style="background-color: white;" />
-                  {{nameField.value | json}}
-                  {{form.value | json}}
+                <!-- {{nameField.value | json}}
+                  {{form.value | json}} -->
                 <small id="username-help">Ingrese su nombre y apellido</small>
                 <div *ngIf="nameField.errors && nameField.touched">
                   <span *ngIf="nameField.errors['minlength']" style="color: red;">El campo debe contener 5 caracteres o
@@ -137,8 +137,7 @@
 
               <div class="flex flex-column gap-2">
                 <label for="role" class="font-bold block mb-2" style="color: white;">Rol: </label>
-                <p-dropdown [options]="roles" formControlName="role" placeholder="Seleccione un rol"
-                  class="my-rol"></p-dropdown>
+                <p-dropdown [options]="roles" placeholder="Seleccione un rol" class="my-rol"></p-dropdown>
                 <small id="role-help">Seleccione el rol del usuario</small>
                 <div *ngIf="roleField.errors && roleField.touched">
                   <span *ngIf="roleField.errors['required']" style="color: red;">El campo es requerido</span>
@@ -150,7 +149,7 @@
                   ></button>
               </div> -->
 
-              <button (click)="onSubmit()">presionar</button>
+              <p-button label="Submit" type="onSubmit" />
             </form>
 
             <!-- Imagen -->
