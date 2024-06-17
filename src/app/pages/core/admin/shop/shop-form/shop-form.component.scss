@@ -4,50 +4,53 @@
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
 }
 
-.main {
-  display: flex; 
-  justify-content: center; 
-  width: 900px;
-}
-
 .form-title {
-  margin-top: 10px;
+  color: #050505;
   text-align: center;
-  margin-bottom: 10px;
-  font-size: 20px;
-  padding-top: -1px;
-
+  margin-bottom: -5px;
+  font-size: 22px;
 }
 
 h1 {
-text-align: center;
-font-weight: bold;
-font-size: 1.7rem;
+  text-align: center;
+  font-weight: bold;
 }
-.shop-form {
-box-shadow: 0 4px 16px rgb(238, 238, 238);
-border-radius: 10px;
 
-.form { 
-  padding-top: 20%;
+.main {
+  display: flex; 
+  justify-content: center; 
+  width: 600px;
 }
+
+.shop-form {
+  border-radius: 35px; 
+  box-shadow: 0 1px 22px rgb(43, 27, 59);
 
 .field {
-  margin-bottom: 5px;
-
-label {
-  font-weight: bold;
-  margin-bottom: 1px;
-  display: block;
-  }
+  color: #2c2c2c;
+  margin-bottom: 4px;
 
   input {
     width: 100%;
-    padding: 9px;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    border: 2px solid #000000;
+      padding: 9px;
+      border-radius: 10px;
+      border: 2px solid #000000;
+
+      &:focus {
+        outline: none;
+        border: 2px solid #afafaf;
+      }
+   }
+ }
+}
+.d-grid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -35px;
+  
+  &.gap-2 {
+    gap: 2rem;
     
   }
-}
 }

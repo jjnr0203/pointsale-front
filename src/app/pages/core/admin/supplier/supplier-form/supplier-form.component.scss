@@ -1,7 +1,8 @@
 .container {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   display: flex;
   align-items: center;
-  background: linear-gradient(110deg, rgb(191, 192, 114), rgb(206, 224, 164));
+  
   
 }
 
@@ -9,52 +10,53 @@
   .form-title {
     color: #050505;
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 30px;
+    margin-bottom: -2px;
+    font-size: 22px;
   }
 
 h1 {
   text-align: center;
   font-weight: bold;
-  font-size: 1.7rem;
 }
 
 .main {
-  
   display: flex; 
   justify-content: center; 
   width: 600px;
 }
 
 .supplier-form {
-  box-shadow: 0 5px 23px rgb(47, 46, 48);
-  border-radius: 10px;
-
-  .form { 
-    padding: 20px;
-  }
+  border-radius: 35px; 
+  box-shadow: 0 1px 22px rgb(43, 27, 59);
+  
 
   .field {
-    margin-bottom: 15px;
-
-  .label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    }
+    color: #2c2c2c;
+    margin-bottom: 9px;
 
     input {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #000000;
+      padding: 9px;
       border-radius: 10px;
       border: 2px solid #000000;
 
       &:focus {
         outline: none;
-        border: 2px solid #0f0f0f;
+        border: 2px solid #afafaf;
       }
       
+    }
+  }
+  .d-grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+    &.gap-2 {
+      gap: 2rem;
+    }
+    p-button {
+      margin-top: 0.5rem; 
     }
   }
 }

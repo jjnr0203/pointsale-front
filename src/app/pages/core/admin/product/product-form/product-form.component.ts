@@ -26,7 +26,8 @@ export class ProductFormComponent {
       name: ['', [Validators.required, Validators.minLength(4)]],
       unit: [null, [Validators.required, Validators.minLength(1)]],
       price: [null, [Validators.required]],
-      cost: [null, [Validators.required]]
+      cost: [null, [Validators.required]],
+      idShops: ['esaf18ae1c5se1c8sc1', [Validators.required]]
     })
   }
 
