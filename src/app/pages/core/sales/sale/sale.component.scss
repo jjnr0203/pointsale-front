@@ -16,6 +16,7 @@
 }
 
 .left-main {
+  background-color: rgba(231, 228, 228, 0.709);
   height: 92vh;
   overflow-y: scroll;
   display: flex;
@@ -25,6 +26,7 @@
   border-radius: 20px;
   border: solid 1px rgba(0, 0, 0, 0.293);
   padding-top: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.168);
 }
 .right-main {
   margin-right: 35px;
@@ -38,13 +40,14 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: rgba(231, 228, 228, 0.709);
   border: solid 2px rgba(203, 198, 198, 0.8);
   border-radius: 20px;
   padding: 8px;
 }
 
 .buttons {
-  background-color: #20262e8e;
+  background-color: #0056b3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,14 +60,20 @@
   cursor: default;
   user-select: none;
   border: none;
+  color: #ffffff;
 }
 
-.buttons:hover {
-  background-color: #0056b3;
+.buttons:not([disabled]):hover {
+  color: black;
+  background-color: #4554698e;
 }
 
 .buttons:active {
   transform: scale(0.95);
+}
+
+.buttons[disabled] {
+  background-color: #0057b3ae; 
 }
 
 :host ::ng-deep .p-dialog-header {
@@ -75,11 +84,17 @@
   border-top-right-radius: 20px;
 }
 
-:host ::ng-deep .p-element {
-  border: none;
+
+:host ::ng-deep .p-dialog .p-element {
+  border: none; 
 }
 
+
 .body-modal {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(231, 228, 228, 0.709);
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,7 +127,6 @@ h3 {
 }
 
 .form-input input {
-  background-color: #7b7b7b49;
   height: 25px;
   width: 300px;
   border: none;
@@ -132,7 +146,7 @@ h3 {
 .order-detail-group {
   margin-top: 15px;
   width: 48%;
-  padding: 0;
+  padding: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -147,17 +161,14 @@ h3 {
 }
 
 .details-input label {
-  margin-left: 15px;
+  margin-left: 2px;
 }
 .details-input input {
+  border: solid 1px rgba(0, 0, 0, 0.182);
   text-align: end;
   border-radius: 10px;
   height: 45px;
-  margin-left: 20px;
-  margin-right: 25px;
-  padding-right: 10px;
   font-size: 20px;
-  background-color: #bababace;
 }
 
 

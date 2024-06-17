@@ -20,6 +20,10 @@ export class ShopHttpService{
         return this.httpClient.get<ShopModel[]>(`${this.url}`);
     }
 
+    findShopsByUser(userId:string){
+        return this.httpClient.get<ResponseModel>(`${this.url}/${userId}/user`);
+    }
+
 
     findOneShop(id:string){
         return this.httpClient.get<ShopModel>(`${this.url}/${id}`)

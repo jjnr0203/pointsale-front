@@ -8,38 +8,29 @@
       <form class="col-12" [formGroup]="orderForm">
         <div class="form-controls col-12" formArrayName="ordersDetails">
           @for (orderDetailForm of ordersDetails.controls; track orderDetailForm; let i = $index) {
-            <div class="order-detail-group col-5" [formGroupName]="i">
-              <div class="details-input">
-                <p-floatLabel>
-                  <p-dropdown
-                    class="col-12"
-                    [options]="products"
-                    formControlName="product"
-                    placeholder="Seleccione un producto"
-                    [editable]="true"
-                    [filter]="true"
-                    optionLabel="name"
-                    id="productId"
-                  />
-                  <label for="productId">Producto:</label>
-                </p-floatLabel>
-              </div>
-              <div class="details-input col-5">
-                <p-floatLabel>
-                  <input type="number" id="quantity" style="width: 90%" pKeyFilter="int"
-                         formControlName="quantity"/>
-                  <label for="quantity" style="margin-bottom: 5px">Cantidad:</label>
-                </p-floatLabel>
-              </div>
+          <div class="order-detail-group col-5" [formGroupName]="i">
+            <div class="details-input col-5">
+                <p-dropdown class="col-11" [options]="products" formControlName="product"
+                  placeholder="Producto" [filter]="true" optionLabel="name"
+                  id="productId" />
+            </div>
+            <div class="details-input col-5">
+              <p-floatLabel>
+                <input type="number" id="quantity" style="width: 100%" pKeyFilter="int" formControlName="quantity" />
+                <label for="quantity" style="margin-bottom: 5px">Cantidad:</label>
+              </p-floatLabel>
+            </div>
+            <div class="details-input">
               <p-button severity="danger" (click)="removeOrderDetail(i)">
-                <i class="pi pi-trash" style="font-size: 20px" ></i>
+                <i class="pi pi-trash" style="font-size: 15px; margin: 3px;"></i>
               </p-button>
             </div>
+          </div>
           }
         </div>
       </form>
       <p-button icon="pi pi-plus" [rounded]="true" severity="secondary" [disabled]="actionButtonsState"
-                (click)="addOrderDetail()"/>
+        (click)="addOrderDetail()" />
     </div>
     <div class="right-main col-3">
       <div class="actions col-12">
@@ -47,14 +38,12 @@
         </button>
         <button class="buttons col-5" (click)="showDialog()" [disabled]="actionButtonsState"> Agregar Cliente
         </button>
-        <p-dialog header="Agregar cliente" [modal]="true" [(visible)]="dialogVisible"
-                  [style]="{ width: '55rem' }">
+        <p-dialog header="Agregar cliente" [modal]="true" [(visible)]="dialogVisible" [style]="{ width: '55rem' }">
           <div class="body-modal">
             <div class="customer-list col-12">
-              <p-autoComplete styleClass="auto-complete" class="custom-input"
-                              [suggestions]="filteredCustomers" (completeMethod)="filterCustomer($event)"
-                              (onSelect)="onCustomerSelect($event)" optionLabel="name"
-                              placeholder="Buscar un cliente">
+              <p-autoComplete styleClass="auto-complete" class="custom-input" [suggestions]="filteredCustomers"
+                (completeMethod)="filterCustomer($event)" (onSelect)="onCustomerSelect($event)" optionLabel="name"
+                placeholder="Buscar un cliente">
                 <ng-template pTemplate="item" let-item>
                   {{ item.identification }} <br> {{ item.name }}
                 </ng-template>
@@ -67,88 +56,84 @@
                 </div>
                 <div class="form-input">
                   <label for="identification">Número de identificación:</label>
-                  <input type="text" id="identification" pKeyFilter="int"
-                         formControlName="identification"/>
+                  <input type="text" id="identification" pKeyFilter="int" formControlName="identification" />
                   <div class="validators">
                     @if (identification.errors && identification.touched) {
-                      <span>Campo requerido. </span>
-                      <span> Debe contener 10 dígitos.</span>
+                    <span>Campo requerido. </span>
+                    <span> Debe contener 10 dígitos.</span>
                     }
                   </div>
                 </div>
                 <div class="form-input">
                   <label for="name">Nombre:</label>
-                  <input type="text" id="name" formControlName="name"/>
+                  <input type="text" id="name" formControlName="name" />
                   <div class="validators">
                     @if (name.errors && name.touched) {
-                      <span>Campo requerido</span>
+                    <span>Campo requerido</span>
                     }
                   </div>
                 </div>
                 <div class="form-input">
                   <label for="email">Correo:</label>
-                  <input type="text" id="email" formControlName="email"/>
+                  <input type="text" id="email" formControlName="email" />
                   <div class="validators">
                     @if (email.errors && email.touched) {
-                      <span>Campo requerido</span>
+                    <span>Campo requerido</span>
                     }
                   </div>
                 </div>
                 <div class="form-input">
                   <label for="phone">Número de contacto:</label>
-                  <input type="text" id="phone" pKeyFilter="int" formControlName="phone"/>
+                  <input type="text" id="phone" pKeyFilter="int" formControlName="phone" />
                   <div class="validators">
                     @if (phone.errors && phone.touched) {
-                      <span>Campo requerido</span>
+                    <span>Campo requerido</span>
                     }
                   </div>
                 </div>
                 <div class="form-input">
                   <label for="address">Dirección</label>
-                  <input type="text" id="address" formControlName="address"/>
+                  <input type="text" id="address" formControlName="address" />
                   <div class="validators">
                     @if (address.errors && address.touched) {
-                      <span>Campo requerido</span>
+                    <span>Campo requerido</span>
                     }
                   </div>
                 </div>
                 <div class="flex justify-content-center gap-2">
-                  <p-button label="Cancelar" severity="secondary" [rounded]="true"
-                            (click)="closeDialog()"/>
-                  <p-button type="submit" label="Guardar" severity="primary" [rounded]="true"/>
+                  <p-button label="Cancelar" severity="secondary" [rounded]="true" (click)="closeDialog()" />
+                  <p-button type="submit" label="Guardar" severity="primary" [rounded]="true" />
                 </div>
               </form>
             </div>
           </div>
 
         </p-dialog>
-        <div class="col-12"
-             style="display: flex; flex-direction: column; justify-content: center; align-items: center"
-             [formGroup]="orderForm">
+        <div class="col-12" style="display: flex; flex-direction: column; justify-content: center; align-items: center"
+          [formGroup]="orderForm">
           <div class="col-11">
-            <p-dropdown styleClass="col-12" [options]="payments"
-                        formControlName="paymentMethod" placeholder="Método de pago:" optionLabel="name"/>
+            <p-dropdown styleClass="col-12" [options]="payments" formControlName="paymentMethod"
+              placeholder="Método de pago:" optionLabel="name" />
           </div>
           @if (cashBack.hasValidator(Validators.required)) {
-            <div class="payment-group col-12">
-              <label for="cash">Dinero recibido:</label>
-              <p-inputGroup class="cash-input col-12" >
-                <p-inputGroupAddon>$</p-inputGroupAddon>
-                <p-inputNumber formControlName="cash" id="cash" mode="currency" currency="USD"
-                               locale="en-US" />
-              </p-inputGroup>
-              <label for="cashback">Cambio:</label>
-              <p-inputGroup  class="cash-input col-12">
-                <p-inputGroupAddon>$</p-inputGroupAddon>
-                <p-inputNumber formControlName="cashBack" id="cashback" mode="currency" currency="USD"
-                               locale="en-US"/>
-              </p-inputGroup>
-            </div>
+          <div class="payment-group col-12">
+            <label for="cash">Dinero recibido:</label>
+            <p-inputGroup class="cash-input col-12">
+              <p-inputGroupAddon>$</p-inputGroupAddon>
+              <p-inputNumber formControlName="cash" id="cash" mode="currency" currency="USD" locale="en-US" />
+            </p-inputGroup>
+            <label for="cashback">Cambio:</label>
+            <p-inputGroup class="cash-input col-12">
+              <p-inputGroupAddon>$</p-inputGroupAddon>
+              <p-inputNumber formControlName="cashBack" id="cashback" mode="currency" currency="USD" locale="en-US" />
+            </p-inputGroup>
+          </div>
           }
         </div>
         <p-toast />
         <p-confirmDialog />
-        <button class="buttons col-5" [disabled]="actionButtonsState" (click)="onSubmitOrder($event)"> Cerrar Orden</button>
+        <button class="buttons col-5" [disabled]="actionButtonsState" (click)="onSubmitOrder($event)"> Cerrar
+          Orden</button>
         <button class="buttons col-5" [disabled]="actionButtonsState" (click)="restartForms()">
           Cancelar
         </button>
