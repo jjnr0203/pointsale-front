@@ -7,14 +7,14 @@
       <div class="main center-main">
         <!-- Imagen -->
         <div class="image-container">
-          <p-image src="/assets/images/empleados.png" [preview]="true" alt="Image" class="empleado-image" width="650">
+          <p-image src="/assets/images/empleados.png" [preview]="true" alt="Image" class="empleado-image" width="500">
             <ng-template pTemplate="indicator">
               <i class="pi pi-check"></i>
             </ng-template>
           </p-image>
         </div>
 
-        <p-card [style]="{ width: '450px', height: '650px' }" class="my-card">
+        <p-card [style]="{ width: '450px', height: '550px' }" class="my-card">
           <h1>Registro de empleados</h1>
 
           <div class="form-container">
@@ -64,7 +64,7 @@
 
               <!-- <p-button label="Submit" type="onSubmit" [rounded]="true" [outlined]="true" severity="success"
                 [text]="true" /> -->
-                <p-button label="Guardar" type="onSubmit" [rounded]="true" severity="success" />
+              <p-button label="Guardar" type="onSubmit" [rounded]="true" severity="success" />
             </form>
           </div>
         </p-card>
