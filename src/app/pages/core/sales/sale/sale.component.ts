@@ -9,6 +9,8 @@ import {OrderModel} from '../../../../models/order.model';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {first} from "rxjs";
 import { ShopService } from '../../../../http-services/shop.service';
+import { ShopHttpService } from '../../../../http-services/shop-http.service';
+import { ProductsHttpService } from '../../../../http-services/products-http.service';
 
 @Component({
   selector: 'app-sale',
@@ -24,15 +26,13 @@ export class SaleComponent implements OnInit {
   currentShop:any;
   payments: any = [];
   customers: CustomerModel[] = [];
-  products = [
-    {id: '000710b0-afb5-4439-b53b-3af65e251c81', name: 'Gorra', price: 50},
-    {id: '000710b0-afb5-4439-b53b-3af75e251c81', name: ' buzo', price: 100},
-  ];
+  products = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private customersHttpService: CustomersHttpService,
     private ordersHttpService: OrdersHttpService,
+    private productsHttpService:ProductsHttpService,
     private cataloguesHttpService: CataloguesHttpService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
@@ -46,6 +46,7 @@ export class SaleComponent implements OnInit {
 
   ngOnInit() {
     this.getPayments();
+    this.getProductsByShop(this.currentShop.id);
     this.getCustomers(this.currentShop.id);
   }
 
@@ -153,11 +154,11 @@ export class SaleComponent implements OnInit {
     return this.customersHttpService.findByShop(shopId).subscribe((response: ResponseModel) => this.customers = response.data);
   }
 
-  /* getProducts() {
-     return this.customersHttpService.findAll().subscribe((response: ResponseModel) => {
-       this.customers = response.data;
+  getProductsByShop(shopId:string) {
+     return this.productsHttpService.findByShop(shopId).subscribe((response: ResponseModel) => {
+       this.products = response.data;
      });
-   }*/
+   }
   getPayments() {
     return this.cataloguesHttpService.getByPayment('PAYMENTS').subscribe(
       (response: ResponseModel) => this.payments = response.data);

@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import { CataloguesHttpService } from '../../../../http-services';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
 import { ShipperFormModel } from '../../../../models/user.model';
+import { LoginHttpService } from '../../../../http-services/login-http.service';
+import { SupplierHttpService } from '../../../../http-services/supplier-http.service';
 
 @Component({
   selector: 'app-shipper-form',
@@ -19,6 +21,8 @@ import { ShipperFormModel } from '../../../../models/user.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShipperFormComponent  {
+  id:any;
+  supplier:any;
   form: FormGroup;
   userForm: FormGroup;
   shippers: any = [];
@@ -29,18 +33,38 @@ export class ShipperFormComponent  {
     private formBuilder: FormBuilder,
     private shipperHttpService: ShipperHttpService,
     protected router: Router, private activatedRoute: ActivatedRoute,
-    private cataloguesHttpService:CataloguesHttpService
+    private cataloguesHttpService:CataloguesHttpService,
+    private loginHttpService:LoginHttpService,
+    private supplierHttpService:SupplierHttpService
   ) {
+    this.supplier = this.loginHttpService.getUser()
     this.findRoleByName();
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
     this.roles = [{ label: 'Repartidor'}];
+    console.log(this.supplier)
   }
+
+  ngOnInit(): void {
+    this.findAll();
+    }
+
+    findAll() {
+      this.supplierHttpService.findSupplierByUser(this.supplier.sub).subscribe(response => {
+        this.id = response.data;
+        console.log(this.id)
+        this.supplierField.setValue(this.id.id)
+      });
+    }
+
+    get supplierField(): AbstractControl {
+      return this.form.controls['supplier'];
+    }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
       user: this.userForm,
-      supplier: ['8485cb24-5046-4f8b-a9db-7462c3e1ff67', [Validators.required]]
+      supplier: [null, [Validators.required]]
     });
   }
 

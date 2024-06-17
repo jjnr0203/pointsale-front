@@ -6,12 +6,12 @@ import { ShipperListComponent } from './shipper-list/shipper-list.component';
 
 const routes: Routes = [
 {
-  path:'supplier-form/:id',
+  path:'shipper-form',
   component: ShipperFormComponent
 },
 
 {
-  path:'supplier-list',
+  path:'shipper-list',
   component: ShipperListComponent
 },
 

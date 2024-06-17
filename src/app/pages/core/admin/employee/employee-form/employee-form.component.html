@@ -3,78 +3,70 @@
     <app-nav-bar></app-nav-bar>
   </div>
   <div class="main">
-    <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-      <div class="main" style="display: flex; justify-content: center; align-items: center;">
-        <p-card [style]="{ width: '1100px' }" class="my-card">
-          <ng-template pTemplate="header">
-            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem; color: rgb(0, 0, 0);">
-              Registro del empleado
-            </div>
-          </ng-template>
+    <div class="container center-container">
+      <div class="main center-main">
+        <!-- Imagen -->
+        <div class="image-container">
+          <p-image src="/assets/images/empleados.png" [preview]="true" alt="Image" class="empleado-image" width="500">
+            <ng-template pTemplate="indicator">
+              <i class="pi pi-check"></i>
+            </ng-template>
+          </p-image>
+        </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <p-card [style]="{ width: '450px', height: '550px' }" class="my-card">
+          <h1>Registro de empleados</h1>
 
-            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" style="width: 50%; text-align: left; color: white;">
-
+          <div class="form-container">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
               <div class="flex flex-column gap-2">
-                <label for="name" class="font-bold block mb-2" style="color:black;">Nombre: </label>
-                <input pInputText id="name" aria-describedby="username-help" formControlName="name" style="color: white;"/>
-                <small id="username-help" style="color: black;">Ingrese su nombre y apellido</small>
+                <label for="name" class="label">Nombre: </label>
+                <input pInputText id="name" aria-describedby="username-help" formControlName="name" class="input" />
+                <small id="username-help" class="small-text">Ingrese su nombre y apellido</small><br>
                 <div *ngIf="nameField.errors && nameField.touched">
-                  <span *ngIf="nameField.errors['minlength']" style="color: red;">El campo debe contener 5 caracteres o
+                  <span *ngIf="nameField.errors['minlength']" class="error-text">El campo debe contener 5 caracteres o
                     más</span>
-                  <span *ngIf="nameField.errors['required']" style="color: red;">El campo es requerido</span>
+                  <span *ngIf="nameField.errors['required']" class="error-text">El campo es requerido</span>
                 </div>
-              </div><br>
+              </div>
 
               <div class="flex flex-column gap-2">
-                <label for="email" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Email: </label>
-                <input pInputText id="email" aria-describedby="username-help" formControlName="email" style="color: white;"/>
-                <small id="username-help" style="color: black;">Ingrese su correo electrónico</small>
+                <label for="email" class="label">Email: </label>
+                <input pInputText id="email" aria-describedby="username-help" formControlName="email" class="input" />
+                <small id="username-help" class="small-text">Ingrese su correo electrónico</small>
                 <div *ngIf="emailField.errors && emailField.touched">
-                  <span *ngIf="emailField.errors['email']" style="color: red;">El campo debe contener un correo
+                  <span *ngIf="emailField.errors['email']" class="error-text">El campo debe contener un correo
                     electrónico válido</span>
-                  <span *ngIf="emailField.errors['required']" style="color: red;">El campo es requerido</span>
+                  <span *ngIf="emailField.errors['required']" class="error-text">El campo es requerido</span>
                 </div>
               </div><br>
 
-              <label for="email" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Password: </label>
+              <label for="password" class="label">Password: </label>
               <p-floatLabel>
                 <p-password formControlName="password" [feedback]="false" class="my-password" />
-                <label for="password" style="color: rgb(0, 0, 0);"></label>
+                <label for="password" class="input-label"></label>
               </p-floatLabel>
-              <small id="username-help" style="color: black;">Ingrese una contraseña segura</small>
+              <small id="username-help" class="small-text">Ingrese una contraseña segura</small>
               <div *ngIf="passwordField.errors && passwordField.touched">
-                <span *ngIf="passwordField.errors['pattern']" style="color: red;">El campo debe contener números y
+                <span *ngIf="passwordField.errors['pattern']" class="error-text">El campo debe contener números y
                   letras</span>
-                <span *ngIf="passwordField.errors['required']" style="color: red;">El campo es requerido</span>
+                <span *ngIf="passwordField.errors['required']" class="error-text">El campo es requerido</span>
               </div><br>
 
               <div class="flex flex-column gap-2">
-                <label for="role" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Rol: </label>
+                <label for="role" class="label">Rol: </label>
                 <p-dropdown [options]="roles" placeholder="Seleccione un rol" class="my-rol"></p-dropdown>
-                <small id="role-help" style="color: rgb(0, 0, 0);">Seleccione el rol del usuario</small>
+                <small id="role-help" class="small-text">Seleccione el rol del usuario</small>
                 <div *ngIf="roleField.errors && roleField.touched">
-                  <span *ngIf="roleField.errors['required']" style="color: red;">El campo es requerido</span>
+                  <span *ngIf="roleField.errors['required']" class="error-text">El campo es requerido</span>
                 </div>
               </div><br>
 
-              <!-- <div class="d-grid gap-2">
-                <button pButton type="submit" (click)="onSubmit()" label="Validar" class="p-button-outlined p-button-success"
-                  ></button>
-              </div> -->
-
-              <p-button label="Submit" type="onSubmit" label="Success" [rounded]="true" [outlined]="true" severity="success" [text]="true"/>
+              <!-- <p-button label="Submit" type="onSubmit" [rounded]="true" [outlined]="true" severity="success"
+                [text]="true" /> -->
+              <p-button label="Guardar" type="onSubmit" [rounded]="true" severity="success" />
             </form>
-
-            <!-- Imagen -->
-            <div style="width: 40%; text-align: center;">
-              <img src="/assets/images/empleado_image.png" alt="Descripción de la imagen"
-                style="max-width: 100%; border-radius: 20px;">
-            </div>
-
           </div>
-
         </p-card>
       </div>
     </div>

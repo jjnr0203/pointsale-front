@@ -1,51 +1,121 @@
-body{
-  background-image: url("/assets/images/fondo2.jpg");
+body {
   background-size: cover;
+  background-color: rgb(255, 255, 255)
 }
 
 .container {
   display: flex;
-  
 }
 
 .nav {
   width: 80px;
 }
+
 .main {
-  padding-top: px;
   padding-left: 30px;
   display: flex;
   margin: 15px;
   width: 100%;
   justify-content: space-between;
-  
 }
 
-.my-password{
-width: 1200px;
+
+
+.my-password {
+  width: 100%;
 }
 
-.my-password .p-component{
-width: 100%;
-height: 40px;
-background-color: rgba(252, 252, 252, 0.712);
+.my-password .p-component {
+  width: 100%;
+  height: 40px;
 }
 
-.my-password .p-icon{
+.my-password .p-icon {
   position: relative;
   bottom: 8px;
 }
 
-.my-rol .p-component{
+.my-rol .p-component {
   width: 100%;
 }
 
-.my-card .p-component{
-  background-color: #ffffff80;
-  background-size: cover;
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.center-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  width: 100%;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.empleado-image img {
+  max-width: 100%;
+  border-radius: 50px;
+}
+
+.card-header {
+  padding: 30px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgb(0, 0, 0);
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.user-form {
+  width: 100%;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: rgb(0, 0, 0);
+}
+
+.input {
+  color: rgb(0, 0, 0);
+  border: 1px solid #000000;
+  border-radius: 5px; 
+  padding: 5px; 
+  margin-bottom: 10px;
 }
 
 
-  
+.small-text {
+  color: rgb(0, 0, 0);
+}
 
+.error-text {
+  color: red;
+}
+
+.my-card {
+  border: 2px solid #000000; 
+  border-radius: 10px;
+}
+
+.my-card h1 {
+  text-align: center;
+}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { EmployeeHttpService } from '../../../../../http-services/employee-http.service';
 import { catchError, of } from 'rxjs';
 import { UserDeleteModel } from '../../../../../models/user.model';
@@ -6,12 +6,14 @@ import { UserDeleteModel } from '../../../../../models/user.model';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrl: './employee-list.component.scss'
+  styleUrl: './employee-list.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeListComponent {
   employees: any = [];
   filteredEmployees: any = [];
   searchTerm: string = '';
+
 
   constructor(private employeeHttpService: EmployeeHttpService) {
     this.findAll();
