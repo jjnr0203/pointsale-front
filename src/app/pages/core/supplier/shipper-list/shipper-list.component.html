@@ -1,30 +1,48 @@
-<!-- <div class="container">
+<div class="container">
     <div class="nav">
-        <app-nav-bar></app-nav-bar>
+      <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-        <p-table [value]="shippers" [tableStyle]="{'min-width': '50rem'}">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Acciones</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-user>
-                <tr>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td><p-button label="Editar" icon="pi pi-trash" /></td>
-                    <td><p-button label="Eliminar" icon="pi pi-trash" /></td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <p-confirmDialog appendTo="body"></p-confirmDialog>
+      <p-table class="custom-p-table col-11"
+               [tableStyle]="{ 'min-width': '50rem'}"
+               styleClass="p-datatable-striped"
+               [paginator]="true"
+               [rows]="5"
+               [value]="filteredShippers">
+        <ng-template pTemplate="caption" class="table">
+          <div class="table-header">
+            <h1 class="table-title">Lista de repartidores</h1>
+            <div class="search-bar">
+              <input type="text" 
+                     pInputText 
+                     placeholder="Buscar..." 
+                     [(ngModel)]="searchTerm" 
+                     (ngModelChange)="filterShippers()" />
+              <i class="pi pi-search search-icon"></i>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:25%">Name</th>
+            <th style="width:30%">Email</th>
+            <th style="width:20%">Rol</th>
+            <th style="width:25%">Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-shipper>
+          <tr>
+            <td>{{shipper.name}}</td>
+            <td>{{shipper.email}}</td>
+            <td>{{shipper.role.name}}</td>
+            <td>
+              <button pButton type="button" label="Delete" icon="pi pi-trash" class="p-button p-button-danger"
+                      (click)="confirm($event, shipper)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
-</div> -->
-<div class="card flex justify-content-center gap-2">
-    <p-toast />
-    <p-confirmDialog />
-    <p-button (click)="confirm1($event)" label="Save" [outlined]="true" />
-    <p-button (click)="confirm2($event)" label="Delete" severity="danger" [outlined]="true" />
-</div>
+  </div>
+  

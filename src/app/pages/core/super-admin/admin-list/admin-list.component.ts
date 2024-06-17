@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { AdminHttpService } from '../../../../http-services/admin-http.service';
-import { catchError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { CataloguesHttpService } from '../../../../http-services';
 import { UserDeleteModel } from '../../../../models/user.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-admin-list',
@@ -14,31 +16,27 @@ export class AdminListComponent {
   users: any = [];
   filteredUsers: any = [];
   searchTerm: string = '';
+  confirmOpened: boolean = false; 
 
-  constructor(private adminHttpService: AdminHttpService, private cataloguesHttpService:CataloguesHttpService) {
+  constructor(private adminHttpService: AdminHttpService,
+              private cataloguesHttpService: CataloguesHttpService,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
     this.findRoleByName();
   }
 
-  findRoleByName(){
-    return this.cataloguesHttpService.getRoleByName('ADMIN').subscribe(response=>{ 
+  findRoleByName() {
+    this.cataloguesHttpService.getRoleByName('ADMIN').subscribe(response => { 
       this.catalogue = response.data[0].id;
       this.findAll();
-    })
+    });
   }
 
   findAll() {
     this.adminHttpService.findUserByRole(this.catalogue).subscribe(response => {
       this.users = response;
       this.filteredUsers = this.users;
-      console.log(this.filteredUsers)
     });
-  }
-
-  filterCustomer(event: any) {
-    const query = event.query;
-    this.filteredUsers = this.users.filter((user: any) =>
-      user.name.toLowerCase().includes(query.toLowerCase())
-    );
   }
 
   filterUsers() {
@@ -52,6 +50,29 @@ export class AdminListComponent {
     }
   }
 
+  confirm(event: Event, user: UserDeleteModel) {
+    if (!this.confirmOpened) { 
+      this.confirmOpened = true;
+      this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: '¿Deseas eliminar este registro?',
+        header: 'Confirmación de Eliminación',
+        icon: 'pi pi-info-circle',
+        acceptButtonStyleClass: 'p-button-danger p-button-text',
+        rejectButtonStyleClass: 'p-button-text p-button-text',
+        acceptIcon: 'pi pi-check',
+        rejectIcon: 'pi pi-times',
+        accept: () => {
+          this.deleteUser(user);
+          this.confirmOpened = false;
+        },
+        reject: () => {
+          this.confirmOpened = false; 
+        }
+      });
+    }
+  }
+  
   deleteUser(user: UserDeleteModel) {
     this.adminHttpService.delete(user.id).pipe(
       catchError(error => {
@@ -63,4 +84,3 @@ export class AdminListComponent {
     });
   }
 }
-

@@ -14,6 +14,11 @@ export interface EmployeeFormModel{
     shop: string;
 }
 
+export interface ShipperFormModel{
+    user:string;
+    supplier: string;
+}
+
 export interface LoginFormModel{
     email:string;
     password: string;
