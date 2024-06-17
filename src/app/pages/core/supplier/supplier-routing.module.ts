@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShipperFormComponent } from './shipper-form/shipper-form.component';
 import { ShipperListComponent } from './shipper-list/shipper-list.component';
 
+
 const routes: Routes = [
-  {
+{
   path:'supplier-form/:id',
   component: ShipperFormComponent
 },

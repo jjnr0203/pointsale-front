@@ -1,21 +1,120 @@
+body {
+  background-image: url("/assets/images/fondo2.jpg");
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 .container {
-    display: flex;
-  }
-  
-  .nav {
-    width: 100px;
-  }
-  .main {
-    padding-top: 20px;
-    padding-left: 35px;
-    display: flex;
-    margin: 15px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+}
+
+.nav {
+  width: 80px;
+}
+
+.main {
+  padding: 20px;
+  display: flex;
+  margin: 15px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-password {
+  width: 100%;
+}
+
+.my-password .p-component {
+  width: 100%;
+  height: 40px;
+  background-color: rgba(161, 25, 25, 0.712);
+}
+
+.my-password .p-icon {
+  position: relative;
+  bottom: 8px;
+}
+
+.my-rol .p-component {
+  width: 100%;
+}
+
+.my-card .p-component {
+  background-color: #ffffffb1;
+  background-size: cover;
+}
+
+.form-container {
+  width: 55%;
+  margin-right: 5%;
+  color: rgb(0, 0, 0);
+}
+
+.image-container {
+  width: 40%;
+  text-align: center;
+}
+
+.image {
+  max-width: 100%;
+  border-radius: 20px;
+  margin-left: -20px; /* Ajustar este valor para mover la imagen más a la izquierda */
+}
+
+.p-button-success {
+  background-color: #28a745 !important; /* Fondo verde */
+  border-color: #28a745 !important; /* Borde verde */
+  color: #fff !important; /* Texto blanco */
+  padding: 0.75rem 1.5rem !important; /* Agrandar el botón */
+  font-size: 1.2rem !important; /* Aumentar el tamaño del texto */
+}
+
+.p-button-success:hover {
+  background-color: #218838 !important; /* Verde más oscuro al pasar el ratón */
+  border-color: #1e7e34 !important; /* Borde verde más oscuro al pasar el ratón */
+}
+
+.label {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input, .dropdown {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.small-text {
+  color: black;
+  margin-bottom: 5px;
+}
+
+.error-message {
+  color: red;
+}
+
+.my-card {
+  padding: 10px 20px; /* Reducir padding vertical */
+}
+
+.flex-column {
+  margin-bottom: 5px; /* Reducir margen inferior */
+}
+
+.form-container p-inputText,
+.form-container p-password,
+.form-container p-dropdown {
+  margin-bottom: 5px; /* Reducir margen inferior */
+}
+
+.form-container p-button {
+  margin-top: 10px; /* Reducir margen superior del botón */
+}
+
+header {
+  margin-bottom: 10px;
 }

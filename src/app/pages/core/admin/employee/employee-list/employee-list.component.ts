@@ -18,7 +18,7 @@ export class EmployeeListComponent {
   }
 
   findAll() {
-    this.employeeHttpService.findEmployeeByShop('1fcc8f68-8f56-4173-8aad-664df6be324f').subscribe(response => {
+    this.employeeHttpService.findEmployeeByShop('55d00e3c-c9b5-4505-8ce5-5fd75655dde3').subscribe(response => {
       this.employees = response;
       this.filteredEmployees = response;
     });

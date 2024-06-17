@@ -11,6 +11,9 @@ import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { CarouselModule } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { ImageModule } from 'primeng/image';
     ButtonModule,
     ReactiveFormsModule,
     CarouselModule,
-    ImageModule
+    ImageModule,
+    DropdownModule,
+    InputGroupModule,
+    InputGroupAddonModule 
   ]
 })
 export class ProductModule { }

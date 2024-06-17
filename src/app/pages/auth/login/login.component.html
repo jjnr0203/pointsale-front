@@ -106,51 +106,55 @@
     </div>
   </div> -->
 
-  <div class="login-container">
-    <p-card [style]="{ width: '800px' }">
+<div class="login-container">
+    <p-card [style]="{ width: '800px' }" class="my-card">
         <ng-template pTemplate="header">
-            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem;">
-              INICIO DE SESION
+            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem; color: white; padding: 20px;">
+                INICIO DE SESION
             </div>
-          </ng-template>
+        </ng-template>
 
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
             <div style="width: 50%; text-align: center;">
-                <form [formGroup]="form" (ngSubmit)="submitLogin()"
-                    style="width: 100%;">
+                <form [formGroup]="form" (ngSubmit)="submitLogin()" style="width: 100%;">
                     <div class="p-fluid">
                         <div class="p-field">
-                            <label for="email">Correo Electrónico</label>
+                            <label for="email" style="color: white;">Correo Electrónico</label>
                             <input id="email" type="email" pInputText formControlName="email" name="email" required>
                             <div *ngIf="emailField.errors && emailField.touched">
-                                <span *ngIf="emailField.errors['email']" style="color: rgb(203, 92, 92);">El campo debe
+                                <span *ngIf="emailField.errors['email']" style="color: red;">El campo debe
                                     contener un correo válido</span>
-                                <span *ngIf="emailField.errors['required']" style="color: rgb(203, 92, 92);">El campo es
+                                <span *ngIf="emailField.errors['required']" style="color: red;">El campo es
                                     requerido</span>
                             </div>
                         </div>
                     </div>
                     <div class="p-field">
-                        <label for="password">Contraseña</label>
+                        <label for="password" style="color: white;">Contraseña</label>
                         <br>
                         <p-password [toggleMask]="true" [feedback]="false" formControlName="password" name="password"
                             class="my-password" [style]="{ width: '100%' }">
                         </p-password>
+                        <small id="username-help" style="color: white;">Ingrese la contraseña correcta</small>
+                        <div *ngIf="passwordField.errors && passwordField.touched">
+                            <span *ngIf="passwordField.errors['required']" style="color: red;">El campo es requerido</span>
+                        </div>
                     </div>
+
                     <div class="p-field">
                         <button pButton type="submit" label="Acceder" (click)="submitLogin()" ></button>
+                        <button pButton icon="pi pi-user" type="submitLogin" label="Iniciar Sesion" severity="success"></button>
                     </div>
                 </form>
                 <div class="flex gap-3 mt-1">
-                    <a href="/auth/register" class="forgot-password">Si no tienes cuenta registrate</a>
+                    <a href="/auth/register" class="forgot-password" style="color: aliceblue;">Si no tienes cuenta registrate</a>
                 </div>
             </div>
 
             <!-- Imagen -->
             <div style="width: 45%; text-align: center;">
-                <img alt="Card" src="/assets/images/tienda_login.png" 
-                    style="max-width: 100%; border-radius: 20px;">
+                <img alt="Card" src="/assets/images/login2.jpg" style="width: 100%; border-radius: 30px">
             </div>
 
         </div>

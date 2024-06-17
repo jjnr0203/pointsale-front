@@ -1,55 +1,90 @@
 import { Component } from '@angular/core';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UserDeleteModel } from '../../../../models/user.model';
+import { catchError, of } from 'rxjs';
+import { AdminHttpService } from '../../../../http-services/admin-http.service';
+import { CataloguesHttpService } from '../../../../http-services';
 
 @Component({
   selector: 'app-shipper-list',
   templateUrl: './shipper-list.component.html',
   styleUrl: './shipper-list.component.scss'
 })
+
 export class ShipperListComponent {
-
-  shippers: any = [];
+    catalogue: any = [];
+    shippers: any = [];
+    filteredShippers: any = [];
+    searchTerm: string = '';
+    confirmOpened: boolean = false; 
   
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {}
+    constructor(private adminHttpService: AdminHttpService,
+                private cataloguesHttpService: CataloguesHttpService,
+                private confirmationService: ConfirmationService,
+                private messageService: MessageService) {
+      this.findRoleByName();
+    }
   
-  confirm1(event: Event) {
-    this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Are you sure that you want to proceed?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        acceptIcon:"none",
-        rejectIcon:"none",
-        rejectButtonStyleClass:"p-button-text",
-        accept: () => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-        },
-        reject: () => {
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-        }
-    });
-}
-
-confirm2(event: Event) {
-    this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Do you want to delete this record?',
-        header: 'Delete Confirmation',
-        icon: 'pi pi-info-circle',
-        acceptButtonStyleClass:"p-button-danger p-button-text",
-        rejectButtonStyleClass:"p-button-text p-button-text",
-        acceptIcon:"none",
-        rejectIcon:"none",
-
-        accept: () => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
-        },
-        reject: () => {
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-        }
-    });
-}
-
-
-}
+    findRoleByName() {
+      this.cataloguesHttpService.getRoleByName('SHIPPER').subscribe(response => { 
+        this.catalogue = response.data[0].id;
+        this.findAll();
+      });
+    }
+  
+    findAll() {
+      this.adminHttpService.findUserByRole(this.catalogue).subscribe(response => {
+        this.shippers = response;
+        this.filteredShippers = this.shippers;
+      });
+    }
+  
+    filterShippers() {
+      if (this.searchTerm) {
+        this.filteredShippers = this.shippers.filter((shipper: any) =>
+          shipper.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          shipper.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+      } else {
+        this.filteredShippers = this.shippers;
+      }
+    }
+  
+    confirm(event: Event, shipper: UserDeleteModel) {
+      if (!this.confirmOpened) { 
+        this.confirmOpened = true;
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          message: '¿Deseas eliminar este registro?',
+          header: 'Confirmación de Eliminación',
+          icon: 'pi pi-info-circle',
+          acceptButtonStyleClass: 'p-button-danger p-button-text',
+          rejectButtonStyleClass: 'p-button-text p-button-text',
+          acceptIcon: 'pi pi-check',
+          rejectIcon: 'pi pi-times',
+          accept: () => {
+            this.deleteShipper(shipper);
+            this.confirmOpened = false;
+          },
+          reject: () => {
+            this.confirmOpened = false; 
+          }
+        });
+      }
+    }
+    
+  
+    deleteShipper(shipper: UserDeleteModel) {
+      this.adminHttpService.delete(shipper.id).pipe(
+        catchError(error => {
+          console.error('Error deleting user:', error);
+          return of(null);
+        })
+      ).subscribe(() => {
+        this.findAll();
+      });
+    }
+  }
+  
+  
