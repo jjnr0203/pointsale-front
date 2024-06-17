@@ -1,86 +1,39 @@
 <div class="container">
     <div class="nav">
-        <app-nav-bar></app-nav-bar>
+      <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
-            <div class="card-content">
-                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
-                <div class="info-container">
-                    <div class="info-field">
-                        <label for="name">Nombre:</label>
-                        <input id="name" type="text" value="John Doe" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="email">Email:</label>
-                        <input id="email" type="email" value="john.doe@example.com" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="role">Rol:</label>
-                        <input id="role" type="text" value="Admin" disabled class="dynamic-input" />
-                    </div>
-                </div>
+      <div class="flex-container flex flex-wrap">
+        <p-card header="Informacion" subheader="Proveedor" [style]="{ width: '300px' }">
+          <ng-template pTemplate="footer">
+            <div class="flex flex-column gap-2">
+              <label for="username">Nombre:</label>
+              <input
+                pInputText
+                [disabled]="true"
+                id="username"
+                aria-describedby="username-help"
+                class="input"
+              />
+              <small id="username-help">Nombre del proveedor</small>
             </div>
-        </p-card>
-        
-        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
-            <div class="card-content">
-                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
-                <div class="info-container">
-                    <div class="info-field">
-                        <label for="name">Nombre:</label>
-                        <input id="name" type="text" value="John Doe" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="email">Email:</label>
-                        <input id="email" type="email" value="john.doe@example.com" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="role">Rol:</label>
-                        <input id="role" type="text" value="Admin" disabled class="dynamic-input" />
-                    </div>
-                </div>
+            <br>
+            <div class="flex flex-column gap-2">
+              <label for="username">Correo:</label>
+              <input
+                pInputText
+                [disabled]="true"
+                id="username"
+                aria-describedby="username-help"
+                class="input"
+              />
+              <small id="username-help">Correo del proveedor</small>
             </div>
+            <br>
+          </ng-template>
         </p-card>
-
-        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
-            <div class="card-content">
-                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
-                <div class="info-container">
-                    <div class="info-field">
-                        <label for="name2">Nombre:</label>
-                        <input id="name2" type="text" value="Jane Smith" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="email2">Email:</label>
-                        <input id="email2" type="email" value="jane.smith@example.com" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="role2">Rol:</label>
-                        <input id="role2" type="text" value="User" disabled class="dynamic-input" />
-                    </div>
-                </div>
-            </div>
-        </p-card>
-
-        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
-            <div class="card-content">
-                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
-                <div class="info-container">
-                    <div class="info-field">
-                        <label for="name2">Nombre:</label>
-                        <input id="name2" type="text" value="Jane Smith" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="email2">Email:</label>
-                        <input id="email2" type="email" value="jane.smith@example.com" disabled class="dynamic-input" />
-                    </div>
-                    <div class="info-field">
-                        <label for="role2">Rol:</label>
-                        <input id="role2" type="text" value="User" disabled class="dynamic-input" />
-                    </div>
-                </div>
-            </div>
-        </p-card>
+        <p-image src="/assets/images/empleado_image.png" alt="Image" width="250" [preview]="true" />
+      </div>
     </div>
-</div>
+  </div>
+  
