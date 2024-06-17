@@ -25,6 +25,9 @@ export class LoginHttpService {
 
   getUser() {
     const user = JSON.parse(sessionStorage.getItem('user')!)
+    if(!user){
+      return {}
+    }
     return user.user
   }
 

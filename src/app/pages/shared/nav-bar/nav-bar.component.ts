@@ -17,7 +17,6 @@ export class NavBarComponent implements OnInit{
     private shopHttpService:ShopHttpService
   ){
     this.user = this.loginHttpService.getUser()
-    console.log(this.user)
   }
   
   
