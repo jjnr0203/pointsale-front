@@ -8,6 +8,9 @@ import {ResponseModel} from '../../../../models/response.model';
 import {OrderModel} from '../../../../models/order.model';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {first} from "rxjs";
+import { ShopService } from '../../../../http-services/shop.service';
+import { ShopHttpService } from '../../../../http-services/shop-http.service';
+import { ProductsHttpService } from '../../../../http-services/products-http.service';
 
 @Component({
   selector: 'app-sale',
@@ -20,21 +23,22 @@ export class SaleComponent implements OnInit {
   customerForm: FormGroup;
   orderForm: FormGroup;
   // data
+  currentShop:any;
   payments: any = [];
   customers: CustomerModel[] = [];
-  products = [
-    {id: '000710b0-afb5-4439-b53b-3af65e251c81', name: 'Gorra', price: 50},
-    {id: '000710b0-afb5-4439-b53b-3af75e251c81', name: ' buzo', price: 100},
-  ];
+  products = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private customersHttpService: CustomersHttpService,
     private ordersHttpService: OrdersHttpService,
+    private productsHttpService:ProductsHttpService,
     private cataloguesHttpService: CataloguesHttpService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private shopService:ShopService
   ) {
+    this.currentShop = this.shopService.getShop()
     this.customerForm = this.newCustomerForm();
     this.orderForm = this.newOrderForm();
     this.addValidations();
@@ -42,7 +46,8 @@ export class SaleComponent implements OnInit {
 
   ngOnInit() {
     this.getPayments();
-    this.getCustomers();
+    this.getProductsByShop(this.currentShop.id);
+    this.getCustomers(this.currentShop.id);
   }
 
   newCustomerForm(): FormGroup {
@@ -52,13 +57,13 @@ export class SaleComponent implements OnInit {
       email: [null, Validators.required],
       phone: [null, Validators.required],
       address: [null, Validators.required],
-      shopIds:[['e3999fd5-ebdc-4558-a8ea-3f81198641e6'], Validators.required]
+      shops:[[this.currentShop], Validators.required]
     });
   }
 
   newOrderForm(): FormGroup {
     return this.formBuilder.group({
-      shop: ['e3999fd5-ebdc-4558-a8ea-3f81198641e6', Validators.required],
+      shop: [this.currentShop, Validators.required],
       customer: [null, Validators.required],
       paymentMethod: [{value: null, disabled: true}, Validators.required],
       cash: [null],
@@ -103,6 +108,7 @@ export class SaleComponent implements OnInit {
     if (!this.selectedCustomer) {
       this.customerForm.markAllAsTouched()
       if (this.customerForm.valid) {
+        console.log(this.customerForm.value)
         this.createCustomer(this.customerForm.value);
         this.closeDialog();
       }
@@ -123,7 +129,7 @@ export class SaleComponent implements OnInit {
     this.paymentMethod.disable();
     this.newOrderState = false;
     this.orderForm.reset();
-    this.shop.setValue('9ff1970b-7afe-4ce1-ba8b-66c6148c259f');
+    this.shop.setValue(this.currentShop);
     this.customerForm.reset();
     this.ordersDetails.clear();
   }
@@ -144,15 +150,15 @@ export class SaleComponent implements OnInit {
   }
 
   // getters catalogues
-  getCustomers() {
-    return this.customersHttpService.findAll().subscribe((response: ResponseModel) => this.customers = response.data);
+  getCustomers(shopId:string) {
+    return this.customersHttpService.findByShop(shopId).subscribe((response: ResponseModel) => this.customers = response.data);
   }
 
-  /* getProducts() {
-     return this.customersHttpService.findAll().subscribe((response: ResponseModel) => {
-       this.customers = response.data;
+  getProductsByShop(shopId:string) {
+     return this.productsHttpService.findByShop(shopId).subscribe((response: ResponseModel) => {
+       this.products = response.data;
      });
-   }*/
+   }
   getPayments() {
     return this.cataloguesHttpService.getByPayment('PAYMENTS').subscribe(
       (response: ResponseModel) => this.payments = response.data);

@@ -47,6 +47,8 @@ export class SupplierFormComponent {
         }
       )
     } else {
+      const data = this.supplier.value;
+      this.supplier.markAllAsTouched()
       alert('El formulario no es valido');
     }
   }

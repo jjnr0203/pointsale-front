@@ -38,7 +38,7 @@
 
 .second-element {
   padding-top: 10px;
-  max-height: 500px;
+  max-height: 600px;
   overflow-y: auto;
   width: 100%;
   display: flex;
@@ -55,14 +55,18 @@
   align-items: center;
   font-size: 15px;
   text-align: center;
-  margin-bottom:25px
+  margin-bottom:15px
+}
+.item:hover{
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #052C4E;
 }
 
 .pi {
   font-size: 30px;
 }
 .options-container{
-  padding: 15px;
   border-radius: 10px;
   position: relative;
   display: none;
@@ -89,3 +93,38 @@
   background-color: #052C4E;
   height: 50px;
  } */
+
+
+.third-element {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.menu {
+  display: none; /* Oculto por defecto */
+  position: absolute;
+  left: 300px;
+  bottom: 10px;
+  width: 160px;
+  background-color: #052C4E;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu li{
+  cursor: pointer;
+  list-style: none;
+  margin: 3px;
+  border-radius: 5px;
+}
+.menu li:hover{
+  background-color: rgba(128, 128, 128, 0.45);
+}
+
+.menu-show{
+  display: block;
+}

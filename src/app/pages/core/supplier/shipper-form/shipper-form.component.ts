@@ -1,103 +1,96 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CataloguesHttpService } from '../../../../http-services';
+import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
+import { ShipperFormModel } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-shipper-form',
   templateUrl: './shipper-form.component.html',
-  styleUrl: './shipper-form.component.scss'
+  styleUrl: './shipper-form.component.scss',
+  providers: [MessageService],
+  encapsulation: ViewEncapsulation.None,
 })
-export class ShipperFormComponent {
-  catalogue: any = {};
+export class ShipperFormComponent  {
   form: FormGroup;
+  userForm: FormGroup;
+  shippers: any = [];
+  roles: any = [];
+  catalogue: any = []
 
-    constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
+    private shipperHttpService: ShipperHttpService,
+    protected router: Router, private activatedRoute: ActivatedRoute,
     private cataloguesHttpService:CataloguesHttpService
   ) {
+    this.findRoleByName();
+    this.userForm = this.buildUserForm();
     this.form = this.buildForm();
-    this.findByName();
+    this.roles = [{ label: 'Repartidor'}];
   }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
-      role:[null, [Validators.required]],
-      name: [null, [Validators.required, Validators.minLength(5)]],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]]
+      user: this.userForm,
+      supplier: ['8485cb24-5046-4f8b-a9db-7462c3e1ff67', [Validators.required]]
     });
   }
 
-  findByName(){
-    return this.cataloguesHttpService.getRoleByName('SHIPPER').subscribe(response=>{ 
-      this.catalogue = response.data
-      this.roleField.setValue(this.catalogue[0].id)
+  findRoleByName() {
+    return this.cataloguesHttpService
+      .getRoleByName('SHIPPER')
+      .subscribe((response) => {
+        this.catalogue = response.data
+        this.roleField.setValue(this.catalogue[0].id);
+      });
+  }
+
+  buildUserForm(): FormGroup {
+    return this.formBuilder.group({
+      name: [null, [Validators.required, Validators.minLength(5)]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null,[Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),]],
+      role: [null, [Validators.required]],
     })
   }
 
-  validateForm() {
-    if (this.form.valid) {
-      alert('El formulario es valido')
-    } else {
-      alert('El formulario no es valido');
-    }
+  createShipper(shipper: ShipperFormModel) {
+    return this.shipperHttpService.create(shipper).subscribe();
+  }
+
+  onSubmit(){
+      if (this.form.valid) {
+        const data = this.form.value;
+        this.createShipper(data);
+        this.form.reset();
+        console.log(data)
+        alert("Creado")
+      } else {
+        alert('El formulario no es valido');
+      }
   }
 
   get nameField(): AbstractControl {
-    return this.form.controls['name'];
+    return this.userForm.controls['name'];
   }
 
   get emailField(): AbstractControl {
-    return this.form.controls['email'];
+    return this.userForm.controls['email'];
   }
 
   get passwordField(): AbstractControl {
-    return this.form.controls['password'];
+    return this.userForm.controls['password'];
   }
+
   get roleField(): AbstractControl {
-    return this.form.controls['role'];
-  } 
-
-  
- /* submit() {
-  if (this.customer) {
-    this.customerUpdate();
-    alert('actualizado')
-    this.router.navigate(['home/'+ this.userId])
-  } else {
-  if (this.customerForm.valid) {
-    const data = this.customerForm.value;
-    this.httpClient.post('http://localhost:3000/customer', data).subscribe(response => {
-      alert('Usuario creado')
-      this.router.navigate(['login'])
-    },(error) => {
-      console.log(error)
-      alert('Error al crear el usuario');
-    });
+    return this.userForm.controls['role'];
   }
 }
-} */
-
-/* getCustomer(){
-  this.httpClient.get('http://localhost:3000/customer/'+ this.userId).subscribe((response: any) => {
-        this.customer = response;
-        console.log(this.customer);
-        this.customerForm.patchValue(this.customer)
-  })
-} */
-
-/* customerUpdate() {
-  this.getCustomer();
-  this.customerForm;
-  if (this.customerForm.valid) {
-  const data = this.customerForm.value;
-  this.httpClient
-    .put('http://localhost:3000/customer/'+ this.customer.id_customer, data)
-    .subscribe((response) => {  
-    },(error) => {
-      console.log(error)
-      alert('Error al actualizar el datos del usuario');
-    });
-  }
-} */
-}
-

@@ -3,41 +3,43 @@
     <app-nav-bar></app-nav-bar>
   </div>
   <div class="main">
-    <p-table
-      class="custom-p-table"
-      class="col-11"
-      [tableStyle]="{ 'min-width': '50rem'}"
-      styleClass="p-datatable-striped"
-      [paginator]="true"
-      [rows]="5"
-      [value]="filteredUsers"
-    >
+    <p-confirmDialog appendTo="body"></p-confirmDialog>
+    <p-table class="custom-p-table col-11"
+             [tableStyle]="{ 'min-width': '50rem'}"
+             styleClass="p-datatable-striped"
+             [paginator]="true"
+             [rows]="5"
+             [value]="filteredUsers">
       <ng-template pTemplate="caption" class="table">
         <div class="table-header">
           <h1 class="table-title">Lista de administradores</h1>
           <div class="search-bar">
             <input type="text" 
-              pInputText 
-              placeholder="Buscar..." 
-              [(ngModel)]="searchTerm" 
-              (ngModelChange)="filterUsers()"
-              />
+                   pInputText 
+                   placeholder="Buscar..." 
+                   [(ngModel)]="searchTerm" 
+                   (ngModelChange)="filterUsers()" />
             <i class="pi pi-search search-icon"></i>
           </div>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width:33%">Name</th>
-          <th style="width:34%">Email</th>
-          <th style="width:33%">Acciones</th>
+          <th style="width:25%">Name</th>
+          <th style="width:30%">Email</th>
+          <th style="width:20%">Rol</th>
+          <th style="width:25%">Acciones</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
         <tr>
           <td>{{user.name}}</td>
           <td>{{user.email}}</td>
-          <td><p-button label="Eliminar" severity="danger" size="small" icon="pi pi-trash" (onClick)="deleteUser(user)"/>
+          <td>{{user.role.name}}</td>
+          <td>
+            <button pButton type="button" label="Delete" icon="pi pi-trash" class="p-button p-button-danger"
+                    (click)="confirm($event, user)"></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>
