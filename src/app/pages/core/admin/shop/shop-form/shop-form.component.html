@@ -1,54 +1,83 @@
-<div class="container">    
-    <div class="nav">
-      <app-nav-bar></app-nav-bar>
-    </div>
-    <div class="main">
-      <div class="shop-form">
+<div class="container">
+  <div class="nav">
+    <app-nav-bar></app-nav-bar>
+  </div>
+  <div class="main">
+    <div class="shop-form">
+        <p-card [style]="{ width: '450px' }"  >
+        <h2 class="form-title">Registro de Tienda</h2>
         <form [formGroup]="shop">
-          <div class="flex flex-column gap-2">
-            <label for="name">Nombre:</label>
-            <input 
-              pInputText 
-              id="name" 
-              aria-describedby="username-help" 
-              formControlName="name" />
+          <div class="field">
+            <label for="name" class="block">Nombre</label>
+            <input type="text" pInputText placeholder="Nombre" formControlName="name" />
+            @if (nameField.errors) {
+              @if (nameField.errors['required'] && nameField.touched) {
+                <small style="color: red;">El campo nombre es requerido</small>
+              }
+              @if (nameField.errors['minlength']) {
+                <small class="alert-validation" style="color: red;">Minimo de letras es 4</small>
+              }
+            }
           </div>
-          <div class="flex flex-column gap-2">
-            <label for="ruc">Ruc:</label>
-            <input 
-              pInputText 
-              id="ruc" 
-              aria-describedby="ruc" 
-              formControlName="ruc" />
+          <div class="field">
+            <label for="ruc" class="block">Ruc</label>
+            <input type="text" pInputText placeholder="Ruc" formControlName="ruc" />
+            @if (rucField.errors) {
+              @if (rucField.errors['required'] && rucField.touched) {
+                <small style="color: red;">El campo ruc es requerido</small>
+              }
+            }
           </div>
-          <div class="flex flex-column gap-2">
-            <label for="address">Dirección:</label>
-            <input 
-              pInputText 
-              id="address" 
-              aria-describedby="address" 
-              formControlName="address" />
+          <div class="field">
+            <label for="address" class="block">Dirección</label>
+            <input type="text" pInputText placeholder="Dirección" formControlName="address" />
+            @if (addressField.errors) {
+              @if (addressField.errors['required'] && addressField.touched) {
+                <small style="color: red;">El campo dirección es requerido</small>
+              }
+            }
           </div>
-          <div class="flex flex-column gap-2">
-            <label for="phone">Teléfono:</label>
-            <input 
-              pInputText 
-              id="phone" 
-              aria-describedby="phone" 
-              formControlName="phone" />
+          <div class="field">
+            <label for="phone" class="block">Teléfono</label>
+            <input type="text" pInputText placeholder="Teléfono" formControlName="phone" />
+            @if (phoneField.errors) {
+              @if (phoneField.errors['required'] && phoneField.touched) {
+                <small style="color: red;">El campo teléfono es requerido</small>
+              }
+            }
           </div>
-          <div class="flex flex-column gap-2">
+          <div class="field">
             <label for="email">Correo Electrónico:</label>
-            <input 
-              pInputText 
-              id="email" 
-              aria-describedby="email" 
-              formControlName="email" />
+            <input type="email" pInputText placeholder="Correo Electrónico" formControlName="email" />
+            @if (emailField.errors) {
+              @if (emailField.errors['required'] && emailField.touched) {
+                <small style="color: red;">El campo email es requerido</small>
+              }
+            }
+          </div>
+          <div class="field">
+            <label for="idUser">Id:</label>
+            <input type="idUser" pInputText placeholder="Correo Electrónico" formControlName="idUser" />
+            @if (idUserField.errors) {
+              @if (idUserField.errors['required'] && idUserField.touched) {
+                <small style="color: red;">El campo email es requerido</small>
+              }
+            }
           </div>
           <br>
-          <p-button (onClick)="onSubmit()" icon="pi pi-shop" type="submit" severity="primary" label="Crear nueva tienda" />
-        </form>
-      </div>
+        <div class="d-grid gap-2 ">
+        <p-button (onClick)="onSubmit()" size="small" label="Enviar" [raised]="true" severity="contrast"/>
+        </div>
+      </form>
+    </p-card>
     </div>
   </div>
-  
+  <div class="card flex justify-content-center">
+    <p-image 
+        src="https://th.bing.com/th/id/OIG3._lh.b0kKOWl077RMJZCj?pid=ImgGn"
+        alt="Image" 
+        width="500"
+        height="550"
+        [preview]="true" />
+</div>
+</div>

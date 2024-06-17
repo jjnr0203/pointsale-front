@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { ShopModel } from '../../../../../models/shop.model';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
 
@@ -24,10 +24,11 @@ export class ShopFormComponent {
   formShop(): FormGroup{
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      ruc: ['',[Validators.required,Validators.maxLength(11)]],
+      ruc: ['',[Validators.required,Validators.maxLength(13), Validators.minLength(13)]],
       address: ['',[Validators.required]],
-      phone:['',[Validators.required, Validators.maxLength(10)]],
+      phone:['',[Validators.required, Validators.maxLength, Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email]],
+      idUser:['', Validators.required]
     })
   }
 
@@ -40,6 +41,7 @@ export class ShopFormComponent {
           alert('Tienda creada exitosamente');
           this.shop.reset();
           this.shops
+          console.log(this.shop)
         },
         (error: any) => {
           console.error('Error al crear la tienda:', error);
@@ -72,4 +74,7 @@ export class ShopFormComponent {
   get emailField(): AbstractControl{
     return this.shop.controls['email'];
   }
+  get idUserField(): AbstractControl{
+    return this.shop.controls['idUser'];
   }
+}

@@ -1,15 +1,53 @@
 .container {
-    display: flex;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+.main {
+  display: flex; 
+  justify-content: center; 
+  width: 900px;
+}
+
+.form-title {
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding-top: -1px;
+
+}
+
+h1 {
+text-align: center;
+font-weight: bold;
+font-size: 1.7rem;
+}
+.shop-form {
+box-shadow: 0 4px 16px rgb(238, 238, 238);
+border-radius: 10px;
+
+.form { 
+  padding-top: 20%;
+}
+
+.field {
+  margin-bottom: 5px;
+
+label {
+  font-weight: bold;
+  margin-bottom: 1px;
+  display: block;
   }
-  
-  .nav {
-    width: 100px;
-  }
-  .main {
-    padding-top: 20px;
-    padding-left: 35px;
-    display: flex;
-    margin: 15px;
+
+  input {
     width: 100%;
-    justify-content: space-between;
+    padding: 9px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    
   }
+}
+}

@@ -4,6 +4,7 @@ import { ProductModel } from "../models/product.model";
 import { ResponseModel } from "../models/response.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
+import { ShopModel } from "../models/shop.model";
 
 @Injectable({
     providedIn:'root'
@@ -24,6 +25,10 @@ export class ProductsHttpService{
 
     createProduct(product: ProductModel){
         return this.httpClient.post<ProductModel>(`${this.url}`, product);
+    }
+
+    findByShop(id:string){
+        return this.httpClient.get<ShopModel>(`${this.url}/${id}`)
     }
 
     updateProduct(id:string,product: ProductModel):Observable<ProductModel>{

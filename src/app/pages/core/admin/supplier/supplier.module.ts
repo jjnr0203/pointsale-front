@@ -11,6 +11,9 @@ import { TableModule } from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { GalleriaModule } from 'primeng/galleria';
     ButtonModule,
     ReactiveFormsModule,
     ImageModule,
-    GalleriaModule 
+    GalleriaModule,
+    InputGroupModule,
+    InputGroupAddonModule, 
+    InputTextModule 
     
   ]
 })
