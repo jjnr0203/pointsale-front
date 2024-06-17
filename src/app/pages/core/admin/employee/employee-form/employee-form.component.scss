@@ -1,7 +1,7 @@
-/* body{
-  background-image: url("/assets/images/background.png");
+body{
+  background-image: url("/assets/images/fondo2.jpg");
   background-size: cover;
-} */
+}
 
 .container {
   display: flex;
@@ -28,6 +28,7 @@ width: 1200px;
 .my-password .p-component{
 width: 100%;
 height: 40px;
+background-color: rgba(252, 252, 252, 0.712);
 }
 
 .my-password .p-icon{
@@ -40,9 +41,11 @@ height: 40px;
 }
 
 .my-card .p-component{
-  background-color: #052C4E;
+  background-color: #ffffff80;
   background-size: cover;
 }
+
+
   
 
 

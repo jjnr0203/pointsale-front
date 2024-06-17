@@ -1,84 +1,3 @@
-<!--     <div class="container">
-        <div class="nav">
-            <app-nav-bar></app-nav-bar>
-        </div>
-        <div class="main">
-    <form [formGroup]="form" style="width: 50%; text-align: center; border: 2px solid #cfbcbc; padding: 20px; border-radius: 20px;">
-        <p class="h1">Registro del empleado</p>
-
-            <div class="flex flex-column gap-2">
-              <label for="names" class="font-bold block mb-2">Nombre del producto: </label>
-              <input 
-                  pInputText 
-                  id="name" 
-                  aria-describedby="username-help" 
-                  formControlName="name" />
-              <small id="username-help">
-                  Ingrese el nombre del producto
-              </small>
-          
-            @if (nameField.errors) {
-                @if (nameField.touched) {
-                  @if (nameField.errors['minlength']) {
-                    <span style="color: red; ">El campo debe contener 2 caracteres o más</span>
-                  }
-                  @else if (nameField.errors['required']) {
-                    <span style="color: red;">El campo es requerido</span>
-                  }
-                }
-              }
-          </div><br>
-        
-
-            <div class="flex flex-column gap-2">
-              <label for="price" class="font-bold block mb-2">Precio: </label>
-              <input pInputText id="price" pKeyFilter="int" class="w-full" formControlName="price" /> 
-              <small id="username-help">
-                  Ingrese el precio del producto
-              </small>
-            @if (priceField.errors) {
-              @if (priceField.touched) {
-                @if (priceField.errors['required']) {
-                  <span style="color: red;">El campo es requerido</span>
-                }
-              }
-            }
-        </div><br>
-
-
-        
-          <div class="flex flex-column gap-2">
-            <label for="unit" class="font-bold block mb-2">Unidades del producto </label>
-            <input pInputText id="unit" pKeyFilter="int" class="w-full" formControlName="unit" /> 
-            <small id="username-help">
-                Ingrese el numero de unidades deseadas
-            </small>
-          @if (unitField.errors) {
-            @if (unitField.touched) {
-              @if (unitField.errors['min']) {
-                <span style="color: red;">El campo debe contener por lo menos una unidad</span>
-              }
-              @else if (unitField.errors['required']) {
-                <span style="color: red;">El campo es requerido</span>
-              }
-            }
-          }
-      </div><br>
-
-        <div>
-          <button 
-              pButton 
-              pRipple 
-              label="Submit" 
-              class="p-button-success">
-          </button>
-        </div>
-    </form>
-    </div>
-</div>
- -->
-
-
 <div class="container">
   <div class="nav">
     <app-nav-bar></app-nav-bar>
@@ -88,7 +7,7 @@
       <div class="main" style="display: flex; justify-content: center; align-items: center;">
         <p-card [style]="{ width: '1100px' }" class="my-card">
           <ng-template pTemplate="header">
-            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem; color: white;">
+            <div style="text-align: center; width: 100%; font-weight: bold; font-size: 1.5rem; color: rgb(0, 0, 0);">
               Registro del empleado
             </div>
           </ng-template>
@@ -98,12 +17,9 @@
             <form [formGroup]="userForm" (ngSubmit)="onSubmit()" style="width: 50%; text-align: left; color: white;">
 
               <div class="flex flex-column gap-2">
-                <label for="name" class="font-bold block mb-2" style="color: white;">Nombre: </label>
-                <input pInputText id="name" aria-describedby="username-help" formControlName="name"
-                  style="background-color: white;" />
-                <!-- {{nameField.value | json}}
-                  {{form.value | json}} -->
-                <small id="username-help">Ingrese su nombre y apellido</small>
+                <label for="name" class="font-bold block mb-2" style="color:black;">Nombre: </label>
+                <input pInputText id="name" aria-describedby="username-help" formControlName="name" style="color: white;"/>
+                <small id="username-help" style="color: black;">Ingrese su nombre y apellido</small>
                 <div *ngIf="nameField.errors && nameField.touched">
                   <span *ngIf="nameField.errors['minlength']" style="color: red;">El campo debe contener 5 caracteres o
                     más</span>
@@ -112,10 +28,9 @@
               </div><br>
 
               <div class="flex flex-column gap-2">
-                <label for="email" class="font-bold block mb-2" style="color: white;">Email: </label>
-                <input pInputText id="email" aria-describedby="username-help" formControlName="email"
-                  style="background-color: white;" />
-                <small id="username-help">Ingrese su correo electrónico</small>
+                <label for="email" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Email: </label>
+                <input pInputText id="email" aria-describedby="username-help" formControlName="email" style="color: white;"/>
+                <small id="username-help" style="color: black;">Ingrese su correo electrónico</small>
                 <div *ngIf="emailField.errors && emailField.touched">
                   <span *ngIf="emailField.errors['email']" style="color: red;">El campo debe contener un correo
                     electrónico válido</span>
@@ -123,12 +38,12 @@
                 </div>
               </div><br>
 
-              <label for="email" class="font-bold block mb-2" style="color: white;">Password: </label>
+              <label for="email" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Password: </label>
               <p-floatLabel>
                 <p-password formControlName="password" [feedback]="false" class="my-password" />
-                <label for="password"></label>
+                <label for="password" style="color: rgb(0, 0, 0);"></label>
               </p-floatLabel>
-              <small id="username-help">Ingrese una contraseña segura</small>
+              <small id="username-help" style="color: black;">Ingrese una contraseña segura</small>
               <div *ngIf="passwordField.errors && passwordField.touched">
                 <span *ngIf="passwordField.errors['pattern']" style="color: red;">El campo debe contener números y
                   letras</span>
@@ -136,9 +51,9 @@
               </div><br>
 
               <div class="flex flex-column gap-2">
-                <label for="role" class="font-bold block mb-2" style="color: white;">Rol: </label>
+                <label for="role" class="font-bold block mb-2" style="color: rgb(0, 0, 0);">Rol: </label>
                 <p-dropdown [options]="roles" placeholder="Seleccione un rol" class="my-rol"></p-dropdown>
-                <small id="role-help">Seleccione el rol del usuario</small>
+                <small id="role-help" style="color: rgb(0, 0, 0);">Seleccione el rol del usuario</small>
                 <div *ngIf="roleField.errors && roleField.touched">
                   <span *ngIf="roleField.errors['required']" style="color: red;">El campo es requerido</span>
                 </div>
@@ -149,7 +64,7 @@
                   ></button>
               </div> -->
 
-              <p-button label="Submit" type="onSubmit" />
+              <p-button label="Submit" type="onSubmit" label="Success" [rounded]="true" [outlined]="true" severity="success" [text]="true"/>
             </form>
 
             <!-- Imagen -->

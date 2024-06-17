@@ -39,7 +39,7 @@ export class EmployeeFormComponent {
   buildForm(): FormGroup {
     return this.formBuilder.group({
       user: this.userForm,
-      shop: ['5ca520cb-0a41-436a-88b8-c7bf142f559e', [Validators.required]]
+      shop: ['55d00e3c-c9b5-4505-8ce5-5fd75655dde3', [Validators.required]]
     });
   }
 
