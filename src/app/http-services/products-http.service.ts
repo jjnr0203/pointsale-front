@@ -28,12 +28,11 @@ export class ProductsHttpService{
     }
 
     findByShop(id:string){
-        return this.httpClient.get<ShopModel>(`${this.url}/${id}`)
+        return this.httpClient.get<ResponseModel>(`${this.url}/${id}/shop`)
     }
 
     updateProduct(id:string,product: ProductModel):Observable<ProductModel>{
         return this.httpClient.put<ProductModel>(`${this.url}/${id}`, product);
-
     }
     
     deleteProduct(id: string){

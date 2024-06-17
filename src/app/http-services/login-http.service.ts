@@ -25,7 +25,7 @@ export class LoginHttpService {
 
   getUser() {
     const user = JSON.parse(sessionStorage.getItem('user')!)
-    return user
+    return user.user
   }
 
   setShopByUser(id: string) {
