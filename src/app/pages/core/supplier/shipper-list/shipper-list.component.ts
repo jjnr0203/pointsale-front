@@ -35,7 +35,7 @@ export class ShipperListComponent implements OnInit{
     }
 
     findAll() {
-      this.shipperHttpService.findShipperBySupplier(this.user.user.sub).subscribe(response => {
+      this.shipperHttpService.findShipperBySupplier(this.user.sub).subscribe(response => {
         this.shippers = response.data;
         this.filteredShippers = this.shippers;
         console.log(response)

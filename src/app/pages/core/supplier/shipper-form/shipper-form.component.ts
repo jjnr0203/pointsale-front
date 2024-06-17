@@ -11,6 +11,7 @@ import { CataloguesHttpService } from '../../../../http-services';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
 import { ShipperFormModel } from '../../../../models/user.model';
 import { LoginHttpService } from '../../../../http-services/login-http.service';
+import { SupplierHttpService } from '../../../../http-services/supplier-http.service';
 
 @Component({
   selector: 'app-shipper-form',
@@ -20,6 +21,7 @@ import { LoginHttpService } from '../../../../http-services/login-http.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShipperFormComponent  {
+  id:any;
   supplier:any;
   form: FormGroup;
   userForm: FormGroup;
@@ -32,7 +34,8 @@ export class ShipperFormComponent  {
     private shipperHttpService: ShipperHttpService,
     protected router: Router, private activatedRoute: ActivatedRoute,
     private cataloguesHttpService:CataloguesHttpService,
-    private loginHttpService:LoginHttpService
+    private loginHttpService:LoginHttpService,
+    private supplierHttpService:SupplierHttpService
   ) {
     this.supplier = this.loginHttpService.getUser()
     this.findRoleByName();
@@ -47,16 +50,21 @@ export class ShipperFormComponent  {
     }
 
     findAll() {
-      this.shipperHttpService.findShipperBySupplier(this.supplier.user.sub).subscribe(response => {
-        this.shippers = response.data;
-        console.log(this.shippers)
+      this.supplierHttpService.findSupplierByUser(this.supplier.sub).subscribe(response => {
+        this.id = response.data;
+        console.log(this.id)
+        this.supplierField.setValue(this.id.id)
       });
+    }
+
+    get supplierField(): AbstractControl {
+      return this.form.controls['supplier'];
     }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
       user: this.userForm,
-      supplier: ['8485cb24-5046-4f8b-a9db-7462c3e1ff67', [Validators.required]]
+      supplier: [null, [Validators.required]]
     });
   }
 
