@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit{
   
   
   ngOnInit(): void {
-    this.shopHttpService.findShopsByUser(this.user.user.sub).subscribe(
+    this.shopHttpService.findShopsByUser(this.user.sub).subscribe(
       response => {
         this.shops = response.data
   })
@@ -47,6 +47,15 @@ export class NavBarComponent implements OnInit{
 
   items = [
     { icon: 'pi pi-shop', label: 'Tiendas' },
+    { 
+      icon: 'pi pi-users', 
+      label: 'Empleados', 
+      activeSubmenu: false,
+      submenu: [
+        { label: 'My link' },
+        { label: 'My link 2' }
+      ]
+    },
     { 
       icon: 'pi pi-users', 
       label: 'Empleados', 
