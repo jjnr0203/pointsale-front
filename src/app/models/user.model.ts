@@ -15,8 +15,8 @@ export interface EmployeeFormModel{
 }
 
 export interface ShipperFormModel{
-    user:string;
-    supplier: string;
+    user:any;
+    supplier: any;
 }
 
 export interface LoginFormModel{

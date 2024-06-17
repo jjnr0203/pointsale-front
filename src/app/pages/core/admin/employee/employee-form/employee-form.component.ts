@@ -68,6 +68,7 @@ export class EmployeeFormComponent {
   onSubmit(){
       if (this.form.valid) {
         const data = this.form.value;
+        console.log(data)
         this.createEmployee(data);
         this.form.reset();
 

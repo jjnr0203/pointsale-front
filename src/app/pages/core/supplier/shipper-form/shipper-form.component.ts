@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { CataloguesHttpService } from '../../../../http-services';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
+import { ShipperFormModel } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-shipper-form',
@@ -61,7 +62,7 @@ export class ShipperFormComponent  {
     })
   }
 
-  createShipper(shipper: any) {
+  createShipper(shipper: ShipperFormModel) {
     return this.shipperHttpService.create(shipper).subscribe();
   }
 

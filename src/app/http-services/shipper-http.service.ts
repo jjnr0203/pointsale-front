@@ -10,10 +10,14 @@ import { ShipperFormModel } from '../models/user.model';
 export class ShipperHttpService {
 
   constructor(private httpClient: HttpClient) { }
-  url:string = "http://localhost:3000/users";
+  url:string = "http://localhost:3000/shipper";
 
   findAll(){
     return this.httpClient.get(this.url);
+  }
+
+  findShipperBySupplier(supplier:string){
+    return this.httpClient.get<ResponseModel>(`${this.url}/${supplier}/supplier`);
   }
 
   findOne(id: string){

@@ -5,6 +5,7 @@ import { UserDeleteModel } from '../../../../models/user.model';
 import { catchError, of } from 'rxjs';
 import { AdminHttpService } from '../../../../http-services/admin-http.service';
 import { CataloguesHttpService } from '../../../../http-services';
+import { LoginHttpService } from '../../../../http-services/login-http.service';
 
 @Component({
   selector: 'app-shipper-list',
@@ -13,33 +14,38 @@ import { CataloguesHttpService } from '../../../../http-services';
 })
 
 export class ShipperListComponent {
+    supplier:any;
+    user:any;
     catalogue: any = [];
     shippers: any = [];
     filteredShippers: any = [];
     searchTerm: string = '';
     confirmOpened: boolean = false; 
   
-    constructor(private adminHttpService: AdminHttpService,
-                private cataloguesHttpService: CataloguesHttpService,
+    constructor(private shipperHttpService:ShipperHttpService,
                 private confirmationService: ConfirmationService,
-                private messageService: MessageService) {
-      this.findRoleByName();
+                private messageService: MessageService,
+                private loginHttpService:LoginHttpService){
+      this.user = this.loginHttpService.getUser()
+      this.findAll();
     }
-  
-    findRoleByName() {
-      this.cataloguesHttpService.getRoleByName('SHIPPER').subscribe(response => { 
-        this.catalogue = response.data[0].id;
-        this.findAll();
-      });
+    
+    ngOnInit(): void {
+      this.shipperHttpService.findOne(this.user.user.sub).subscribe(
+        response => {
+          this.supplier = response.data
+          console.log(this.supplier)
+    })
     }
-  
+
     findAll() {
-      this.adminHttpService.findUserByRole(this.catalogue).subscribe(response => {
-        this.shippers = response;
+      this.shipperHttpService.findShipperBySupplier('8485cb24-5046-4f8b-a9db-7462c3e1ff67').subscribe(response => {
+        this.shippers = response.data;
         this.filteredShippers = this.shippers;
+        console.log(response)
       });
     }
-  
+
     filterShippers() {
       if (this.searchTerm) {
         this.filteredShippers = this.shippers.filter((shipper: any) =>
@@ -76,7 +82,7 @@ export class ShipperListComponent {
     
   
     deleteShipper(shipper: UserDeleteModel) {
-      this.adminHttpService.delete(shipper.id).pipe(
+      this.shipperHttpService.delete(shipper.id).pipe(
         catchError(error => {
           console.error('Error deleting user:', error);
           return of(null);

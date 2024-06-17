@@ -33,9 +33,9 @@
         </ng-template>
         <ng-template pTemplate="body" let-shipper>
           <tr>
-            <td>{{shipper.name}}</td>
-            <td>{{shipper.email}}</td>
-            <td>{{shipper.role.name}}</td>
+            <td>{{shipper.user.name}}</td>
+            <td>{{shipper.user.email}}</td>
+            <td>{{shipper.user.role.name}}</td>
             <td>
               <button pButton type="button" label="Delete" icon="pi pi-trash" class="p-button p-button-danger"
                       (click)="confirm($event, shipper)"></button>
