@@ -27,6 +27,7 @@ export class SupplierFormComponent {
       name: ['', [Validators.required, Validators.minLength(4)]],
       phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
+      idShipper: ['esaf18ae1c5se1c8sc1', [Validators.required]]
     })
   }
 
@@ -65,6 +66,9 @@ export class SupplierFormComponent {
   }
   get emailField(): AbstractControl{
     return this.supplier.controls['email'];
+  }
+  get idShipperField(): AbstractControl{
+    return this.supplier.controls['idShop'];
   }
 
 }

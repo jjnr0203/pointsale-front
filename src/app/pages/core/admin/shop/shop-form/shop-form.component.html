@@ -4,7 +4,8 @@
   </div>
   <div class="main">
     <div class="shop-form">
-      <p-card styleClass="form" class="flex" [style]="{ width: '450px' }"> <h2 class="form-title">Registro de Tienda</h2>
+        <p-card [style]="{ width: '450px' }"  >
+        <h2 class="form-title">Registro de Tienda</h2>
         <form [formGroup]="shop">
           <div class="field">
             <label for="name" class="block">Nombre</label>
@@ -54,9 +55,18 @@
               }
             }
           </div>
+          <div class="field">
+            <label for="idUser">Id:</label>
+            <input type="idUser" pInputText placeholder="Correo Electrónico" formControlName="idUser" />
+            @if (idUserField.errors) {
+              @if (idUserField.errors['required'] && idUserField.touched) {
+                <small style="color: red;">El campo email es requerido</small>
+              }
+            }
+          </div>
           <br>
         <div class="d-grid gap-2 ">
-        <p-button (onClick)="onSubmit()" icon="pi pi-users" label="Info" [outlined]="true" severity="info"  size="small"/>
+        <p-button (onClick)="onSubmit()" size="small" label="Enviar" [raised]="true" severity="contrast"/>
         </div>
       </form>
     </p-card>

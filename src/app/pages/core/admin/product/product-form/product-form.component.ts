@@ -73,6 +73,9 @@ export class ProductFormComponent {
   get costField(): AbstractControl{
     return this.product.controls['cost'];
   }
+  get idShopField(): AbstractControl{
+    return this.product.controls['idShop'];
+  }
 
 }
 

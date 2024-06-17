@@ -4,7 +4,7 @@
   </div>
   <div class="main">
     <div class="supplier-form">
-      <p-card styleClass="form" class="flex justify-content-center" [style]="{ width: '450px' }">
+      <p-card styleClass="form" class="flex justify-content-center">
         <h2 class="form-title">Registro de Proovedor</h2>
       <form [formGroup]="supplier">
         <div class="field">
@@ -54,7 +54,7 @@
         </div>
         <br>
         <div class="d-grid gap-2 ">
-        <p-button (onClick)="onSubmit()" icon="pi pi-users" label="Enviar" [outlined]="true" severity="contrast"/>
+        <p-button (onClick)="onSubmit()" icon="pi pi-users"  type="submit" label="Enviar" severity="contrast" />
         </div>
       </form>
     </p-card>
@@ -64,8 +64,8 @@
     <p-image 
         src="https://th.bing.com/th/id/OIG3.J_pcECUKnxPQ4hv0O7F2?w=1024&h=1024&rs=1&pid=ImgDetMain"
         alt="Image" 
-        width="500"
-        height="550"
+        width="450"
+        height="500"
         [preview]="true" />
 </div>
 </div>

@@ -1,19 +1,22 @@
 .container {
   display: flex;
   align-items: center;
-  background: linear-gradient(110deg, rgb(0, 140, 255)rgb(235, 235, 236));
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
 }
 
 .main {
   display: flex; 
   justify-content: center; 
-  width: 1000px;
+  width: 900px;
 }
 
 .form-title {
+  margin-top: 10px;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding-top: -1px;
+
 }
 
 h1 {
@@ -26,7 +29,7 @@ box-shadow: 0 4px 16px rgb(238, 238, 238);
 border-radius: 10px;
 
 .form { 
-  padding: 20px;
+  padding-top: 20%;
 }
 
 .field {
@@ -39,16 +42,12 @@ label {
   }
 
   input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #0d007e;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #000000;
     border-radius: 10px;
-    border: 2px solid #00027e;
+    border: 2px solid #000000;
     
-  }
-
-  button {
-    border-radius: 0%;
   }
 }
 }

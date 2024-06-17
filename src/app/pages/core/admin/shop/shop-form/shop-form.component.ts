@@ -28,6 +28,7 @@ export class ShopFormComponent {
       address: ['',[Validators.required]],
       phone:['',[Validators.required, Validators.maxLength, Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email]],
+      idUser:['', Validators.required]
     })
   }
 
@@ -73,4 +74,7 @@ export class ShopFormComponent {
   get emailField(): AbstractControl{
     return this.shop.controls['email'];
   }
+  get idUserField(): AbstractControl{
+    return this.shop.controls['idUser'];
   }
+}
