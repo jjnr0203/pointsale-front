@@ -3,49 +3,84 @@
         <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-        <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-            </ng-template>
-            <p>
-                Lorem ipsum dolor sit amet...
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-3 mt-1">
-                    <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-                    <p-button label="Save" class="w-full" styleClass="w-full" />
+        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
+            <div class="card-content">
+                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
+                <div class="info-container">
+                    <div class="info-field">
+                        <label for="name">Nombre:</label>
+                        <input id="name" type="text" value="John Doe" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" value="john.doe@example.com" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="role">Rol:</label>
+                        <input id="role" type="text" value="Admin" disabled class="dynamic-input" />
+                    </div>
                 </div>
-            </ng-template>
+            </div>
+        </p-card>
+        
+        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
+            <div class="card-content">
+                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
+                <div class="info-container">
+                    <div class="info-field">
+                        <label for="name">Nombre:</label>
+                        <input id="name" type="text" value="John Doe" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" value="john.doe@example.com" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="role">Rol:</label>
+                        <input id="role" type="text" value="Admin" disabled class="dynamic-input" />
+                    </div>
+                </div>
+            </div>
         </p-card>
 
-        <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-            </ng-template>
-            <p>
-                Lorem ipsum dolor sit amet...
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-3 mt-1">
-                    <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-                    <p-button label="Save" class="w-full" styleClass="w-full" />
+        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
+            <div class="card-content">
+                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
+                <div class="info-container">
+                    <div class="info-field">
+                        <label for="name2">Nombre:</label>
+                        <input id="name2" type="text" value="Jane Smith" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="email2">Email:</label>
+                        <input id="email2" type="email" value="jane.smith@example.com" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="role2">Rol:</label>
+                        <input id="role2" type="text" value="User" disabled class="dynamic-input" />
+                    </div>
                 </div>
-            </ng-template>
+            </div>
         </p-card>
 
-        <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-            </ng-template>
-            <p>
-                Lorem ipsum dolor sit amet...
-            </p>
-            <ng-template pTemplate="footer">
-                <div class="flex gap-3 mt-1">
-                    <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-                    <p-button label="Save" class="w-full" styleClass="w-full" />
+        <p-card header="Advanced Card" subheader="Card Subheader" class="dynamic-card">
+            <div class="card-content">
+                <img alt="Card" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" class="card-image" />
+                <div class="info-container">
+                    <div class="info-field">
+                        <label for="name2">Nombre:</label>
+                        <input id="name2" type="text" value="Jane Smith" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="email2">Email:</label>
+                        <input id="email2" type="email" value="jane.smith@example.com" disabled class="dynamic-input" />
+                    </div>
+                    <div class="info-field">
+                        <label for="role2">Rol:</label>
+                        <input id="role2" type="text" value="User" disabled class="dynamic-input" />
+                    </div>
                 </div>
-            </ng-template>
+            </div>
         </p-card>
     </div>
 </div>

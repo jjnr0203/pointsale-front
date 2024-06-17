@@ -8,18 +8,37 @@
     <div class="second-element">
         @for(item of items; track item.label){
         <div class="se-icons" (click)="toggleMenu(item)">
-            <i class="{{item.icon}}"></i>
-            <p>{{item.label}}</p>
+            <div class="item">
+                <i class="{{item.icon}}"></i>
+                <p>{{item.label}}</p>
+            </div>
             @if(item.submenu && item.submenu.length > 0 && item.activeSubmenu){
             <div class="options-container" [ngClass]="item.activeSubmenu ? 'options-container-active':''">
-                <div> <a href="">My link</a></div>
-                <div><a href="">My link 2</a></div>
+                @for(subitem of item.submenu; track subitem.label){
+                <div> <a href="">{{subitem.label}}</a></div>
+                }
             </div>
             }
         </div>
         }
 
     </div>
-    <div>
+    <div class="third-element">
+        <div class="third-icon" (click)="toggleMenuShops()">
+            <i class="pi pi-cog" style="font-size: 2rem; color: #ffffff;"></i>
+        </div>
+        <div class="menu" [ngClass]="activeShopOptions ? 'menu-show':''">
+            <ul>
+                @for(item of shops; track item.id){
+                    <li (click)="selectShop(item)" >{{item.name}}</li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
+
+<!-- @for(item of shops; track item.id){
+    <div class="shops-item">
+        <div>{{item.name}}</div>
+    </div>
+    } -->

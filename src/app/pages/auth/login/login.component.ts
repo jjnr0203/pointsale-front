@@ -6,8 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-/* import { LoginHttpService } from '../../../http-services/login-http.service';
- */import { ActivatedRoute, Router } from '@angular/router';
+import { LoginHttpService } from '../../../http-services/login-http.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ShopService } from '../../../http-services/shop.service';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,12 @@ export class LoginComponent {
   private formBuilder: FormBuilder = inject(FormBuilder);
   protected form: FormGroup;
 
+  user:any
+  shop:any
   constructor(
-/*     private loginHttpService: LoginHttpService,
- */    protected router: Router,
+    private loginHttpService: LoginHttpService,
+    private shopService:ShopService,
+    protected router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.form = this.buildForm;
@@ -42,32 +46,26 @@ export class LoginComponent {
     }
   }
 
-  submitLogin() {
-    /* this.form.markAllAsTouched();
+   submitLogin() {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       const data = this.form.value;
       this.loginHttpService.login(data).subscribe({
         next: () => {
           this.router.navigateByUrl('/core/super-admin/admin-list');
-          this.getProfile();
-        }}
-      );
-    } */
+          this.getUser()
+        },
+      });
+    }
   }
 
-  getProfile() {
-/*     this.loginHttpService.getProfile().subscribe();
- */  }
 
-  /* onSubmit() {
-  if (this.form.valid) {
-    const data = this.form.value;
-    this.createAdmin(data);
-    this.form.reset();
-  } else {
-    alert('El formulario no es valido');
+
+  getUser() {
+    this.user = this.loginHttpService.getUser();
   }
-} */
+ 
+ 
 
   get passwordField(): AbstractControl {
     return this.form.controls['password'];

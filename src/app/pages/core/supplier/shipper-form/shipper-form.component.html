@@ -1,101 +1,68 @@
 <div class="container">
     <div class="nav">
-        <app-nav-bar></app-nav-bar>
+      <app-nav-bar></app-nav-bar>
     </div>
     <div class="main">
-
-        <div class="register-container">
-            <p-card [style]="{ width: '800px' }">
-        
-                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <!-- Formulario -->
-                    <div style="width: 55%; text-align: center;">
-                        <form [formGroup]="form"
-                            style="width: 100%">
-                            <div class="flex flex-column gap-2">
-                                <label for="name" class="font-bold block mb-2">Nombre: </label>
-                                <input pInputText id="name" aria-describedby="username-help" formControlName="name" />
-                                <small id="username-help">
-                                    Ingrese su nombre y apellido
-                                </small>
-                                <div *ngIf="nameField.errors && nameField.touched">
-                                    <span *ngIf="nameField.errors['minlength']" style="color: red;">El campo debe contener 5
-                                        caracteres o más</span>
-                                    <span *ngIf="nameField.errors['required']" style="color: red;">El campo es requerido</span>
-                                </div>
-                            </div><br>
-        
-                            <div class="flex flex-column gap-2">
-                                <label for="email" class="font-bold block mb-2">Email: </label>
-                                <input pInputText id="email" aria-describedby="username-help" formControlName="email" />
-                                <small id="username-help">
-                                    Ingrese su correo electrónico
-                                </small>
-                                <div *ngIf="emailField.errors && emailField.touched">
-                                    <span *ngIf="emailField.errors['email']" style="color: red;">El campo debe contener un
-                                        correo electrónico válido</span>
-                                    <span *ngIf="emailField.errors['required']" style="color: red;">El campo es requerido</span>
-                                </div>
-                            </div><br>
-        
-                            <div class="p-field">
-                                <label for="password">Contraseña</label>
-                                <br>
-                                <p-password [toggleMask]="true" formControlName="password" name="password" required>
-                                    <ng-template pTemplate="footer">
-                                        <p class="mt-2">Debe contener</p>
-                                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                                            <li>Al menos una minúscula</li>
-                                            <li>Al menos una mayúscula</li>
-                                            <li>Al menos un número</li>
-                                            <li>Mínimo 8 caracteres</li>
-                                        </ul>
-                                    </ng-template>
-                                </p-password>
-                            </div>
-                            <br>
-                            <div class="p-field">
-                                <button pButton type="submit" label="Registrarse"></button>
-                            </div>
-                        </form>
-                    </div>
-        
+      <div class="container col-11" style="display: flex; justify-content: center; align-items: center;">
+        <div class="main" style="display: flex; justify-content: center; align-items: center;">
+          <p-card [style]="{ width: '900px' }" class="my-card"> 
+            <ng-template pTemplate="header">
+              <br>
+              <div style="text-align: center; width: 100%; font-weight: bold; font-size: 2rem; color: rgb(0, 0, 0);">
+                Registro del empleado
+              </div>
+            </ng-template>
+  
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+              <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+                <div class="flex flex-column gap-2">
+                  <label for="name" class="label">Nombre:</label>
+                  <input placeholder="Ingrese su nombre y apellido" pInputText id="name" aria-describedby="username-help" formControlName="name" class="input"/>
+                  <div *ngIf="nameField.errors && nameField.touched" class="error-message">
+                    <span *ngIf="nameField.errors['minlength']">El campo debe contener 5 caracteres o más</span>
+                    <span *ngIf="nameField.errors['required']">El campo es requerido</span>
+                  </div>
+                </div><br>
+  
+                <div class="flex flex-column gap-2">
+                  <label for="email" class="label">Email:</label>
+                  <input placeholder="Ingrese su correo electrónico" pInputText id="email" aria-describedby="username-help" formControlName="email" class="input"/>
+                  <div *ngIf="emailField.errors && emailField.touched" class="error-message">
+                    <span *ngIf="emailField.errors['email']">El campo debe contener un correo electrónico válido</span>
+                    <span *ngIf="emailField.errors['required']">El campo es requerido</span>
+                  </div>
+                </div><br>
+  
+                <label for="password" class="label">Contraseña:</label>
+                <br><br>
+                    <p-password formControlName="password" [feedback]="false" [toggleMask]="true"   class="my-password" placeholder="Ingrese su contraseña">
+                    </p-password>
+                    <div *ngIf="passwordField.errors && passwordField.touched" class="error-message">
+                    <span *ngIf="passwordField.errors['pattern']">El campo debe contener números y letras</span>
+                    <span *ngIf="passwordField.errors['required']">El campo es requerido</span>
                 </div>
-        
-            </p-card>
-        </div>
+                <br><br>
 
-        
-       <!-- <div class="customer-form">
-            <form [formGroup]="shipperForm">
-        <div class="flex flex-column gap-2">
-            <label for="name">Nombre:</label>
-            <input 
-                pInputText 
-                id="name" 
-                aria-describedby="username-help" 
-                formControlName="name" />
+                <div class="flex flex-column gap-2">
+                  <label for="role" class="label">Rol:</label>
+                  <p-dropdown [options]="roles" placeholder="Seleccione un rol" class="my-rol dropdown"></p-dropdown>
+                  <div *ngIf="roleField.errors && roleField.touched" class="error-message">
+                    <span *ngIf="roleField.errors['required']">El campo es requerido</span>
+                  </div>
+                </div><br>
+  
+                <div style="display: flex; justify-content: center; margin-top: 10px;">
+                  <p-button label="Crear repartidor" type="submit" styleClass="p-button-success" [rounded]="true" [outlined]="true" [text]="true"></p-button>
+                </div>
+              </form>
+  
+              <div class="image-container">
+                <img src="/assets/images/Repartidor.jpeg" alt="Descripción de la imagen" class="image">
+              </div>
+            </div>
+          </p-card>
         </div>
-        <div class="flex flex-column gap-2">
-            <label for="email">Email:</label>
-            <input 
-                pInputText 
-                id="email" 
-                aria-describedby="email" 
-                formControlName="email" />
-        </div>
-        <div class="flex flex-column gap-2">
-            <label for="password">Contraseña:</label>
-            <input 
-                pInputText 
-                id="password" 
-                aria-describedby="password" 
-                formControlName="password" />
-        </div>
-        <br>
-            <p-button (onClick)="validateForm" icon="pi pi-check" type="submit" severity="primary" label="Crear nuevo repartidor" />
-        </form>
-    </div> -->
-
+      </div>
     </div>
-</div>
+  </div>
+  
