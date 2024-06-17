@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserDeleteModel } from '../../../../models/user.model';
@@ -6,6 +6,7 @@ import { catchError, of } from 'rxjs';
 import { AdminHttpService } from '../../../../http-services/admin-http.service';
 import { CataloguesHttpService } from '../../../../http-services';
 import { LoginHttpService } from '../../../../http-services/login-http.service';
+import { SupplierHttpService } from '../../../../http-services/supplier-http.service';
 
 @Component({
   selector: 'app-shipper-list',
@@ -13,8 +14,7 @@ import { LoginHttpService } from '../../../../http-services/login-http.service';
   styleUrl: './shipper-list.component.scss'
 })
 
-export class ShipperListComponent {
-    supplier:any;
+export class ShipperListComponent implements OnInit{
     user:any;
     catalogue: any = [];
     shippers: any = [];
@@ -25,21 +25,17 @@ export class ShipperListComponent {
     constructor(private shipperHttpService:ShipperHttpService,
                 private confirmationService: ConfirmationService,
                 private messageService: MessageService,
-                private loginHttpService:LoginHttpService){
+                private loginHttpService:LoginHttpService,
+              private supplierHttpService:SupplierHttpService){
       this.user = this.loginHttpService.getUser()
-      this.findAll();
     }
     
     ngOnInit(): void {
-      this.shipperHttpService.findOne(this.user.user.sub).subscribe(
-        response => {
-          this.supplier = response.data
-          console.log(this.supplier)
-    })
+    this.findAll();
     }
 
     findAll() {
-      this.shipperHttpService.findShipperBySupplier('8485cb24-5046-4f8b-a9db-7462c3e1ff67').subscribe(response => {
+      this.shipperHttpService.findShipperBySupplier(this.user.user.sub).subscribe(response => {
         this.shippers = response.data;
         this.filteredShippers = this.shippers;
         console.log(response)

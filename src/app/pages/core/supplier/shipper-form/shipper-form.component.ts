@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { CataloguesHttpService } from '../../../../http-services';
 import { ShipperHttpService } from '../../../../http-services/shipper-http.service';
 import { ShipperFormModel } from '../../../../models/user.model';
+import { LoginHttpService } from '../../../../http-services/login-http.service';
 
 @Component({
   selector: 'app-shipper-form',
@@ -19,6 +20,7 @@ import { ShipperFormModel } from '../../../../models/user.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShipperFormComponent  {
+  supplier:any;
   form: FormGroup;
   userForm: FormGroup;
   shippers: any = [];
@@ -29,13 +31,27 @@ export class ShipperFormComponent  {
     private formBuilder: FormBuilder,
     private shipperHttpService: ShipperHttpService,
     protected router: Router, private activatedRoute: ActivatedRoute,
-    private cataloguesHttpService:CataloguesHttpService
+    private cataloguesHttpService:CataloguesHttpService,
+    private loginHttpService:LoginHttpService
   ) {
+    this.supplier = this.loginHttpService.getUser()
     this.findRoleByName();
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
     this.roles = [{ label: 'Repartidor'}];
+    console.log(this.supplier)
   }
+
+  ngOnInit(): void {
+    this.findAll();
+    }
+
+    findAll() {
+      this.shipperHttpService.findShipperBySupplier(this.supplier.user.sub).subscribe(response => {
+        this.shippers = response.data;
+        console.log(this.shippers)
+      });
+    }
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
