@@ -58,6 +58,13 @@ export class NavBarComponent implements OnInit {
 
   items = [
     {
+      icon: 'pi pi-home',
+      label: 'Inicio',
+      activeSubmenu: false,
+      submenu: [{ label: 'Inicio', route:'/core/home' }],
+      codes: [1,2,3,4,5]
+    },
+    {
       icon: 'pi pi-users',
       label: 'Empleados',
       activeSubmenu: false,
