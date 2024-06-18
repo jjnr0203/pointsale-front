@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
-import { InputTextModule } from 'primeng/inputtext';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -13,53 +13,54 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class SupplierFormComponent {
   supplier: FormGroup;
-  suppliers: SupplierModel[]= [];
-  result: number = 0;
+  form: FormGroup;
+  suppliers: any = [];
+  shop: any;
   
   constructor(
-    private suppliersHttpService: SupplierHttpService,
     private formBuilder: FormBuilder,
+    private suppliersHttpService: SupplierHttpService,
+    protected router:Router, 
+    private activatedRoute:ActivatedRoute,
   ){  
     this.supplier = this.supplierForm();
+    this.form = this.buildForm();
   }
+
+  buildForm():FormGroup{
+    return this.formBuilder.group({
+      user:this.supplier,
+      shop: ['55d00e3c-c9b5-4505-8ce5-5fd75655dde3', Validators.required]
+    })
+  }
+
 
   supplierForm(): FormGroup{
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
-      
-      //shippers: [[this.currentShipper], [Validators.required]]
+      password:['',[Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]],
+      nameUser: ['', [Validators.required, Validators.minLength(5)]],
+      emailUser:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
     })
   }
 
-  onSubmit(){
-    if (this.supplier.valid) {
-      const supplierData = this.supplier.value;
-      this.suppliersHttpService.createSupplier(supplierData).subscribe(
-        response => {
-          this.suppliers.push(response);
-          alert('Provedor creado exitosamente');
-          this.supplier.reset();
-          this.suppliers
-        },
-        (error: any) => {
-          console.error('Error al crear el provedor:', error);
-          alert('Error al crear el provedor');
-        }
-      )
-    } else {
-      const data = this.supplier.value;
-      this.supplier.markAllAsTouched()
-      alert('El formulario no es valido');
-    }
+  create(supplier:any){
+    return this.suppliersHttpService.createSupplier(supplier).subscribe();
   }
 
-  updateSupplier(){
-    const name = this.supplier.controls['name'].value;
-    const phone = this.supplier.controls['phone'].value;
-    const email = this.supplier.controls['email'].value;
-    this.result = name * phone * email;
+  onSubmit(){
+    if (this.form.valid) {
+      const supplierData = this.form.value;
+      console.log(supplierData)
+      this.create(supplierData);
+      this.form.reset();
+
+      alert("Proveedor creado con éxito.")
+    } else {
+      alert('El formulario no es valido');
+    }
   }
 
   get nameField(): AbstractControl{
@@ -71,10 +72,13 @@ export class SupplierFormComponent {
   get emailField(): AbstractControl{
     return this.supplier.controls['email'];
   }
-  get idShipperField(): AbstractControl{
-    return this.supplier.controls['idShop'];
+  get nameUserField(): AbstractControl{
+    return this.supplier.controls['nameUser'];
   }
-
+  get emailUserField(): AbstractControl{
+    return this.supplier.controls['emailUser'];
+  }
+  get passwordField(): AbstractControl{
+    return this.supplier.controls['password'];
+  }
 }
-
-

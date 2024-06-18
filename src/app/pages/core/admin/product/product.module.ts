@@ -5,7 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { SharedAppModule } from '../../../shared/shared-app.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
@@ -14,6 +14,8 @@ import { ImageModule } from 'primeng/image';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { OrderListModule } from 'primeng/orderlist';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 
 @NgModule({
@@ -33,7 +35,11 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     ImageModule,
     DropdownModule,
     InputGroupModule,
-    InputGroupAddonModule 
+    InputGroupAddonModule,
+    OrderListModule,
+    FormsModule,
+    FloatLabelModule,
+
   ]
 })
 export class ProductModule { }

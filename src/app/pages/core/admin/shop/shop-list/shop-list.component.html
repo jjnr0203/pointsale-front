@@ -1,1 +1,40 @@
-<p>shop-list works!</p>
+<div class="container">
+    <div class="nav">
+        <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+        <p-table class="col-11" [tableStyle]="{ 'min-width': '50rem'}" styleClass="p-datatable-striped"
+            [paginator]="true" [rows]="5" [value]="filteredShops">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    <h2 class="table-title">Lista de Tiendas</h2>
+                    <div class="search-bar">
+                        <input type="text" pInputText placeholder="Buscar..." [(ngModel)]="searchTerm"
+                            (ngModelChange)="filterShops()"/>
+                        <i class="pi pi-search search-icon"></i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:33%">Nombre</th>
+                    <th style="width:34%">Ruc</th>
+                    <th style="width:33%">Dirección</th>
+                    <th style="width:33%">Telefóno</th>
+                    <th style="width:33%">Correo Electrónico</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-shop>
+                <tr>
+                    <td>{{shop.user.name}}</td>
+                    <td>{{shop.user.ruc}}</td>
+                    <td>{{shop.user.address}}</td>
+                    <td>{{shop.user.phone}}</td>
+                    <td>{{shop.user.email}}</td>
+                    <td><p-button label="Delete" severity="danger" size="small" icon="pi pi-trash"
+                            (onClick)="deleteShop(shop)" /></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

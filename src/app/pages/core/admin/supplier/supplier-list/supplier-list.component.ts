@@ -8,8 +8,9 @@ import { SupplierModel } from '../../../../../models/supplier.model';
   styleUrl: './supplier-list.component.scss'
 })
 export class SupplierListComponent {
-
   suppliers: any = [];
+  filteredSuppliers: any = [];
+  searchTerm: string = '';
 
   constructor(private supplierHttpService: SupplierHttpService) {
     this.findAll();
@@ -22,17 +23,28 @@ export class SupplierListComponent {
    })
   }
 
+  filterSuppliers() {
+    if (this.searchTerm) {
+      this.filteredSuppliers = this.suppliers.filter((supplier: any) =>
+        supplier.user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        supplier.user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredSuppliers = this.suppliers;
+    }
+  }
+
   //createSupplier(supplier: SupplierModel){
     //this.supplierHttpService.createSupplier(supplier).subscribe(response =>{
       //console.log(response)
     //})
   //}
 
-  finOneShupplier(id:string){
+  /* finOneShupplier(id:string){
     this.supplierHttpService.finOneShupplier(id).subscribe(response => {
       this.suppliers = response;
     })
-  }
+  } */
 
   //updateSupplier(id:string, supplier:SupplierModel){
     //this.supplierHttpService.updateSupplier(id, supplier). subscribe(response => {

@@ -25,7 +25,7 @@ export class SupplierHttpService{
         return this.httpClient.get<ResponseModel>(`${this.url}/${id}`);
     }
 
-    finOneShupplier(id:string){
+    finOneSupplier(id:string){
         return this.httpClient.get<SupplierModel>(`${this.url}/${id}`);
     }
 

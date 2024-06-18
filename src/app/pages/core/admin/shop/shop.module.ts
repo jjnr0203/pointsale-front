@@ -5,11 +5,13 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ShopFormComponent } from './shop-form/shop-form.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { SharedAppModule } from '../../../shared/shared-app.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ImageModule } from 'primeng/image';
+import { OrderListModule } from 'primeng/orderlist';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { ImageModule } from 'primeng/image';
     CardModule,
     ButtonModule,
     ReactiveFormsModule,
-    ImageModule
+    ImageModule,
+    FormsModule,
+    OrderListModule,
+    FloatLabelModule
   ]
 })
 export class ShopModule { }

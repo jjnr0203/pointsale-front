@@ -16,7 +16,7 @@ export class ShopFormComponent {
   user: any;
 
   constructor(
-    private shopsHttpService: ShopHttpService,
+    private shopHttpService: ShopHttpService,
     private formBuilder:FormBuilder,
     private loginHttpService:LoginHttpService
   ){
@@ -37,8 +37,9 @@ export class ShopFormComponent {
   }
 
     onSubmit(){
-        this.shopsHttpService.createShop(this.shop.value).subscribe(
-          response => {console.log(response)
+        this.shopHttpService.createShop(this.shop.value).subscribe(
+          response => {
+            console.log(response)
           },
           (error: any) => {
             console.error('Error', error)

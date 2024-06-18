@@ -52,6 +52,46 @@
             }
             }
         </div>
+        <h2 class="form-title">Registro de Usuario</h2>
+        <div class="field">
+          <label for="nameUser" class="block">Nombre</label>
+          <input
+          type="text"
+          pInputText
+          placeholder="Nombre"
+          formControlName="nameUser"/>
+          @if(nameUserField.errors){
+            @if (nameUserField.errors['required'] && nameUserField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
+        <div class="field">
+          <label for="emailUser" class="block">Correo Electrónico</label>
+          <input
+          type="email"
+          pInputText
+          placeholder="Correo Electrónico"
+          formControlName="emailUser"/>
+          @if(emailUserField.errors){
+            @if (emailUserField.errors['required'] && emailUserField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
+        <div class="field">
+          <label for="password" class="block">Contraseña</label>
+          <input
+          type="text"
+          pInputText
+          placeholder="Contraseña"
+          formControlName="password"/>
+          @if(passwordField.errors){
+            @if (passwordField.errors['required'] && passwordField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
         <div class="d-grid gap-2 ">
         <p-button (onClick)="onSubmit()" size="small" label="Enviar" [raised]="true" severity="contrast"/>
         </div>

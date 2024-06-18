@@ -8,8 +8,9 @@ import { ProductModel } from '../../../../../models/product.model';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
-
   products: any = [];
+  filteredProducts: any[] = [];
+  searchTerm: string = '';
 
   constructor(private productsHttpService: ProductsHttpService) {
     this.findAll();
@@ -22,16 +23,21 @@ export class ProductListComponent {
     })
   }
 
-  //createProduct(product: ProductModel){
-    ////this.products = response;
-    //})
-  //}
+  filterProducts() {
+    if (this.searchTerm) {
+      this.filteredProducts = this.products.filter((product: any) =>
+        product.user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredProducts = this.products;
+    }
+  }
 
-  findOneProduct(id:string){
+  /* findOneProduct(id:string){
     this.productsHttpService.findOneProduct(id).subscribe(response =>{
       this.products = response;
     })
-  }
+  } */
 
   //updateProduct(id:string,product: ProductModel){
     ////console.log(response);
