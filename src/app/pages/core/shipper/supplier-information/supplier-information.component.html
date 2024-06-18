@@ -4,7 +4,7 @@
     </div>
     <div class="main">
       <div class="flex-container flex flex-wrap">
-        <p-card header="Informacion" subheader="Proveedor" [style]="{ width: '300px' }">
+        <p-card header="Informacion" subheader="Proveedor" [style]="{ width: '300px' }" class="my-card">
           <ng-template pTemplate="footer">
             <div class="flex flex-column gap-2">
               <label for="username">Nombre:</label>
@@ -14,6 +14,7 @@
                 id="username"
                 aria-describedby="username-help"
                 class="input"
+                placeholder="{{shipper.supplier.name}}"
               />
               <small id="username-help">Nombre del proveedor</small>
             </div>
@@ -26,13 +27,26 @@
                 id="username"
                 aria-describedby="username-help"
                 class="input"
+                placeholder="{{shipper.supplier.email}}"
               />
               <small id="username-help">Correo del proveedor</small>
             </div>
             <br>
+            <div class="flex flex-column gap-2">
+              <label for="username">Telefono:</label>
+              <input
+                pInputText
+                [disabled]="true"
+                id="username"
+                aria-describedby="username-help"
+                class="input"
+                placeholder="{{shipper.supplier.phone}}"
+              />
+              <small id="username-help">Contacto del proveedor</small>
+            </div>
           </ng-template>
         </p-card>
-        <p-image src="/assets/images/empleado_image.png" alt="Image" width="250" [preview]="true" />
+        <p-image src="/assets/images/proveedores.jpeg" alt="Image" width="715" [preview]="true" />
       </div>
     </div>
   </div>

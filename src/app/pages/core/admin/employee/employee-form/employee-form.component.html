@@ -14,15 +14,14 @@
           </p-image>
         </div>
 
-        <p-card [style]="{ width: '450px', height: '550px' }" class="my-card">
+        <p-card [style]="{ width: '400px', height: '550px' }" class="my-card">
           <h1>Registro de empleados</h1>
 
           <div class="form-container">
             <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
               <div class="flex flex-column gap-2">
                 <label for="name" class="label">Nombre: </label>
-                <input pInputText id="name" aria-describedby="username-help" formControlName="name" class="input" />
-                <small id="username-help" class="small-text">Ingrese su nombre y apellido</small><br>
+                <input pInputText id="name" aria-describedby="username-help" formControlName="name" class="input" placeholder="Ingrese su nombre y apellido"/>
                 <div *ngIf="nameField.errors && nameField.touched">
                   <span *ngIf="nameField.errors['minlength']" class="error-text">El campo debe contener 5 caracteres o
                     más</span>
@@ -32,31 +31,26 @@
 
               <div class="flex flex-column gap-2">
                 <label for="email" class="label">Email: </label>
-                <input pInputText id="email" aria-describedby="username-help" formControlName="email" class="input" />
-                <small id="username-help" class="small-text">Ingrese su correo electrónico</small>
+                <input pInputText id="email" aria-describedby="username-help" formControlName="email" class="input" placeholder="Ingrese su correo"/>
                 <div *ngIf="emailField.errors && emailField.touched">
                   <span *ngIf="emailField.errors['email']" class="error-text">El campo debe contener un correo
                     electrónico válido</span>
                   <span *ngIf="emailField.errors['required']" class="error-text">El campo es requerido</span>
                 </div>
-              </div><br>
+              </div>
 
               <label for="password" class="label">Password: </label>
-              <p-floatLabel>
-                <p-password formControlName="password" [feedback]="false" class="my-password" />
-                <label for="password" class="input-label"></label>
-              </p-floatLabel>
-              <small id="username-help" class="small-text">Ingrese una contraseña segura</small>
+              <p-password formControlName="password" [feedback]="false" [toggleMask]="true" class="my-password"/>
+              
               <div *ngIf="passwordField.errors && passwordField.touched">
                 <span *ngIf="passwordField.errors['pattern']" class="error-text">El campo debe contener números y
                   letras</span>
                 <span *ngIf="passwordField.errors['required']" class="error-text">El campo es requerido</span>
-              </div><br>
+              </div>
 
               <div class="flex flex-column gap-2">
                 <label for="role" class="label">Rol: </label>
                 <p-dropdown [options]="roles" placeholder="Seleccione un rol" class="my-rol"></p-dropdown>
-                <small id="role-help" class="small-text">Seleccione el rol del usuario</small>
                 <div *ngIf="roleField.errors && roleField.touched">
                   <span *ngIf="roleField.errors['required']" class="error-text">El campo es requerido</span>
                 </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ShipperModel } from '../models/customer.model';
 import { ResponseModel } from '../models/response.model';
 import { ShipperFormModel } from '../models/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class ShipperHttpService {
 
   findShipperBySupplier(supplier:string){
     return this.httpClient.get<ResponseModel>(`${this.url}/${supplier}/supplier`);
+  }
+
+  findShipperBySupplierUserId(userId: string) {
+    return this.httpClient.get<ResponseModel>(`${this.url}/${userId}/user`);
   }
 
   findOne(id: string){

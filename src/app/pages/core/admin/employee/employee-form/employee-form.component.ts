@@ -9,6 +9,7 @@ import { EmployeeHttpService } from '../../../../../http-services/employee-http.
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { CataloguesHttpService } from '../../../../../http-services';
+import { ShopService } from '../../../../../http-services/shop.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -18,18 +19,24 @@ import { CataloguesHttpService } from '../../../../../http-services';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeFormComponent {
+  currentShop:any;
   form: FormGroup;
   userForm: FormGroup;
   employees: any = [];
   roles: any = [];
   catalogue: any = []
 
+
+
   constructor(
     private formBuilder: FormBuilder,
     private employeeHttpService: EmployeeHttpService,
     protected router: Router, private activatedRoute: ActivatedRoute,
-    private cataloguesHttpService:CataloguesHttpService
+    private cataloguesHttpService:CataloguesHttpService,
+    private shopService:ShopService
+
   ) {
+    this.currentShop = this.shopService.getShop()
     this.findRoleByName();
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
@@ -39,7 +46,7 @@ export class EmployeeFormComponent {
   buildForm(): FormGroup {
     return this.formBuilder.group({
       user: this.userForm,
-      shop: ['55d00e3c-c9b5-4505-8ce5-5fd75655dde3', [Validators.required]]
+      shop: [this.currentShop, [Validators.required]]
     });
   }
 
