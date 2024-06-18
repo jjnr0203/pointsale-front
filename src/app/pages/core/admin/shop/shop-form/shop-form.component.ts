@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { ShopModel } from '../../../../../models/shop.model';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
+import { LoginHttpService } from '../../../../../http-services/login-http.service';
 
 @Component({
   selector: 'app-shop-form',
@@ -12,48 +13,38 @@ export class ShopFormComponent {
   shop:FormGroup;
   shops: ShopModel[]= [];
   result: number = 0;
-
+  user: any;
 
   constructor(
     private shopsHttpService: ShopHttpService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private loginHttpService:LoginHttpService
   ){
+    this.user = this.loginHttpService.getUser()
     this.shop = this.formShop()
+    console.log(this.user)
   }
 
   formShop(): FormGroup{
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      ruc: ['',[Validators.required,Validators.maxLength(13), Validators.minLength(13)]],
+      name: ['', [Validators.required]],
+      ruc: ['',[Validators.required]],
       address: ['',[Validators.required]],
-      phone:['',[Validators.required, Validators.maxLength, Validators.minLength(10)]],
-      email:['',[Validators.required, Validators.email]],
-      idUser:['', Validators.required]
+      phone:['',[Validators.required]],
+      email:['',[Validators.required]],
+      user:[this.user.sub,[Validators.required]]
     })
   }
 
-  onSubmit(){
-    if (this.shop.valid) {
-      const shopData = this.shop.value;
-      this.shopsHttpService.createShop(shopData).subscribe(
-        response => {
-          this.shops.push(response);
-          alert('Tienda creada exitosamente');
-          this.shop.reset();
-          this.shops
-          console.log(this.shop)
-        },
-        (error: any) => {
-          console.error('Error al crear la tienda:', error);
-          alert('Error al crear la tienda');
-        }
-      )
-    } else {
-      const data = this.shop.value;
-      this.shop.markAllAsTouched()
-      alert('El formulario no es valido');
-    }
-  }
+    onSubmit(){
+        this.shopsHttpService.createShop(this.shop.value).subscribe(
+          response => {console.log(response)
+          },
+          (error: any) => {
+            console.error('Error', error)
+          }
+        )
+      }
 
   updateShop(){
     const name = this.shop.controls['name'].value;
@@ -76,7 +67,8 @@ export class ShopFormComponent {
   get emailField(): AbstractControl{
     return this.shop.controls['email'];
   }
-  get idUserField(): AbstractControl{
-    return this.shop.controls['idUser'];
+  get userField(): AbstractControl{
+    return this.shop.controls['user'];
   }
+
 }

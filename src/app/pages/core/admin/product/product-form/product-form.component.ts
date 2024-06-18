@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsHttpService } from '../../../../../http-services/products-http.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductModel } from '../../../../../models/product.model';
+import { ShopService } from '../../../../../http-services/shop.service';
 
 @Component({
   selector: 'app-product-form',
@@ -11,13 +12,17 @@ import { ProductModel } from '../../../../../models/product.model';
 export class ProductFormComponent {
   product:FormGroup;
   products: ProductModel[]= [];
+  currentShop: any;
   result: number = 0;
 
+
   constructor (
+    private shopService:ShopService,
     private productsHttpService:ProductsHttpService,
     private formBuilder:FormBuilder
-
+    
   ){
+    this.currentShop = this.shopService.getShop()
     this.product = this.productForm();
   }
 
@@ -27,7 +32,7 @@ export class ProductFormComponent {
       unit: [null, [Validators.required, Validators.minLength(1)]],
       price: [null, [Validators.required]],
       cost: [null, [Validators.required]],
-      idShops: ['esaf18ae1c5se1c8sc1', [Validators.required]]
+      shops: [[this.currentShop], [Validators.required]]
     })
   }
 
@@ -74,10 +79,6 @@ export class ProductFormComponent {
   get costField(): AbstractControl{
     return this.product.controls['cost'];
   }
-  get idShopField(): AbstractControl{
-    return this.product.controls['idShop'];
-  }
-
 }
 
 

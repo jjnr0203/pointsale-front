@@ -8,6 +8,7 @@ import { ShipperFormModel } from '../models/user.model';
   providedIn: 'root'
 })
 export class ShipperHttpService {
+  [x: string]: any;
 
   constructor(private httpClient: HttpClient) { }
   url:string = "http://localhost:3000/shipper";
