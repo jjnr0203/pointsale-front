@@ -19,7 +19,7 @@ import { ShopService } from '../../../../../http-services/shop.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeFormComponent {
-  currentShop:any;
+  currentShop: any;
   form: FormGroup;
   userForm: FormGroup;
   employees: any = [];
@@ -32,15 +32,16 @@ export class EmployeeFormComponent {
     private formBuilder: FormBuilder,
     private employeeHttpService: EmployeeHttpService,
     protected router: Router, private activatedRoute: ActivatedRoute,
-    private cataloguesHttpService:CataloguesHttpService,
-    private shopService:ShopService
+    private cataloguesHttpService: CataloguesHttpService,
+    private shopService: ShopService,
+    private messageService: MessageService,
 
   ) {
     this.currentShop = this.shopService.getShop()
     this.findRoleByName();
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
-    this.roles = [{ label: 'Empleado'}];
+    this.roles = [{ label: 'Empleado' }];
   }
 
   buildForm(): FormGroup {
@@ -63,7 +64,7 @@ export class EmployeeFormComponent {
     return this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5)]],
       email: [null, [Validators.required, Validators.email]],
-      password: [null,[Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),]],
+      password: [null, [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/),]],
       role: [null, [Validators.required]],
     })
   }
@@ -72,17 +73,25 @@ export class EmployeeFormComponent {
     return this.employeeHttpService.create(employee).subscribe();
   }
 
-  onSubmit(){
-      if (this.form.valid) {
-        const data = this.form.value;
-        console.log(data)
-        this.createEmployee(data);
-        this.form.reset();
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Empleado creado', detail: 'El empleado ha sido creado exitosamente.' });
+  }
 
-        alert("Creado")
-      } else {
-        alert('El formulario no es valido');
-      }
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.' });
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      const data = this.form.value;
+      console.log(data)
+      this.createEmployee(data);
+      this.form.reset();
+
+      this.showSuccess()
+    } else {
+      this.showError()
+    }
   }
 
   get nameField(): AbstractControl {
