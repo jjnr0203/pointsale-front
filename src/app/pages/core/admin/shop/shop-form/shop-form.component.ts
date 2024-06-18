@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { ShopModel } from '../../../../../models/shop.model';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
+import { LoginHttpService } from '../../../../../http-services/login-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-form',
@@ -12,48 +14,44 @@ export class ShopFormComponent {
   shop:FormGroup;
   shops: ShopModel[]= [];
   result: number = 0;
-
+  user: any;
 
   constructor(
-    private shopsHttpService: ShopHttpService,
-    private formBuilder:FormBuilder
+    private shopHttpService: ShopHttpService,
+    private formBuilder:FormBuilder,
+    private loginHttpService:LoginHttpService,
+    private router: Router
   ){
+    this.user = this.loginHttpService.getUser()
     this.shop = this.formShop()
+    console.log(this.user)
   }
 
   formShop(): FormGroup{
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      ruc: ['',[Validators.required,Validators.maxLength(13), Validators.minLength(13)]],
+      ruc: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       address: ['',[Validators.required]],
-      phone:['',[Validators.required, Validators.maxLength, Validators.minLength(10)]],
-      email:['',[Validators.required, Validators.email]],
-      idUser:['', Validators.required]
+      phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
+      user:[this.user.sub,[Validators.required]]
     })
   }
 
-  onSubmit(){
-    if (this.shop.valid) {
-      const shopData = this.shop.value;
-      this.shopsHttpService.createShop(shopData).subscribe(
-        response => {
-          this.shops.push(response);
-          alert('Tienda creada exitosamente');
-          this.shop.reset();
-          this.shops
-          console.log(this.shop)
-        },
-        (error: any) => {
-          console.error('Error al crear la tienda:', error);
-          alert('Error al crear la tienda');
-        }
-      )
-    } else {
-      const data = this.shop.value;
-      this.shop.markAllAsTouched()
-      alert('El formulario no es valido');
-    }
-  }
+    onSubmit(){
+        this.shopHttpService.createShop(this.shop.value).subscribe(
+          response => {
+            this.router.navigateByUrl('/core/admin/shop/shop-list');
+            alert('Tienda creada exitosamente');
+            console.log(response)
+          },
+          (error: any) => {
+            this.shop.markAllAsTouched()
+            console.error('Error al crear la tienda:', error);
+            alert('Error al crear la tienda');
+          }
+        )
+      }
 
   updateShop(){
     const name = this.shop.controls['name'].value;
@@ -76,7 +74,8 @@ export class ShopFormComponent {
   get emailField(): AbstractControl{
     return this.shop.controls['email'];
   }
-  get idUserField(): AbstractControl{
-    return this.shop.controls['idUser'];
+  get userField(): AbstractControl{
+    return this.shop.controls['user'];
   }
+
 }

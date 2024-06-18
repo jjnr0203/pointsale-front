@@ -1,1 +1,38 @@
-<p>product-list works!</p>
+<div class="container">
+    <div class="nav">
+        <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
+        <p-table class="col-11" [tableStyle]="{ 'min-width': '50rem'}" styleClass="p-datatable-striped"
+            [paginator]="true" [rows]="5" [value]="filteredProducts">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    <h2 class="table-title">Lista de Productos</h2>
+                    <div class="search-bar">
+                        <input type="text" pInputText placeholder="Buscar..." [(ngModel)]="searchTerm"
+                            (ngModelChange)="filterProducts()"/>
+                        <i class="pi pi-search search-icon"></i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:33%">Nombre</th>
+                    <th style="width:34%">Unidad</th>
+                    <th style="width:33%">Precio</th>
+                    <th style="width:33%">Costo</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-items>
+                <tr>
+                    <td>{{items.name}}</td>
+                    <td>{{items.unit}}</td>
+                    <td>{{items.price}}</td>
+                    <td>{{items.cost}}</td>
+                    <td><p-button label="Delete" severity="danger" size="small" icon="pi pi-trash"
+                            (onClick)="deleteProduct(items)" /></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

@@ -8,7 +8,6 @@
         <h2 class="form-title">Registro de Proveedor</h2>
       <form [formGroup]="supplier">
         <div class="field">
-          <label for="name" class="block" >Nombre</label>
           <input
           type="text"
           pInputText
@@ -24,7 +23,6 @@
           }
         </div>
         <div class="field">
-          <label for="phone" class="block">Teléfono</label>
           <input
           type="number"
           pInputText
@@ -40,7 +38,6 @@
             }
         </div>
         <div class="field">
-          <label for="email" class="block">Correo Eléctronico</label>
           <input
           type="email"
           pInputText
@@ -52,16 +49,40 @@
             }
             }
         </div>
+        <h2 class="form-title">Credenciales de Usuario</h2>
         <div class="field">
-          <label for="idShipper" class="block">Id:</label>
           <input
           type="text"
           pInputText
-          placeholder="Id"
-          formControlName="idShipper"/>
-          @if(emailField.errors){
-            @if (emailField.errors['required'] && emailField.touched){
-              <small style="color: red;">El campo id es requerido</small>
+          placeholder="Nombre"
+          formControlName="nameUser"/>
+          @if(nameUserField.errors){
+            @if (nameUserField.errors['required'] && nameUserField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
+        <div class="field">
+          <input
+          type="email"
+          pInputText
+          placeholder="Correo Electrónico"
+          formControlName="emailUser"/>
+          @if(emailUserField.errors){
+            @if (emailUserField.errors['required'] && emailUserField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
+            }
+            }
+        </div>
+        <div class="field">
+          <input
+          type="text"
+          pInputText
+          placeholder="Contraseña"
+          formControlName="password"/>
+          @if(passwordField.errors){
+            @if (passwordField.errors['required'] && passwordField.touched){
+              <small style="color: red;">El campo correo eléctronico es requerido</small>
             }
             }
         </div>

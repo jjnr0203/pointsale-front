@@ -8,12 +8,14 @@ import { SharedAppModule } from '../../../shared/shared-app.module';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
+import { OrderListModule } from 'primeng/orderlist';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 
 @NgModule({
@@ -33,8 +35,10 @@ import { InputTextModule } from 'primeng/inputtext';
     GalleriaModule,
     InputGroupModule,
     InputGroupAddonModule, 
-    InputTextModule 
-    
+    InputTextModule,
+    FormsModule,
+    OrderListModule,
+    FloatLabelModule
   ]
 })
 export class SupplierModule { }

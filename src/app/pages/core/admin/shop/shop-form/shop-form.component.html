@@ -6,7 +6,7 @@
     <div class="shop-form">
       <p-card styleClass="form" class="flex justify-content-center" [style]="{ width: '450px' }">
         <h2 class="form-title">Registro de Tiendas</h2>
-      <form [formGroup]="shop">
+      <form [formGroup]="shop"> 
         <div class="field">
           <label for="name" class="block" >Nombre</label>
           <input
@@ -26,7 +26,7 @@
         <div class="field">
           <label for="ruc" class="block">Ruc:</label>
           <input
-          type="number"
+          type="text"
           pInputText
           placeholder="Ruc"
           formControlName="ruc"/>
@@ -35,7 +35,10 @@
               <small style="color: red;">El campo ruc es requerido</small>
             }
             @if (rucField.errors['minlength']){
-              <small class="alert-validation" style="color: red;">Minimo de unidad es 1</small>
+              <small class="alert-validation" style="color: red;">Minimo de unidad es 10</small>
+            }
+            @if (rucField.errors['maxlength']){
+              <small class="alert-validation" style="color: red;">Maximo de unidad es 10</small>
             }
             }
         </div>
@@ -55,7 +58,7 @@
         <div class="field">
           <label for="phone" class="block">Telefóno:</label>
           <input
-          type="number"
+          type="text"
           pInputText
           placeholder="Telefóno"
           formControlName="phone"/>
@@ -76,23 +79,14 @@
             @if (emailField.errors['required'] && emailField.touched){
               <small style="color: red;">El campo correo electrónico es requerido</small>
             }
-            }
-        </div>
-        <div class="field">
-          <label for="idUser" class="block">Id:</label>
-          <input
-          type="text"
-          pInputText
-          placeholder="Id"
-          formControlName="idUser"/>
-          @if(idUserField.errors){
-            @if (idUserField.errors['required'] && idUserField.touched){
-              <small style="color: red;">El campo id es requerido</small>
+            @if (emailField.errors['email'] && emailField.touched){
+              <small style="color: red;">El campo correo electrónico es requerido</small>
             }
             }
         </div>
+        <br>
         <div class="d-grid gap-2 ">
-        <p-button (onClick)="onSubmit()" size="small" label="Enviar" [raised]="true" severity="contrast"/>
+        <p-button (click)="onSubmit()" type="submit" size="small" label="Enviar" [raised]="true" severity="contrast"/>
         </div>
       </form>
     </p-card>

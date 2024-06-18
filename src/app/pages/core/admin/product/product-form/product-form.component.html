@@ -61,20 +61,7 @@
           formControlName="cost"/>
           @if(costField.errors){
             @if (costField.errors['required'] && costField.touched){
-              <small style="color: red;">El campo id es requerido</small>
-            }
-            }
-        </div>
-        <div class="field">
-          <label for="idShops" class="block">Id:</label>
-          <input
-          type="text"
-          pInputText
-          placeholder="Id"
-          formControlName="idShops"/>
-          @if(costField.errors){
-            @if (costField.errors['required'] && costField.touched){
-              <small style="color: red;">El campo id es requerido</small>
+              <small style="color: red;">El campo es requerido</small>
             }
             }
         </div>
