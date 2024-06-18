@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShopService } from '../../../../../http-services/shop.service';
 
 @Component({
   selector: 'app-supplier-form',
@@ -10,75 +11,77 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './supplier-form.component.scss'
 })
 export class SupplierFormComponent {
-  supplier: FormGroup;
   form: FormGroup;
+  currentShop: any;
   suppliers: any = [];
   shop: any;
   
+  userForm:FormGroup;
   constructor(
+    private shopService:ShopService,
     private formBuilder: FormBuilder,
     private suppliersHttpService: SupplierHttpService,
     protected router:Router, 
     private activatedRoute:ActivatedRoute,
   ){  
-    this.supplier = this.supplierForm();
+    this.currentShop = this.shopService.getShop(),
+    this.userForm = this.buildUserForm();
     this.form = this.buildForm();
   }
 
   buildForm():FormGroup{
     return this.formBuilder.group({
-      user:this.supplier,
-      shop: ['55d00e3c-c9b5-4505-8ce5-5fd75655dde3', Validators.required]
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
+      user:this.userForm,
+      shops: [[this.currentShop], Validators.required]
     })
   }
 
 
-  supplierForm(): FormGroup{
+  buildUserForm(): FormGroup{
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
       password:['',[Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]],
-      nameUser: ['', [Validators.required, Validators.minLength(5)]],
-      emailUser:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
+      role:['0fe7b7ef-d347-4fa9-98f4-0b27f962c28d']
     })
   }
 
   create(supplier:any){
-    return this.suppliersHttpService.createSupplier(supplier).subscribe();
+    return this.suppliersHttpService.createSupplier(supplier).subscribe(
+      response => console.log(response)
+    );
   }
 
   onSubmit(){
-    if (this.form.valid) {
-      const supplierData = this.form.value;
-      console.log(supplierData)
-      this.create(supplierData);
-      this.form.reset();
-
+    if (this.form.valid) { 
+      this.create(this.form.value);
       alert("Proveedor creado con éxito.")
       this.router.navigateByUrl('/core/admin/supplier/supplier-list');
     } else {
-      this.supplier.markAllAsTouched();
+      this.form.markAllAsTouched();
       alert('El formulario no es valido');
     }
   }
 
   get nameField(): AbstractControl{
-    return this.supplier.controls['name'];
+    return this.form.controls['name'];
   }
   get phoneField(): AbstractControl{
-    return this.supplier.controls['phone'];
+    return this.form.controls['phone'];
   }
   get emailField(): AbstractControl{
-    return this.supplier.controls['email'];
+    return this.form.controls['email'];
   }
   get nameUserField(): AbstractControl{
-    return this.supplier.controls['nameUser'];
+    return this.userForm.controls['name'];
   }
   get emailUserField(): AbstractControl{
-    return this.supplier.controls['emailUser'];
+    return this.userForm.controls['email'];
   }
   get passwordField(): AbstractControl{
-    return this.supplier.controls['password'];
+    return this.userForm.controls['password'];
   }
 }

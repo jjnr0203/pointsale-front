@@ -12,8 +12,8 @@ export class SupplierHttpService{
     constructor(private readonly httpClient:HttpClient){}
     url:string = "http://localhost:3000/suppliers";
 
-    findAll():Observable<SupplierModel[]>{
-        return this.httpClient.get<SupplierModel[]>(`${this.url}`);
+    findAll(shopID:string){
+        return this.httpClient.get<ResponseModel>(`${this.url}/${shopID}/shop`);
         
     }
 
@@ -29,8 +29,8 @@ export class SupplierHttpService{
         return this.httpClient.get<SupplierModel>(`${this.url}/${id}`);
     }
 
-    createSupplier(supplier: SupplierModel){
-        return this.httpClient.post<SupplierModel>(`${this.url}`, supplier);
+    createSupplier(supplier: any){
+        return this.httpClient.post(`${this.url}`, supplier);
     }
 
     updateSupplier(id:string, supplier:SupplierModel){
