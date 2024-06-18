@@ -20,8 +20,8 @@ export class ShopFormComponent {
     private formBuilder:FormBuilder,
     private loginHttpService:LoginHttpService
   ){
-    this.shop = this.formShop()
     this.user = this.loginHttpService.getUser()
+    this.shop = this.formShop()
     console.log(this.user)
   }
 
@@ -32,35 +32,11 @@ export class ShopFormComponent {
       address: ['',[Validators.required]],
       phone:['',[Validators.required]],
       email:['',[Validators.required]],
-      user:[this.user,[Validators.required]]
+      user:[this.user.sub,[Validators.required]]
     })
   }
 
-  /* onSubmit(){
-    if (this.shop.valid) {
-      const shopData = this.shop.value;
-      this.shopsHttpService.createShop(shopData).subscribe(
-        response => {
-          this.shops.push(response);
-          alert('Tienda creada exitosamente');
-          this.shop.reset();
-          this.shops
-          console.log(this.shop)
-        },
-        (error: any) => {
-          console.error('Error al crear la tienda:', error);
-          alert('Error al crear la tienda');
-        }
-      )
-    } else {
-      const data = this.shop.value;
-      this.shop.markAllAsTouched()
-      alert('El formulario no es valido');
-    }
-  } */
-
     onSubmit(){
-        console.log('Prueba')
         this.shopsHttpService.createShop(this.shop.value).subscribe(
           response => {console.log(response)
           },
