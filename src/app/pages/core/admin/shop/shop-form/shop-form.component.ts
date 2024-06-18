@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { ShopModel } from '../../../../../models/shop.model';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
 import { LoginHttpService } from '../../../../../http-services/login-http.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-form',
@@ -11,22 +11,30 @@ import { Router } from '@angular/router';
   styleUrl: './shop-form.component.scss'
 })
 export class ShopFormComponent {
+  
   shop:FormGroup;
   shops: ShopModel[]= [];
   result: number = 0;
-  user: any;
+  user:any
+  userStorage: any;
 
   constructor(
+    private activatedRoute:ActivatedRoute,
     private shopHttpService: ShopHttpService,
     private formBuilder:FormBuilder,
     private loginHttpService:LoginHttpService,
     private router: Router
   ){
-    this.user = this.loginHttpService.getUser()
+    const idSnapshot= this.activatedRoute.snapshot.params['id']
+    if(idSnapshot && idSnapshot !== '0'){
+      this.user = idSnapshot
+    }else if(idSnapshot && idSnapshot == '0'){
+      this.userStorage = this.loginHttpService.getUser()
+      this.user = this.userStorage.sub
+    }
     this.shop = this.formShop()
-    console.log(this.user)
   }
-
+  
   formShop(): FormGroup{
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -34,15 +42,18 @@ export class ShopFormComponent {
       address: ['',[Validators.required]],
       phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
-      user:[this.user.sub,[Validators.required]]
+      user:[this.user,[Validators.required]]
     })
   }
 
     onSubmit(){
         this.shopHttpService.createShop(this.shop.value).subscribe(
           response => {
-            this.router.navigateByUrl('/core/admin/shop/shop-list');
+           
             alert('Tienda creada exitosamente');
+            this.router.navigateByUrl('/core/admin/shop/shop-list');
+            this.loginHttpService.setShopByUser(this.user)
+            this.shopHttpService.findShopsByUser(this.user)
             console.log(response)
           },
           (error: any) => {

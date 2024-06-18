@@ -117,7 +117,7 @@ export class NavBarComponent implements OnInit {
       icon: 'pi pi-shop',
       label: 'Tiendas',
       activeSubmenu: false,
-      submenu: [{ label: 'Formulario de tiendas', route:'/core/admin/shop/shop-form/:id' }, { label: 'Listado',route:'/core/admin/shop/shop-list'}],
+      submenu: [{ label: 'Formulario de tiendas', route:'/core/admin/shop/shop-form/0' }, { label: 'Listado',route:'/core/admin/shop/shop-list'}],
       codes: [1]
     },
     {

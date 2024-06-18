@@ -63,9 +63,8 @@ export class RegisterComponent {
           const newUser = response.data;
           console.log(newUser)
           this.showSuccess();
-        this.form.reset();
         setTimeout(() => {
-          this.router.navigateByUrl('/auth/login');
+          this.router.navigateByUrl(`/auth/login`);
         }, 1100);
       },
         error: (error) => {
@@ -74,7 +73,7 @@ export class RegisterComponent {
         }
       });
     }
-
+    
     showSuccess() {
       this.messageService.add({ severity: 'success', summary: 'Usuario creado', detail: 'El usuario ha sido creado exitosamente.' });
     }

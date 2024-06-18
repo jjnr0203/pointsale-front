@@ -26,11 +26,11 @@
             </ng-template>
             <ng-template pTemplate="body" let-shop>
                 <tr>
-                    <td>{{shop.user.name}}</td>
-                    <td>{{shop.user.ruc}}</td>
-                    <td>{{shop.user.address}}</td>
-                    <td>{{shop.user.phone}}</td>
-                    <td>{{shop.user.email}}</td>
+                    <td>{{shop.name}}</td>
+                    <td>{{shop.ruc}}</td>
+                    <td>{{shop.address}}</td>
+                    <td>{{shop.phone}}</td>
+                    <td>{{shop.email}}</td>
                     <td><p-button label="Delete" severity="danger" size="small" icon="pi pi-trash"
                             (onClick)="deleteShop(shop)" /></td>
                 </tr>
