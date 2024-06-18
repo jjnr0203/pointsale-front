@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EmployeeHttpService } from '../../../../../http-services/employee-http.service';
 import { catchError, of } from 'rxjs';
 import { UserDeleteModel } from '../../../../../models/user.model';
+import { ShopService } from '../../../../../http-services/shop.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -9,19 +10,24 @@ import { UserDeleteModel } from '../../../../../models/user.model';
   styleUrl: './employee-list.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class EmployeeListComponent {
+export class EmployeeListComponent implements OnInit{
   employees: any = [];
   filteredEmployees: any = [];
   searchTerm: string = '';
+  currentShop:any;
 
-
-  constructor(private employeeHttpService: EmployeeHttpService) {
+  constructor(private employeeHttpService: EmployeeHttpService,
+    private shopService:ShopService
+  ) { 
+    this.currentShop = this.shopService.getShop()
+  }
+  ngOnInit(): void {
     this.findAll();
   }
 
   findAll() {
-    this.employeeHttpService.findEmployeeByShop('55d00e3c-c9b5-4505-8ce5-5fd75655dde3').subscribe(response => {
-      this.employees = response;
+    this.employeeHttpService.findEmployeeByShop(this.currentShop.id).subscribe(response => {
+      this.employees = response.data;
       this.filteredEmployees = response;
     });
   }
