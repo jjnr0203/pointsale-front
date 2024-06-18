@@ -52,7 +52,7 @@ export class LoginComponent {
       const data = this.form.value;
       this.loginHttpService.login(data).subscribe({
         next: () => {
-          this.router.navigateByUrl('/core/super-admin/admin-list');
+          this.router.navigateByUrl('/core/home');
           this.getUser()
         },
       });

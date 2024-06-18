@@ -57,13 +57,13 @@ export class NavBarComponent implements OnInit {
   }
 
   items = [
-    {
+    /* {
       icon: 'pi pi-home',
       label: 'Inicio',
       activeSubmenu: false,
       submenu: [{ label: 'Inicio', route:'/core/home' }],
       codes: [1,2,3,4,5]
-    },
+    }, */
     {
       icon: 'pi pi-users',
       label: 'Empleados',
@@ -87,30 +87,16 @@ export class NavBarComponent implements OnInit {
     },
     {
       icon: 'pi pi-key',
-      label: 'Super administrador',
+      label: 'Administrador',
       activeSubmenu: false,
       submenu: [{ label: 'Lista de administradores',route:'/core/super-admin/admin-list' }],
-      codes: [2]
-    },
-    {
-      icon: 'pi pi-users',
-      label: 'Shipper',
-      activeSubmenu: false,
-      submenu: [{ label: 'Lista de Transportista', route:'/core/admin/shipper/shipper-list' }, { label: 'Lista de Transportista', route:'core/admin/shipper/shipper-list' }],
-      codes: [5]
-    },
-    {
-      icon: 'pi pi-users',
-      label: 'Transportista',
-      activeSubmenu: false,
-      submenu: [{ label: 'Formulario de Transportista', route:'/core/admin/shipper/shipper-form' }, { label: 'Formulario de Transportista', route:'/core/admin/shipper/shipper-form' }],
-      codes: [5]
+      codes: [2,1]
     },
     {
       icon: 'pi pi-inbox',
-      label: 'SUPPLIER',
+      label: 'Proveedor',
       activeSubmenu: false,
-      submenu: [{ label: 'Formulario del Proveedor', route:'/core/admin/supplier/supplier-form/:id' }, { label: 'Listado',route:'/core/admin/supplier/supplier-list'}],
+      submenu: [{ label: 'Formulario del Proveedor', route:'/core/admin/supplier/supplier-form/0' }, { label: 'Listado',route:'/core/admin/supplier/supplier-list'}],
       codes: [1]
     },
     {
@@ -131,7 +117,7 @@ export class NavBarComponent implements OnInit {
       icon: 'pi pi-tags',
       label: 'Producto',
       activeSubmenu: false,
-      submenu: [{ label: 'Formulario de Productos', route:'/core/admin/product/product-form/:id' }, { label: 'Listado',route:'/core/admin/product/product-list'}],
+      submenu: [{ label: 'Formulario de Productos', route:'/core/admin/product/product-form/0' }, { label: 'Listado',route:'/core/admin/product/product-list'}],
       codes: [1]
     },
   ];

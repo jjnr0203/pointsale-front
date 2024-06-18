@@ -4,6 +4,7 @@ import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShopService } from '../../../../../http-services/shop.service';
+import { CataloguesHttpService } from '../../../../../http-services';
 
 @Component({
   selector: 'app-supplier-form',
@@ -15,6 +16,7 @@ export class SupplierFormComponent {
   currentShop: any;
   suppliers: any = [];
   shop: any;
+  catalogue:any
   
   userForm:FormGroup;
   constructor(
@@ -23,10 +25,12 @@ export class SupplierFormComponent {
     private suppliersHttpService: SupplierHttpService,
     protected router:Router, 
     private activatedRoute:ActivatedRoute,
+    private cataloguesHttpService:CataloguesHttpService
   ){  
     this.currentShop = this.shopService.getShop(),
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
+    this.findRoleByName()
   }
 
   buildForm():FormGroup{
@@ -39,13 +43,19 @@ export class SupplierFormComponent {
     })
   }
 
+  findRoleByName() {
+    this.cataloguesHttpService.getRoleByName('SUPPLIER').subscribe(response => { 
+      this.catalogue = response.data[0].id;
+    }); 
+  }
+
 
   buildUserForm(): FormGroup{
     return this.formBuilder.group({
       password:['',[Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]],
       name: ['', [Validators.required, Validators.minLength(5)]],
       email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
-      role:['0fe7b7ef-d347-4fa9-98f4-0b27f962c28d']
+      role:[this.catalogue]
     })
   }
 

@@ -42,7 +42,6 @@ export class ShipperFormComponent  {
     this.userForm = this.buildUserForm();
     this.form = this.buildForm();
     this.roles = [{ label: 'Repartidor'}];
-    console.log(this.supplier)
   }
 
   ngOnInit(): void {
@@ -52,7 +51,6 @@ export class ShipperFormComponent  {
     findAll() {
       this.supplierHttpService.findSupplierByUser(this.supplier.sub).subscribe(response => {
         this.id = response.data;
-        console.log(this.id)
         this.supplierField.setValue(this.id.id)
       });
     }
@@ -95,8 +93,8 @@ export class ShipperFormComponent  {
         const data = this.form.value;
         this.createShipper(data);
         this.form.reset();
-        console.log(data)
         alert("Creado")
+        this.router.navigateByUrl('/core/supplier/shipper-list');
       } else {
         alert('El formulario no es valido');
       }

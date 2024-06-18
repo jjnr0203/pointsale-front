@@ -43,13 +43,13 @@ export class ShipperListComponent implements OnInit{
     }
 
     filterShippers() {
-      if (this.searchTerm) {
+      if (this.searchTerm.trim()) {
         this.filteredShippers = this.shippers.filter((shipper: any) =>
-          shipper.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          shipper.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+          (shipper.user.name.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
+          (shipper.user.email.toLowerCase().includes(this.searchTerm.toLowerCase()))
         );
       } else {
-        this.filteredShippers = this.shippers;
+        this.filteredShippers = this.shippers; 
       }
     }
   

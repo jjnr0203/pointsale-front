@@ -87,8 +87,8 @@ export class EmployeeFormComponent {
       console.log(data)
       this.createEmployee(data);
       this.form.reset();
-
       this.showSuccess()
+      this.router.navigateByUrl('/core/admin/employee/employee-list');
     } else {
       this.showError()
     }
