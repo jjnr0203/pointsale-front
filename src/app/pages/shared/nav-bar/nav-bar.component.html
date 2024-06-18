@@ -6,16 +6,25 @@
         <h5>{{user.username}}</h5>
     </div>
     <div class="second-element">
-        @for(item of items; track item.label){
+        @for(item of filteredItems; track item.label){
         <div class="se-icons" (click)="toggleMenu(item)">
+            @if(!item.submenu){
+            <div class="item">
+                <a routerLink="/">
+                    <i class="{{item.icon}}"></i>
+                    <p>{{item.label}}</p>
+                </a>
+            </div>
+            }@else{
             <div class="item">
                 <i class="{{item.icon}}"></i>
                 <p>{{item.label}}</p>
             </div>
+            }
             @if(item.submenu && item.submenu.length > 0 && item.activeSubmenu){
             <div class="options-container" [ngClass]="item.activeSubmenu ? 'options-container-active':''">
                 @for(subitem of item.submenu; track subitem.label){
-                <div> <a href="">{{subitem.label}}</a></div>
+                <a [routerLink]="subitem.route"><div>{{subitem.label}}</div></a>
                 }
             </div>
             }
@@ -30,7 +39,7 @@
         <div class="menu" [ngClass]="activeShopOptions ? 'menu-show':''">
             <ul>
                 @for(item of shops; track item.id){
-                    <li (click)="selectShop(item)" >{{item.name}}</li>
+                <li (click)="selectShop(item)">{{item.name}}</li>
                 }
             </ul>
         </div>

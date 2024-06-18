@@ -63,6 +63,17 @@
   color: #052C4E;
 }
 
+.item a{
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.item a:hover{
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #052C4E;
+}
+
 .pi {
   font-size: 30px;
 }
@@ -70,15 +81,14 @@
   border-radius: 10px;
   position: relative;
   display: none;
+  a{
+    text-decoration: none;
+    color: #FFFFFF;
+  }
   div{
-   
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
-    a{
-      text-decoration: none;
-      color: #FFFFFF;
-    }
   }
   div:hover{
     background-color: rgba(128, 128, 128, 0.507);

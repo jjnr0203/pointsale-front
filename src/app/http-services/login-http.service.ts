@@ -16,7 +16,11 @@ export class LoginHttpService {
   login(login: LoginFormModel) {
     return this.httpClient.post<ResponseModel>(`${this.url}/login`, login).pipe(
       map((response) => {
-        this.setShopByUser(response.data.user.sub);
+        if(response.data.user.role.code==1){
+          this.setShopByUser(response.data.user.sub);
+        }else if(response.data.user.role.code==3){
+          this.setShopByEmployee(response.data.user.sub)
+        }
         sessionStorage.setItem('user', JSON.stringify(response.data));
         this.getUser()
       })
@@ -36,6 +40,14 @@ export class LoginHttpService {
       .get<ResponseModel>(`http://localhost:3000/shops/${id}/user`)
       .subscribe((response) => {
         sessionStorage.setItem('shop', JSON.stringify(response.data[0]));
+      });
+  }
+  setShopByEmployee(id: string) {
+    this.httpClient
+      .get<ResponseModel>(`http://localhost:3000/employees/${id}/user`)
+      .subscribe((response) => {
+        console.log(response.data)
+        sessionStorage.setItem('shop', JSON.stringify(response.data.shop));
       });
   }
 }
