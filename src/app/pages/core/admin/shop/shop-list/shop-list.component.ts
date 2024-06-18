@@ -1,28 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
 import { ShopModel } from '../../../../../models/shop.model';
+import { LoginHttpService } from '../../../../../http-services/login-http.service';
 
 @Component({
   selector: 'app-shop-list',
   templateUrl: './shop-list.component.html',
   styleUrl: './shop-list.component.scss'
 })
-export class ShopListComponent {
-  shops: any = [];
+export class ShopListComponent implements OnInit {
+  shops: any;
   filteredShops: any = [];
   searchTerm: string = '';
+  user: any;
 
-  constructor(private shopHttpService: ShopHttpService) {
-    this.findAll();
+  constructor(
+    private shopHttpService: ShopHttpService,
+    private loginHttpService: LoginHttpService,
+    
+  ) {
+    this.user = this.loginHttpService.getUser();
+    // this.findAll();
+    console.log(this.user)
+  }
+  ngOnInit(): void {
+    this.shopHttpService
+      .findShopsByUser(this.user.sub)
+      .subscribe((response) => {
+        this.shops = response.data;
+        this.filteredShops= this.shops;
+        console.log(this.shops)
+      });
   }
 
-  findAll(){
+ /*  findAll(){
     this.shopHttpService.findAll().subscribe(response =>{
       this.shops = response;
       console.log(this.shops)
     })
   }
-
+ */
   filterShops() {
     if (this.searchTerm) {
       this.filteredShops = this.shops.filter((shop: any) =>

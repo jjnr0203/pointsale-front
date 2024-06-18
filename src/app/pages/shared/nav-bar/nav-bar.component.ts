@@ -58,6 +58,13 @@ export class NavBarComponent implements OnInit {
 
   items = [
     {
+      icon: 'pi pi-home',
+      label: 'Inicio',
+      activeSubmenu: false,
+      submenu: [{ label: 'Inicio', route:'/core/home' }],
+      codes: [1,2,3,4,5]
+    },
+    {
       icon: 'pi pi-users',
       label: 'Empleados',
       activeSubmenu: false,
@@ -117,7 +124,7 @@ export class NavBarComponent implements OnInit {
       icon: 'pi pi-shop',
       label: 'Tiendas',
       activeSubmenu: false,
-      submenu: [{ label: 'Formulario de tiendas', route:'/core/admin/shop/shop-form/:id' }, { label: 'Listado',route:'/core/admin/shop/shop-list'}],
+      submenu: [{ label: 'Formulario de tiendas', route:'/core/admin/shop/shop-form/0' }, { label: 'Listado',route:'/core/admin/shop/shop-list'}],
       codes: [1]
     },
     {

@@ -24,9 +24,9 @@
             </ng-template>
             <ng-template pTemplate="body" let-supplier>
                 <tr>
-                    <td>{{supplier.user.name}}</td>
-                    <td>{{supplier.user.phone}}</td>
-                    <td>{{supplier.user.email}}</td>
+                    <td>{{supplier.name}}</td>
+                    <td>{{supplier.phone}}</td>
+                    <td>{{supplier.email}}</td>
                     <td><p-button label="Delete" severity="danger" size="small" icon="pi pi-trash"
                             (onClick)="deleteSupplier(supplier)" /></td>
                 </tr>
