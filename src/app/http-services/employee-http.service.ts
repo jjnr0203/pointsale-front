@@ -16,7 +16,7 @@ export class EmployeeHttpService {
   }
 
   findEmployeeByShop(shop:string){
-    return this.httpClient.get(`${this.url}/${shop}`)
+    return this.httpClient.get<ResponseModel>(`${this.url}/${shop}`)
   }
 
   create(employee:EmployeeFormModel){
