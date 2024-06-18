@@ -5,13 +5,11 @@
   
   
 }
-
-
   .form-title {
     color: #050505;
     text-align: center;
-    margin-bottom: -2px;
-    font-size: 22px;
+    margin-bottom: 13px;
+    font-size: 20px;
   }
 
 h1 {
@@ -32,11 +30,11 @@ h1 {
 
   .field {
     color: #2c2c2c;
-    margin-bottom: 9px;
+    margin-bottom: 13px;
 
     input {
       width: 100%;
-      padding: 9px;
+      padding: 8px;
       border-radius: 10px;
       border: 2px solid #000000;
 
@@ -56,7 +54,7 @@ h1 {
       gap: 2rem;
     }
     p-button {
-      margin-top: 0.5rem; 
+      margin-top: -0.2rem; 
     }
   }
 }

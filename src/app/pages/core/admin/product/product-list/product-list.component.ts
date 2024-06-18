@@ -9,16 +9,19 @@ import { ProductModel } from '../../../../../models/product.model';
 })
 export class ProductListComponent {
   products: any = [];
-  filteredProducts: any[] = [];
+  filteredProducts: any = [];
   searchTerm: string = '';
+  confirmOpened: boolean = false; 
 
-  constructor(private productsHttpService: ProductsHttpService) {
-    this.findAll();
+  constructor(
+    private productsHttpService: ProductsHttpService
+  ) {
   }
 
   findAll(){
     this.productsHttpService.findAll().subscribe(response => {
       this.products = response;
+      this.filteredProducts = this.products
       console.log(this.products);
     })
   }

@@ -3,6 +3,7 @@ import { ProductsHttpService } from '../../../../../http-services/products-http.
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductModel } from '../../../../../models/product.model';
 import { ShopService } from '../../../../../http-services/shop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -19,7 +20,8 @@ export class ProductFormComponent {
   constructor (
     private shopService:ShopService,
     private productsHttpService:ProductsHttpService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private router: Router
     
   ){
     this.currentShop = this.shopService.getShop()
@@ -42,7 +44,8 @@ export class ProductFormComponent {
       this.productsHttpService.createProduct(productData).subscribe(
         response => {
           this.products.push(response);
-          alert('Tienda creada exitosamente');
+          alert('Producto creado exitosamente');
+          this.router.navigateByUrl('/core/admin/product/product-list');
           this.product.reset();
           this.products
           console.log(this.products)
@@ -51,9 +54,9 @@ export class ProductFormComponent {
           console.error('Error al crear el producto:', error);
           alert('Error al crear el producto');
         }
+        
       )
     } else {
-      const data = this.product.value;
       this.product.markAllAsTouched()
       alert('El formulario no es valido');
     }

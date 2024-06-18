@@ -23,14 +23,14 @@
                     <th style="width:33%">Costo</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-product>
+            <ng-template pTemplate="body" let-items>
                 <tr>
-                    <td>{{product.user.name}}</td>
-                    <td>{{product.user.unit}}</td>
-                    <td>{{product.user.price}}</td>
-                    <td>{{product.user.cost}}</td>
+                    <td>{{items.name}}</td>
+                    <td>{{items.unit}}</td>
+                    <td>{{items.price}}</td>
+                    <td>{{items.cost}}</td>
                     <td><p-button label="Delete" severity="danger" size="small" icon="pi pi-trash"
-                            (onClick)="deleteProduct(product)" /></td>
+                            (onClick)="deleteProduct(items)" /></td>
                 </tr>
             </ng-template>
         </p-table>

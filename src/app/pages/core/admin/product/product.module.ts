@@ -16,6 +16,8 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { OrderListModule } from 'primeng/orderlist';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -39,6 +41,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     OrderListModule,
     FormsModule,
     FloatLabelModule,
+    ConfirmDialogModule, 
+    ButtonModule, 
+    ToastModule
 
   ]
 })

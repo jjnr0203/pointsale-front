@@ -4,8 +4,6 @@ import { SupplierModel } from '../../../../../models/supplier.model';
 import { SupplierHttpService } from '../../../../../http-services/supplier-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-supplier-form',
   templateUrl: './supplier-form.component.html',
@@ -58,7 +56,9 @@ export class SupplierFormComponent {
       this.form.reset();
 
       alert("Proveedor creado con éxito.")
+      this.router.navigateByUrl('/core/admin/supplier/supplier-list');
     } else {
+      this.supplier.markAllAsTouched();
       alert('El formulario no es valido');
     }
   }

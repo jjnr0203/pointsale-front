@@ -29,7 +29,7 @@ export class AdminListComponent {
     this.cataloguesHttpService.getRoleByName('ADMIN').subscribe(response => { 
       this.catalogue = response.data[0].id;
       this.findAll();
-    });
+    }); 
   }
 
   findAll() {

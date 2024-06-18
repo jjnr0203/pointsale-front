@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, MinLengthValidator, Validators
 import { ShopModel } from '../../../../../models/shop.model';
 import { ShopHttpService } from '../../../../../http-services/shop-http.service';
 import { LoginHttpService } from '../../../../../http-services/login-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-form',
@@ -18,7 +19,8 @@ export class ShopFormComponent {
   constructor(
     private shopHttpService: ShopHttpService,
     private formBuilder:FormBuilder,
-    private loginHttpService:LoginHttpService
+    private loginHttpService:LoginHttpService,
+    private router: Router
   ){
     this.user = this.loginHttpService.getUser()
     this.shop = this.formShop()
@@ -27,11 +29,11 @@ export class ShopFormComponent {
 
   formShop(): FormGroup{
     return this.formBuilder.group({
-      name: ['', [Validators.required]],
-      ruc: ['',[Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      ruc: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       address: ['',[Validators.required]],
-      phone:['',[Validators.required]],
-      email:['',[Validators.required]],
+      phone:['',[Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      email:['',[Validators.required, Validators.email, Validators.pattern(/^.+@gmail\.com$/)]],
       user:[this.user.sub,[Validators.required]]
     })
   }
@@ -39,10 +41,14 @@ export class ShopFormComponent {
     onSubmit(){
         this.shopHttpService.createShop(this.shop.value).subscribe(
           response => {
+            this.router.navigateByUrl('/core/admin/shop/shop-list');
+            alert('Tienda creada exitosamente');
             console.log(response)
           },
           (error: any) => {
-            console.error('Error', error)
+            this.shop.markAllAsTouched()
+            console.error('Error al crear la tienda:', error);
+            alert('Error al crear la tienda');
           }
         )
       }

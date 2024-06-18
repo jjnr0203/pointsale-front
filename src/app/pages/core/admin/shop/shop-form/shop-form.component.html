@@ -35,7 +35,10 @@
               <small style="color: red;">El campo ruc es requerido</small>
             }
             @if (rucField.errors['minlength']){
-              <small class="alert-validation" style="color: red;">Minimo de unidad es 1</small>
+              <small class="alert-validation" style="color: red;">Minimo de unidad es 10</small>
+            }
+            @if (rucField.errors['maxlength']){
+              <small class="alert-validation" style="color: red;">Maximo de unidad es 10</small>
             }
             }
         </div>
@@ -74,6 +77,9 @@
           formControlName="email"/>
           @if(emailField.errors){
             @if (emailField.errors['required'] && emailField.touched){
+              <small style="color: red;">El campo correo electrónico es requerido</small>
+            }
+            @if (emailField.errors['email'] && emailField.touched){
               <small style="color: red;">El campo correo electrónico es requerido</small>
             }
             }
